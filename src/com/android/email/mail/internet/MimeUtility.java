@@ -5,6 +5,7 @@ import java.io.ByteArrayOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
+import java.nio.charset.Charset;
 import java.util.ArrayList;
 import java.util.regex.Pattern;
 
@@ -12,7 +13,6 @@ import org.apache.commons.io.IOUtils;
 import org.apache.james.mime4j.decoder.Base64InputStream;
 import org.apache.james.mime4j.decoder.DecoderUtil;
 import org.apache.james.mime4j.decoder.QuotedPrintableInputStream;
-import org.apache.james.mime4j.util.CharsetUtil;
 
 import android.util.Log;
 
@@ -25,6 +25,8 @@ import com.android.email.mail.Multipart;
 import com.android.email.mail.Part;
 
 public class MimeUtility {
+
+
     public static String unfold(String s) {
         if (s == null) {
             return null;
@@ -130,6 +132,8 @@ public class MimeUtility {
      * @throws IOException
      */
     public static String getTextFromPart(Part part) {
+        Charset mCharsetConverter;
+
         try {
             if (part != null && part.getBody() != null) {
                 InputStream in = part.getBody().getInputStream();
@@ -154,7 +158,8 @@ public class MimeUtility {
                         /*
                          * See if there is conversion from the MIME charset to the Java one.
                          */
-                        charset = CharsetUtil.toJavaCharset(charset);
+                        mCharsetConverter = Charset.forName(charset);
+                        charset = mCharsetConverter.name();
                     }
                     if (charset != null) {
                         /*
