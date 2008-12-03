@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "z81534dbefe743a8123dafe209165b340",
+        "filename": "src/com/android/email/mail/internet/MimeUtility.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 135,
+      "author": {
+        "id": 1001146
+      },
+      "writtenOn": "2008-12-03T16:11:41Z",
+      "side": 1,
+      "message": "The prefix \"m\" is used only for (non-static) class fields. Local variables should not use any prefix.",
+      "revId": "baedb6052bfd554f4dcfa4fd8de8596750b21672",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    }
+  ]
+}
