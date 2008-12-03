@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "z51bd512125a0a331565839234953bc0b",
+        "filename": "src/com/android/email/mail/internet/MimeUtility.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 194,
+      "author": {
+        "id": 1000678
+      },
+      "writtenOn": "2008-12-03T16:11:20Z",
+      "side": 1,
+      "message": "indentation should be 8 spaces here",
+      "revId": "ad12d383cd60449587417d5cb9fb896535661ca6",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "z2eb0c3fd97c340c46a78f0300b9be8ac",
+        "filename": "src/com/android/email/mail/internet/MimeUtility.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 207,
+      "author": {
+        "id": 1000678
+      },
+      "writtenOn": "2008-12-03T16:11:20Z",
+      "side": 1,
+      "message": "indentation should be 4 spaces here",
+      "revId": "ad12d383cd60449587417d5cb9fb896535661ca6",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    }
+  ]
+}
