@@ -1,0 +1,140 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "z1e241cf92a2c01bd30080bfbf61b42a1",
+        "filename": "src/com/android/email/activity/MessageCompose.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 423,
+      "author": {
+        "id": 1001146
+      },
+      "writtenOn": "2009-01-20T20:16:33Z",
+      "side": 1,
+      "message": "Do not use a new String() and +\u003d to do concatenation, use StringBuilder instead.",
+      "revId": "7cb25aab9103f7c9c245bf4083d92aa6ef3b301a",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "z98587256e46ea8605ae1397f6d884777",
+        "filename": "src/com/android/email/activity/MessageCompose.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 426,
+      "author": {
+        "id": 1001146
+      },
+      "writtenOn": "2009-01-20T20:16:33Z",
+      "side": 1,
+      "message": "Style: we use for (int i \u003d 0; ...)",
+      "revId": "7cb25aab9103f7c9c245bf4083d92aa6ef3b301a",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "zdfc9022c31eb0ae79d356fe9d71099e2",
+        "filename": "src/com/android/email/activity/MessageCompose.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 431,
+      "author": {
+        "id": 1001146
+      },
+      "writtenOn": "2009-01-20T20:16:33Z",
+      "side": 1,
+      "message": "Follow the style: use spaces before operators and {",
+      "revId": "7cb25aab9103f7c9c245bf4083d92aa6ef3b301a",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "zdfa3b2ea14961afbea211c02fba1a8db",
+        "filename": "src/com/android/email/activity/MessageCompose.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 434,
+      "author": {
+        "id": 1001146
+      },
+      "writtenOn": "2009-01-20T20:16:33Z",
+      "side": 1,
+      "message": "Use spaces around -",
+      "revId": "7cb25aab9103f7c9c245bf4083d92aa6ef3b301a",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "ze1f1e20699f30cc149f7dd2162c19e17",
+        "filename": "src/com/android/email/activity/MessageCompose.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 435,
+      "author": {
+        "id": 1001146
+      },
+      "writtenOn": "2009-01-20T20:16:33Z",
+      "side": 1,
+      "message": "Use spaces around +",
+      "revId": "7cb25aab9103f7c9c245bf4083d92aa6ef3b301a",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "z4fdc0d698febcf9f21afbb44b702180f",
+        "filename": "src/com/android/email/activity/MessageCompose.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 437,
+      "author": {
+        "id": 1001146
+      },
+      "writtenOn": "2009-01-20T20:16:33Z",
+      "side": 1,
+      "message": "Use spaces around -",
+      "revId": "7cb25aab9103f7c9c245bf4083d92aa6ef3b301a",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "zce066d0511bf5e33ef51e921a536bf64",
+        "filename": "src/com/android/email/activity/MessageCompose.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 441,
+      "author": {
+        "id": 1001146
+      },
+      "writtenOn": "2009-01-20T20:16:33Z",
+      "side": 1,
+      "message": "Use a StringBuilder",
+      "revId": "7cb25aab9103f7c9c245bf4083d92aa6ef3b301a",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "z4462705bb4e787048331f0684f647662",
+        "filename": "src/com/android/email/activity/MessageCompose.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 455,
+      "author": {
+        "id": 1001146
+      },
+      "writtenOn": "2009-01-20T20:16:33Z",
+      "side": 1,
+      "message": "You\u0027re doing three times the same operation, create a method instead:\n\nprivate String join(String[] array, String delimiter)\n\n(invocation example: addressList \u003d join(extraEmail, \", \");)",
+      "revId": "7cb25aab9103f7c9c245bf4083d92aa6ef3b301a",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    }
+  ]
+}
