@@ -16,6 +16,23 @@
       "revId": "baedb6052bfd554f4dcfa4fd8de8596750b21672",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "AAAAEH////8\u003d",
+        "filename": "src/com/android/email/mail/internet/MimeUtility.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 161,
+      "author": {
+        "id": 1001252
+      },
+      "writtenOn": "2009-02-11T07:35:21Z",
+      "side": 1,
+      "message": "Why do you even need this variable at all - can you just do something like\n\n  charset \u003d Charset.forName(charset).name();\n\nI don\u0027t understand the need for the mCharsetConverter variable, certainly not in the scope of the entire method.",
+      "revId": "baedb6052bfd554f4dcfa4fd8de8596750b21672",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
     }
   ]
 }
