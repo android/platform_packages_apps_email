@@ -50,8 +50,11 @@
     <string name="status_network_error">"Помилка підключення"</string>
     <string name="status_loading_more_failed">"Повторити спробу завантаження інших листів"</string>
     <string name="notification_new_title">"Новий лист"</string>
-    <string name="notification_new_one_account_fmt">"Непрочитані: <xliff:g id="UNREAD_MESSAGE_COUNT">%d</xliff:g> (<xliff:g id="ACCOUNT">%s</xliff:g>)"</string>
-    <string name="notification_new_multi_account_fmt">"в декількох (<xliff:g id="NUMBER_ACCOUNTS">%d</xliff:g>) облікових записах"</string>
+	<!-- no translation found for notification_new_one_account_fmt:one (3422945912787702191) -->
+    <!-- no translation found for notification_new_one_account_fmt:few (6543078667692990869) -->
+    <!-- no translation found for notification_new_one_account_fmt:other (6937673814351448076) -->
+    <!-- no translation found for notification_new_multi_account_fmt:few (1991747245324120305) -->
+    <!-- no translation found for notification_new_multi_account_fmt:other (2723797835410343458) -->
     <string name="special_mailbox_name_inbox">"Вхідні"</string>
     <string name="accounts_welcome">"Ласкаво просимо на сторінку налаштувань електронної пошти."\n\n"З нашою поштовою системою можна використовувати будь-який обліковий запис електронної пошти."\n\n"Найбільш поширені облікові записи електронної пошти можна налаштувати в 2 кроки."</string>
     <string name="debug_version_fmt">"Версія: <xliff:g id="VERSION">%s</xliff:g>"</string>
@@ -62,20 +65,20 @@
     <string name="message_compose_cc_hint">"Копія"</string>
     <string name="message_compose_bcc_hint">"Прихована"</string>
     <string name="message_compose_subject_hint">"Тема"</string>
+	<!-- no translation found for message_compose_body_hint (7575406246484103697) -->
+    <skip />
     <string name="message_compose_fwd_header_fmt">\n\n"-------- Вихідне повідомлення --------"\n"Тема: <xliff:g id="SUBJECT">%s</xliff:g>"\n"Від: <xliff:g id="SENDER">%s</xliff:g>"\n"Кому: <xliff:g id="TO">%s</xliff:g>"\n"Копія: <xliff:g id="CC_0">%s</xliff:g>"\n\n</string>
     <string name="message_compose_reply_header_fmt">\n\n"<xliff:g id="SENDER">%s</xliff:g> написав(ла):"\n\n</string>
     <string name="message_compose_quoted_text_label">"Процитований текст"</string>
-    <string name="message_compose_error_no_recipients">"Необхідно добавити хоча б одного отримувача."</string>
+    <string name="message_compose_error_no_recipients">"Необхідно додати хоча б одного отримувача."</string>
     <string name="message_compose_attachments_skipped_toast">"Деякі додатки неможна переслати, так як вони не завантажені."</string>
     <string name="message_view_to_label">"Кому:"</string>
     <string name="message_view_cc_label">"Копія:"</string>
     <string name="message_view_attachment_view_action">"Відкрити"</string>
     <string name="message_view_attachment_download_action">"Зберегти"</string>
-    <string name="message_view_prev_action">"Попередній лист"</string>
-    <string name="message_view_next_action">"Наступний лист"</string>
     <string name="message_view_status_attachment_saved">"Додаток збережено на SD-карту як <xliff:g id="FILENAME">%s</xliff:g>."</string>
     <string name="message_view_status_attachment_not_saved">"Не вдається зберегти додаток на SD-карту."</string>
-    <string name="message_view_show_pictures_instructions">"Оберіть \"Показати малюнки\", щоб показати убудовану графіку."</string>
+    <string name="message_view_show_pictures_instructions">"Оберіть \"Показати малюнки\", щоб показати вбудовану графіку."</string>
     <string name="message_view_show_pictures_action">"Показати малюнки"</string>
     <string name="message_view_fetching_attachment_toast">"Завантаження додатку."</string>
     <string name="message_deleted_toast">"Лист видалено."</string>
@@ -85,7 +88,7 @@
     <string name="account_setup_basics_instructions">"Вкажіть поштовий адрес свого облікового запису:"</string>
     <string name="account_setup_basics_email_hint">"Адрес електронної пошти"</string>
     <string name="account_setup_basics_password_hint">"Пароль"</string>
-    <string name="account_setup_basics_default_label">"За замовчуванням відправляти пошту з данного облікового запису."</string>
+    <string name="account_setup_basics_default_label">"За замовчуванням відправляти пошту з даного облікового запису."</string>
     <string name="account_setup_basics_manual_setup_action">"Ручні налаштування"</string>
     <string name="account_setup_username_password_toast">"Вкажіть правильний адрес електронної пошти і пароль."</string>
     <string name="account_setup_check_settings_retr_info_msg">"Отримання інформації про обліковий запис..."</string>
@@ -93,7 +96,7 @@
     <string name="account_setup_check_settings_check_outgoing_msg">"Перевірка налаштувань серверу вихідної пошти..."</string>
     <string name="account_setup_check_settings_canceling_msg">"Відмінити..."</string>
     <string name="account_setup_names_title">"Налаштування електронної пошти"</string>
-    <string name="account_setup_names_instructions">"Ваш обліковий запис налаштвано, електронна пошта працює."</string>
+    <string name="account_setup_names_instructions">"Ваш обліковий запис налаштовано, електронна пошта працює."</string>
     <string name="account_setup_names_account_name_label">"Вказати назву цього облікового запису (необов'язково)"</string>
     <string name="account_setup_names_user_name_label">"Ваше ім'я (буде показано у вихідних листах)"</string>
     <string name="account_setup_account_type_title">"Добавити новий обліковий запис електронної пошти"</string>
@@ -114,7 +117,7 @@
     <string name="account_setup_incoming_security_tls_label">"TLS (завжди)"</string>
     <string name="account_setup_incoming_delete_policy_label">"Видалити лист із серверу"</string>
     <string name="account_setup_incoming_delete_policy_never_label">"Ніколи"</string>
-    <string name="account_setup_incoming_delete_policy_7days_label">"Через 7 дней"</string>
+    <string name="account_setup_incoming_delete_policy_7days_label">"Через 7 днів"</string>
     <string name="account_setup_incoming_delete_policy_delete_label">"При видаленні листа із папки \"Вхідні\""</string>
     <string name="account_setup_incoming_imap_path_prefix_label">"Префікс шляху IMAP"</string>
     <string name="account_setup_incoming_imap_path_prefix_hint">"Необов'язково"</string>
@@ -122,7 +125,7 @@
     <string name="account_setup_outgoing_smtp_server_label">"Сервер SMTP"</string>
     <string name="account_setup_outgoing_port_label">"Порт"</string>
     <string name="account_setup_outgoing_security_label">"Тип безпеки"</string>
-    <string name="account_setup_outgoing_require_login_label">"Вимагати входу в систему."</string>
+    <string name="account_setup_outgoing_require_login_label">"Вимагати вхід в систему."</string>
     <string name="account_setup_outgoing_username_label">"Ім'я користувача"</string>
     <string name="account_setup_outgoing_password_label">"Пароль"</string>
     <string name="account_setup_options_title">"Параметри облікового запису"</string>
@@ -151,22 +154,22 @@
     <string name="account_settings_default_label">"Обліковий запис за замовчуванням"</string>
     <string name="account_settings_default_summary">"За замовчуванням відправляти пошту з даного облікового запису"</string>
     <string name="account_settings_notify_label">"Сповіщення про отримання пошти"</string>
-    <string name="account_settings_notify_summary">"При отриманні пошти показувати сповіщення в терміні стану"</string>
+    <string name="account_settings_notify_summary">"При отриманні пошти показувати сповіщення у стрічці стану"</string>
     <string name="account_settings_mail_check_frequency_label">"Частота перевірки електронної пошти"</string>
     <string name="account_settings_incoming_label">"Налаштування вхідної пошти"</string>
     <string name="account_settings_outgoing_label">"Налаштування вихідної пошти"</string>
     <string name="account_settings_add_account_label">"Добавити інший обліковий запис"</string>
     <string name="account_settings_description_label">"Назва облікового запису"</string>
     <string name="account_settings_name_label">"Ваше ім'я"</string>
-    <string name="account_settings_notifications">"Налаштування оповещения"</string>
-    <string name="account_settings_vibrate_enable">"Вібро"</string>
-    <string name="account_settings_vibrate_summary">"Також увімкнути вібро при отриманні пошти"</string>
+    <string name="account_settings_notifications">"Налаштування сповіщення"</string>
+    <string name="account_settings_vibrate_enable">"Вібросигнал"</string>
+    <string name="account_settings_vibrate_summary">"Увімкнути вібросигнал при отриманні пошти"</string>
     <string name="account_settings_ringtone">"Обрати мелодію"</string>
     <string name="account_settings_servers">"Налаштування серверу"</string>
     <string name="account_delete_dlg_title">"Видалити"</string>
     <string name="account_delete_dlg_instructions_fmt">"Обліковий запис \"<xliff:g id="ACCOUNT">%s</xliff:g>\" буде видалено із системи електронної пошти."</string>
     <string name="provider_note_yahoo">"Доступ до поштової скриньки для деяких типів поштових облікових записів Yahoo! не підтримується. Якщо при підключенні виникли проблеми, див. додаткові дані на yahoo.com."</string>
     <string name="provider_note_yahoo_uk">"Щоб налаштувати цей обліковий запис електронної пошти, перейдіть на веб-сайт Yahoo! і увімкніть для цього облікового запису доступ по протоколу POP3."</string>
-    <string name="provider_note_live">"Тольки деякі облікові записи \"Plus\" поддерживают доступ по протоколу POP, который требуется данной программе для підключення. Якщо вам не вдається увійти в систему з правельною адресою електронної пошти і паролем, можливо, у вас немає платного облікового запису \"Plus\". Відкрийте веб-браузер, щоб отримати доступдо цих поштових облікових записів."</string>
+    <string name="provider_note_live">"Тільки деякі облікові записи \"Plus\" підтримують доступ по протоколу POP, який вимагається даною програмою для підключення. Якщо вам не вдається увійти в систему з правильною адресою електронної пошти і паролем, можливо, у вас немає платного облікового запису \"Plus\". Відкрийте веб-браузер, щоб отримати доступ до цих поштових облікових записів."</string>
     <string name="provider_note_t_online">"Щоб налаштувати цей обліковий запис електронної пошти, перейдіть на веб-сайт T-Online і створіть пароль для доступу до електронної пошти по протоколу POP3."</string>
 </resources>
