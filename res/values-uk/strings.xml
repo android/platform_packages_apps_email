@@ -1,0 +1,397 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Copyright (C) 2008 The Android Open Source Project
+
+     Licensed under the Apache License, Version 2.0 (the "License");
+     you may not use this file except in compliance with the License.
+     You may obtain a copy of the License at
+  
+          http://www.apache.org/licenses/LICENSE-2.0
+  
+     Unless required by applicable law or agreed to in writing, software
+     distributed under the License is distributed on an "AS IS" BASIS,
+     WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+     See the License for the specific language governing permissions and
+     limitations under the License.
+-->
+
+<resources xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
+
+    <!-- Permissions label -->
+    <string name="read_attachment_label">"читання поштових додатків"</string>
+    <!-- Permissions description -->
+    <string name="read_attachment_desc">"Дозволяє додаткові зчитувати поштові вкладення."</string>
+    <!-- Name of application on Home screen -->
+    <string name="app_name">"Електронна пошта"</string>
+    <!-- Title of Accounts screen -->
+    <string name="accounts_title">"Ваші облікові записи"</string>
+    <!-- Title of compose screen -->
+    <string name="compose_title">"Написати лист"</string>
+    <!-- Title of debug screen -->
+    <string name="debug_title">"Відлагодження"</string>
+
+    <!-- Actions will be used as buttons and in menu items -->
+    <skip />
+    
+    <!-- Used as part of a multi-step process -->
+    <string name="next_action">"Далі"</string> 
+    <!--  Button name used to confirm acceptance of dialog boxes, warnings, errors, etc. -->
+    <string name="okay_action">OK</string> 
+    <!--  Button name used to cancel out of dialog boxes -->
+    <string name="cancel_action">"Відміна"</string>
+    <!-- Menu item/button name -->
+    <string name="send_action">"Надіслати"</string>
+    <!-- Menu item/button name -->
+    <string name="reply_action">"Відповісти"</string>
+    <!-- Menu item/button name -->
+    <string name="reply_all_action">"Відповісти всім"</string>
+    <!-- Menu item/button name -->
+    <string name="delete_action">"Видалити"</string>
+    <!-- Menu item/button name -->
+    <string name="forward_action">"Перенаправити"</string>
+    <!--  Button name used to complete a multi-step process -->
+    <string name="done_action">"Зроблено"</string> 
+    <!-- Menu item/button name -->
+    <string name="discard_action">"Скасувати"</string>
+    <!-- Menu item/button name -->
+    <string name="save_draft_action">"Зберегти як чернетку"</string>
+    <!-- Menu item -->
+    <string name="refresh_action">"Оновити"</string>
+    <!-- Menu item -->
+    <string name="add_account_action">"Додати обліковий запис"</string>
+    <!-- Menu item -->
+    <string name="compose_action">"Написати листа"</string>
+    <!-- Menu item/button name -->
+    <string name="search_action">"Пошук"</string>
+    <!-- Menu item/button name -->
+    <string name="open_action">"Відкрити"</string>
+    <!-- Menu item -->
+    <string name="account_settings_action">"Налаштування облікового запису"</string>
+    <!-- Menu item -->
+    <string name="remove_account_action">"Видалити обліковий запис"</string>
+    <!-- Menu item -->
+    <string name="accounts_action">"Облікові записи"</string>
+    <!-- Menu item -->
+    <string name="mark_as_read_action">"Позначити як прочитане"</string>
+    <!-- Menu item -->
+    <string name="mark_as_unread_action">"Позначити як непрочитане"</string>
+    <!-- Menu item -->
+    <string name="add_cc_bcc_action">"Долучити копії/приховані копії"</string>
+    <!-- Menu item -->
+    <string name="add_attachment_action">"Долучити прикріплення"</string>
+    <!-- Menu item (debug screen) -->
+    <string name="dump_settings_action">Dump settings</string>
+    <!-- Title of account context menu -->
+    <string name="accounts_context_menu_title">"Опції облікового запису"</string>
+    <!-- Appears in message list view while messages are being loaded -->
+    <string name="status_loading_more">"Завантаження листів\u2026"</string>
+    <!-- Appears in message list view when there's a network error. -->
+    <!-- Also appears in a toast, in the message viewer, when there's a network error. -->
+    <string name="status_network_error">"Помилка під'єднання"</string>
+    <!-- Appears in message list view when error when trying to "Load more messages". -->
+    <string name="status_loading_more_failed">"Повторити спробу завантаження інших листів"</string>
+    <!-- Notification title in status bar -->
+    <string name="notification_new_title">"Новий лист"</string>
+
+    <!-- Notification message in notifications window when one account has
+         one or more new messages; e.g, "279 unread (someone@google.com)". -->
+    <plurals name="notification_new_one_account_fmt">
+        <!-- Case of one new message. -->
+        <item quantity="one">"<xliff:g id="unread_message_count" example="1">%d</xliff:g> непрочитане (<xliff:g id="account">%s</xliff:g>)"</item> 
+
+        <!-- Case of "few" (small number of) new messages. -->
+        <item quantity="few">"<xliff:g id="unread_message_count" example="2">%d</xliff:g> непрочитані (<xliff:g id="account">%s</xliff:g>)"</item> 
+
+        <!-- Case of a plural number of new messages. -->
+        <item quantity="other">"<xliff:g id="unread_message_count" example="279">%d</xliff:g> непрочитані (<xliff:g id="account">%s</xliff:g>)"</item>
+    </plurals>
+
+
+    <!-- Notification message in notifications window when 2+ accounts have new mail; e.g, "in 3 accounts". -->
+    <plurals name="notification_new_multi_account_fmt">
+        <!-- Case of "few" (small number of) accounts with unread messages. -->
+        <item quantity="few">"в <xliff:g id="number_accounts" example="2">%d</xliff:g> облікових записів"</item>
+        <!-- Case of plural number of accounts with unread messages. -->
+        <item quantity="other">"в <xliff:g id="number_accounts" example="10">%d</xliff:g> облікових записів"</item>
+    </plurals>
+        
+
+    <!-- In the folder list view, the inbox will be displayed with this name -->
+    <string name="special_mailbox_name_inbox">"Вхідні"</string>
+    <!-- Do Not Translate.  This is the name of the "outbox" folder, on the server. -->
+    <string name="special_mailbox_name_outbox">Outbox</string>
+    <!-- Do Not Translate.  This is the name of the "drafts" folder, on the server. -->
+    <string name="special_mailbox_name_drafts">Drafts</string>
+    <!-- Do Not Translate.  This is the name of the "trash" folder, on the server. -->
+    <string name="special_mailbox_name_trash">Trash</string>
+    <!-- Do Not Translate.  This is the name of the "sent" folder, on the server. -->
+    <string name="special_mailbox_name_sent">Sent</string>
+    <!-- Text on screen when you don't have any external email accounts set up -->
+    <string name="accounts_welcome">"Ласкаво просимо на сторінку налаштувань електронної пошти.\n\nВикористовуйте будь-який обліковий запис електронної пошти.\n\nНайбільш поширені облікові записи електронної пошти можна налаштувати в 2 кроки."</string>
+
+    <!-- Version number, shown only on debug screen -->
+    <string name="debug_version_fmt">"Версія: <xliff:g id="version">%s</xliff:g>"</string>
+    <!-- Checkbox label, shown only on debug screen -->
+    <string name="debug_enable_debug_logging_label">Enable extra debug logging?</string>
+    <!-- Checkbox label, shown only on debug screen -->
+    <string name="debug_enable_sensitive_logging_label">Enable sensitive information debug logging? (May show passwords in logs.)</string>
+
+    <!-- Appears at the bottom of list of messages; user selects to load more messages from that folder. -->
+    <string name="message_list_load_more_messages_action">"Завантажити ще листи"</string>
+    <!-- Hint text in To field -->
+    <string name="message_compose_to_hint">"Кому"</string>
+    <!-- Hint text in Cc field -->
+    <string name="message_compose_cc_hint">"Копія"</string>
+    <!-- Hint text in Bcc field -->
+    <string name="message_compose_bcc_hint">"Прихована"</string>
+    <!-- Hint text in Subject field -->
+    <string name="message_compose_subject_hint">"Тема"</string>
+    <!-- Hint text in Message composer body field -->
+    <string name="message_compose_body_hint">"Написати лист"</string>    
+    <!-- Header for forwarded original messages -->
+    <string name="message_compose_fwd_header_fmt">"\n\n-------- Вихідне повідомлення --------\nТема: <xliff:g id="subject">%s</xliff:g>\nВід: <xliff:g id="sender">%s</xliff:g>\nКому: <xliff:g id="to">%s</xliff:g>\nКопія: <xliff:g id="cc">%s</xliff:g>\n\n"</string>
+    <!-- Header for replied-to messages -->
+    <string name="message_compose_reply_header_fmt">"\n\n<xliff:g id="sender">%s</xliff:g> написав(ла):\n\n"</string>
+    <!-- Heading that appears before forwarded text -->
+    <string name="message_compose_quoted_text_label">"Процитований текст"</string>
+    <!-- Toast that appears if you try to send with no recipients. -->
+    <string name="message_compose_error_no_recipients">"Необхідно додати хоча б одного отримувача."</string>
+    <!-- Toast that appears in the context of forwarding a message with attachment(s) -->
+    <string name="message_compose_attachments_skipped_toast">"Деякі прикріплення не можна відправити, оскільки вони не завантажені."</string>
+    <!-- Toast that appears when an attachment is too big to send.  Note, translation temporarily
+         borrowed from camera app (msgid="8944461117941172986") -->
+    <string name="message_compose_attachment_size" msgid="8944461117941172986">"Файл надто великий щоб прикріпити."</string>
+    <!-- Label for To field in read message view -->
+    <string name="message_view_to_label">"Кому:"</string>
+    <!-- Label for CC field in read message view -->
+    <string name="message_view_cc_label">"Копія:"</string>
+    <!-- Menu item -->
+    <string name="message_view_attachment_view_action">"Відкрити"</string>
+    <!-- Button name -->
+    <string name="message_view_attachment_download_action">"Зберегти"</string>
+    <!-- Toast after saving attachment -->
+    <string name="message_view_status_attachment_saved">"Прикріплення збережено на SD-карту як <xliff:g id="filename">%s</xliff:g>."</string>
+    <!-- Toast after attachment could not be saved-->
+    <string name="message_view_status_attachment_not_saved">"Не вдається зберегти прикріплення на SD-карту."</string>
+    <!-- Displayed in message view -->
+    <string name="message_view_show_pictures_instructions">"Оберіть \"Показати зображення\", щоб показати вбудовану графіку."</string>
+    <!-- Button on email opened for reading -->
+    <string name="message_view_show_pictures_action">"Показати зображення"</string>
+    <!-- Toast while fetching attachment -->
+    <string name="message_view_fetching_attachment_toast">"Завантаження прикріплення."</string>
+    <!-- Toast shown briefly while deleting a message -->
+    <string name="message_deleted_toast">"Лист видалено."</string>
+    <!-- Toast shown briefly while deleting an unsent (draft) message -->
+    <string name="message_discarded_toast">"Лист не збережено."</string>
+    <!-- Toast shown briefly while saving a draft -->
+    <string name="message_saved_toast">"Лист збережено як чернетку."</string>
+    <!-- Dialog title when prompting before creating a contact from incoming email -->
+    <string name="add_contact_dlg_title">"Додавання контакту"</string>
+    <!-- Dialog message when prompting before creating a contact from incoming email.  Includes
+         the email address, e.g. "Add xyz@foo.com to contacts" -->
+    <string name="add_contact_dlg_message_fmt">"Додати\"<xliff:g id="email">%s</xliff:g>\" до контактів"
+        </string>
+    <!-- String that is displayed when the attachment could not be displayed.  TODO: Make local
+         version and remove use of "borrowed" string. -->
+    <string name="message_view_display_attachment_toast" 
+            msgid="2079093904785941494">"Дане прикріплення не може бути відображено."</string>
+
+    <!-- Title of screen when setting up new email account -->
+    <string name="account_setup_basics_title">"Налаштування електронної пошти"</string>
+    <!-- On "Set up email" screen, brief instructions -->
+    <string name="account_setup_basics_instructions">"Вкажіть поштову адресу свого облікового запису:"</string>
+    <!-- On "Set up email" screen, hint for account email address text field -->
+    <string name="account_setup_basics_email_hint">"Адреса електронної пошти"</string>
+    <!-- On "Set up email" screen, hint for account email password text field -->
+    <string name="account_setup_basics_password_hint">"Пароль"</string>
+    <!-- On "Set up email" screen, checkbox label for making this the new account be the default account -->
+    <string name="account_setup_basics_default_label">"По замовчуваню відправляти пошту з даного облікового запису."</string>
+    <!-- Button name on "Set up email" screen -->
+    <string name="account_setup_basics_manual_setup_action">"Ручні налаштування"</string>
+    <!-- Toast when we can't build a URI from the given email & password -->
+    <!-- Note, the error message in the toast is purposefully vague, because I *don't* know exactly what's wrong. -->
+    <string name="account_setup_username_password_toast">"Вкажіть правильну адресу електронної пошти і пароль."</string>
+
+    <!-- Do Not Translate.  Activity Title for check-settings screen -->
+    <string name="account_setup_check_settings_title"></string>
+    <!-- On check-settings screen, this is the initially-displayed message. -->
+    <string name="account_setup_check_settings_retr_info_msg">"Отримання інформації про обліковий запис\u2026"</string>
+    <!-- Appears on screen while system is checking incoming server settings -->
+    <string name="account_setup_check_settings_check_incoming_msg">"Перевірка налаштувань сервера вхідної пошти\u2026"</string>
+    <!-- Appears on screen while system is checking outgoing server settings -->
+    <string name="account_setup_check_settings_check_outgoing_msg">"Перевірка налаштувань сервера вихідної пошти\u2026"</string>
+    <!-- On check-settings screen, displayed briefly when user cancels the operation. -->
+    <string name="account_setup_check_settings_canceling_msg">"Відміна операції\u2026"</string>
+    <!-- Title of "Set up email" screen after success -->
+    <string name="account_setup_names_title">"Налаштування електронної пошти"</string>
+    <!-- Text that appears on top of "Set up email" screen after successfully setting up an account -->
+    <string name="account_setup_names_instructions">"Ваш обліковий запис налаштовано, електронна пошта працює."</string>
+    <!-- On "Set up email" screen, label of text field -->
+    <string name="account_setup_names_account_name_label">"Вказати назву наступного облікового запису (необов\'язково)"</string>
+    <!-- On "Set up email" screen, label of text field -->
+    <string name="account_setup_names_user_name_label">"Ваше ім\'я (буде показано у вихідних листах)"</string>
+
+    <!-- Activity Title for the first screen in manual setup (where you select IMAP or POP3) -->
+    <string name="account_setup_account_type_title">"Додавання нового облікового запису електронної пошти"</string>
+    <!-- "Add new email account" screen, text that appears on screen -->
+    <string name="account_setup_account_type_instructions">"До якого типу належить даний обліковий запис?"</string>
+    <!-- "Add new email account" screen, button name in response to what type of account this is -->
+    <string name="account_setup_account_type_pop_action">"Обліковий запис POP3"</string>
+    <!-- "Add new email account" screen, button name in response to what type of account this is -->
+    <string name="account_setup_account_type_imap_action">"Обліковий запис IMAP"</string>
+    <!-- "Incoming server settings" screen, label for text field -->
+    <string name="account_setup_incoming_title">"Налаштування сервера вхідної пошти"</string>
+    <!-- "Incoming server settings" screen, label for text field -->
+    <string name="account_setup_incoming_username_label">"Ім\'я користувача"</string>
+    <!-- "Incoming server settings" screen, label for text field -->
+    <string name="account_setup_incoming_password_label">"Пароль"</string>
+    <!-- "Incoming server settings" screen, label for text field -->
+    <string name="account_setup_incoming_pop_server_label">"Сервер POP3"</string>
+    <!-- "Incoming server settings" screen, label for text field -->
+    <string name="account_setup_incoming_imap_server_label">"Сервер IMAP"</string>
+    <!-- "Incoming server settings" screen, label for text field -->
+    <string name="account_setup_incoming_port_label">"Порт"</string>
+    <!-- "Incoming server settings" screen, label for pop-up menu -->
+    <string name="account_setup_incoming_security_label">"Тип безпеки"</string>
+    <!-- "Incoming server settings" screen, options for "Security type" pop-up menu -->
+    <string name="account_setup_incoming_security_none_label">"Немає"</string>
+    <!-- "Incoming server settings" screen, options for "Security type" pop-up menu -->
+    <string name="account_setup_incoming_security_ssl_optional_label">"SSL (якщо доступно)"</string>
+    <!-- "Incoming server settings" screen, options for "Security type" pop-up menu -->
+    <string name="account_setup_incoming_security_ssl_label">"SSL (завжди)"</string>
+    <!-- "Incoming server settings" screen, options for "Security type" pop-up menu -->
+    <string name="account_setup_incoming_security_tls_optional_label">"TLS (якщо доступно)"</string>
+    <!-- "Incoming server settings" screen, options for "Security type" pop-up menu -->
+    <string name="account_setup_incoming_security_tls_label">"TLS (завжди)"</string>
+    <!-- "Incoming server settings" screen, label for pop-up menu -->
+    <string name="account_setup_incoming_delete_policy_label">"Видалити лист з сервера"</string>
+    <!-- "Incoming server settings" screen, options in pop-up menu for Delete email from server: -->
+    <!-- "Incoming server settings" screen, options in pop-up menu for Delete email from server: -->
+    <string name="account_setup_incoming_delete_policy_never_label">"Ніколи"</string>
+    <!-- "Incoming server settings" screen, options in pop-up menu for Delete email from server: -->
+    <string name="account_setup_incoming_delete_policy_7days_label">"Через 7 днів"</string>
+    <!-- "Incoming server settings" screen, options in pop-up menu for Delete email from server: -->
+    <string name="account_setup_incoming_delete_policy_delete_label">"При видаленні листа з папки \"Вхідні\""</string>
+    
+    <!-- "Incoming server settings" screen, label for setting IMAP path prefix: -->
+    <string name="account_setup_incoming_imap_path_prefix_label">"Префікс шляху IMAP"</string>
+    <!-- "Incoming server settings" screen, hint for setting IMAP path prefix: -->
+    <string name="account_setup_incoming_imap_path_prefix_hint">"Не обов\'язково"</string>
+    <!-- Title of "Outgoing server settings" screen -->
+    <string name="account_setup_outgoing_title">"Налаштування сервера вихідної пошти"</string>
+    <!-- On "Outgoing server settings" screen, label for text field -->
+    <string name="account_setup_outgoing_smtp_server_label">"Сервер SMTP"</string>
+    <!-- On "Outgoing server settings" screen, label for text field -->
+    <string name="account_setup_outgoing_port_label">"Порт"</string>
+    <!-- On "Outgoing server settings" screen, label for pop-up menu -->
+    <string name="account_setup_outgoing_security_label">"Тип безпеки"</string>
+    <!-- On "Outgoing server settings" screen, label for check box -->
+    <string name="account_setup_outgoing_require_login_label">"Вимагати вхід в систему."</string>
+    <!-- On "Outgoing server settings" screen, label for text field -->
+    <string name="account_setup_outgoing_username_label">"Ім\'я користувача"</string>
+    <!-- On "Outgoing server settings" screen, label for text field -->
+    <string name="account_setup_outgoing_password_label">"Пароль"</string>
+
+    <!-- In Account setup options screen, Activity title -->
+    <string name="account_setup_options_title">"Параметри облікового запису"</string>
+    <!-- In Account setup options screen, label for email check frequency selector -->
+    <string name="account_setup_options_mail_check_frequency_label">"Частота перевірки електронної пошти"</string>
+    <!-- In Account setup options & Account Settings screens, label for email check frequency option -->
+    <string name="account_setup_options_mail_check_frequency_never">"Ніколи"</string>
+    <!-- In Account setup options & Account Settings screens, email check frequency option -->
+    <string name="account_setup_options_mail_check_frequency_5min">"Кожні 5 хвилин"</string>
+    <!-- In Account setup options & Account Settings screens, email check frequency option -->
+    <string name="account_setup_options_mail_check_frequency_10min">"Кожні 10 хвилин"</string>
+    <!-- In Account setup options & Account Settings screens, email check frequency option -->
+    <string name="account_setup_options_mail_check_frequency_15min">"Кожні 15 хвилин"</string>
+    <!-- In Account setup options & Account Settings screens, email check frequency option -->
+    <string name="account_setup_options_mail_check_frequency_30min">"Кожні 30 хвилин"</string>
+    <!-- In Account setup options & Account Settings screens, email check frequency option -->
+    <string name="account_setup_options_mail_check_frequency_1hour">"Щогодини"</string>
+    <!-- Check box label on "Set up email" screen to make this the default account -->
+    <!-- Note, this should usually match the default account summary preference string -->
+    <string name="account_setup_options_default_label">"По замовчуванням відправляти пошту з даного облікового запису."</string>
+    <!-- In Account setup options & Account Settings screens, check box for new-mail notification -->
+    <string name="account_setup_options_notify_label">"Сповіщати мене при отриманні пошти."</string>
+    <!-- Dialog title when "setup" could not finish -->
+    <string name="account_setup_failed_dlg_title">"Не вдається завершити налаштування"</string>
+
+    <!-- "Setup could not finish" dialog text; e.g., Username or password incorrect -->
+    <string name="account_setup_failed_dlg_auth_message">"Неправильне ім\'я користувача або неправильний пароль."</string> 
+    <!-- "Setup could not finish" dialog text; e.g., Username or password incorrect\n(ERR01 Account does not exist) -->
+    <string name="account_setup_failed_dlg_auth_message_fmt">"Неправильне ім\'я користувача або неправильний пароль.\n(<xliff:g id="error">%s</xliff:g>)"</string> 
+
+    <!-- "Setup could not finish" dialog text; e.g., Cannot safely connect to server -->
+    <string name="account_setup_failed_dlg_certificate_message">"Не вдається втановити захищене з\'єднання з сервером."</string> 
+    <!-- "Setup could not finish" dialog text; e.g., Cannot safely connect to server\n(TLS Not Supported) -->
+    <string name="account_setup_failed_dlg_certificate_message_fmt">"Не вдається втановити захищене з\'єднання з сервером.\n(<xliff:g id="error">%s</xliff:g>)"</string> 
+
+    <!-- "Setup could not finish" dialog text; e.g., Cannot connect to server -->
+    <string name="account_setup_failed_dlg_server_message">"Не вдається під'єднатися до сервера."</string> 
+    <!-- "Setup could not finish" dialog text; e.g., Cannot connect to server\n(Connection timed out) -->
+    <string name="account_setup_failed_dlg_server_message_fmt">"Не вдається під'єднатися до сервера.\n(<xliff:g id="error">%s</xliff:g>)"</string> 
+
+    <!-- Additional diagnostic text when TLS was required but the server doesn't support it -->
+    <string name="account_setup_failed_tls_required">"TLS вимагається, але не підтримується сервером."</string>
+    <!-- Additional diagnostic text when server does not support any of our authentication methods -->
+    <string name="account_setup_failed_auth_required">"Методи перевірки автентичності не підтримуються сервером."</string>
+    <!-- Additional diagnostic text when server connection failed due to security error -->
+    <string name="account_setup_failed_security">"Не вдається втановити з\'єднання з сервером через помилки безпеки."</string>
+    <!-- Additional diagnostic text when server connection failed due to io error (connection) -->
+    <string name="account_setup_failed_ioerror">"Не вдається втановити з\'єднання з сервером."</string>
+
+    <!-- "Setup could not finish" dialog action button -->
+    <string name="account_setup_failed_dlg_edit_details_action">"Редагування деталей"</string>
+    <!-- On Settings screen, section heading -->
+    <string name="account_settings_title_fmt">"Загальні налаштування"</string>
+    <!-- On Settings screen, setting option name -->
+    <string name="account_settings_default_label">"Обліковий запис по замовчуванню"</string>
+    <!-- Check box "summary" label on "Account options" screen to make this the default account -->
+    <!-- Note, this should usually match the default account account setup checkbox string -->
+    <string name="account_settings_default_summary">"Надсилати пошту з даного облікового запису по замовчуванню"</string>
+    <!-- On Settings screen, setting option name -->
+    <string name="account_settings_notify_label">"Сповіщення про отримання пошти"</string>
+    <!-- On Settings screen, setting summary text -->
+    <string name="account_settings_notify_summary">"При отриманні пошти показувати сповіщення у стрічці стану"</string>
+    <!-- On Settings screen, setting option name and title of dialog box that opens -->
+    <string name="account_settings_mail_check_frequency_label">"Частота перевірки електронної пошти"</string>
+    <!-- On Settings screen, setting option name -->
+    <string name="account_settings_incoming_label">"Налаштування вхідної пошти"</string>
+    <!-- On Settings screen, setting option name -->
+    <string name="account_settings_outgoing_label">"Налаштування вихідної пошти"</string>
+    <!-- On Settings screen, setting option name -->
+    <string name="account_settings_add_account_label">"Додати інший обліковий запис"</string>
+    <!-- On Settings screen, setting option name -->
+    <string name="account_settings_description_label">"Назва облікового запису"</string>
+    <!-- On Settings screen, setting option name -->
+    <string name="account_settings_name_label">"Ваше ім\'я"</string>
+    <!-- On Settings screen, section heading -->
+    <string name="account_settings_notifications">"Налаштування сповіщення"</string>
+    <!-- On Settings screen, setting check box label -->
+    <string name="account_settings_vibrate_enable">"Вібросигнал"</string>
+    <!-- On Settings screen, setting summary text -->
+    <string name="account_settings_vibrate_summary">"Увімкнути вібросигнал при отриманні пошти"</string>
+    <!-- On Settings screen, setting option name -->
+    <string name="account_settings_ringtone">"Обрати мелодію"</string>
+    <!-- On Settings screen, section heading -->
+    <string name="account_settings_servers">"Налаштування серверу"</string>
+    <!-- Title of Remove account confirmation dialog box -->
+    <string name="account_delete_dlg_title">"Видалення облікового запису"</string>
+    <!-- Message of Remove account confirmation dialog box -->
+    <string name="account_delete_dlg_instructions_fmt">"Обліковий запис \"<xliff:g id="account">%s</xliff:g>\" буде видалено з системи електронної пошти."</string>
+
+    <!-- Message that appears when user adds a Yahoo mail account. This alert has no title. -->
+    <string name="provider_note_yahoo">"Доступ до поштової скриньки для деяких типів
+        поштових облікових записів Yahoo! не підтримується. Якщо при підключенні виникли проблеми,
+        див. додаткові дані на yahoo.com."</string>
+    <!-- Message that appears when user adds a Yahoo UK mail account. -->
+    <string name="provider_note_yahoo_uk">"Щоб налаштувати даний обліковий запис електронної пошти,
+        перейдіть на веб-сайт Yahoo! і увімкніть для цього облікового запису доступ по протоколу POP3."</string>
+    <!-- Message that appears when adding a Windows Live Hotmail Plus account -->
+    <string name="provider_note_live">"Тільки деякі облікові записи \"Plus\" підтримують доступ
+        по протоколу POP, який вимагається даним додатком для підключення.
+        Якщо вам не вдається увійти в систему з правильною адресою електронної пошти і паролем,
+        можливо, у вас немає платного облікового запису \"Plus\". Відкрийте Оглядач, щоб отримати
+        доступ до цих поштових облікових записів."</string>
+    <!-- Message that appears when adding a T-Online account -->
+    <string name="provider_note_t_online">"Щоб налаштувати даний обліковий запис електронної пошти, перейдіть на веб-сайт T-Online і створіть пароль для доступу до електронної пошти по протоколу POP3."</string>
+</resources>
