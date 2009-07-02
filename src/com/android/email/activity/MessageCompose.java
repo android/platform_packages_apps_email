@@ -586,15 +586,6 @@ public class MessageCompose extends Activity implements OnClickListener, OnFocus
         message.setRecipients(RecipientType.BCC, getAddresses(mBccView));
         message.setSubject(mSubjectView.getText().toString());
         
-        // Preserve Message-ID header if found
-        // This makes sure that multiply-saved drafts are identified as the same message
-        if (mSourceMessage != null && mSourceMessage instanceof MimeMessage) {
-            String messageIdHeader = ((MimeMessage)mSourceMessage).getMessageId();
-            if (messageIdHeader != null) {
-                message.setMessageId(messageIdHeader);
-            }
-        }
-
         /*
          * Build the Body that will contain the text of the message. We'll decide where to
          * include it later.
