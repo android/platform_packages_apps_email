@@ -143,7 +143,7 @@ public class SmtpSender extends Sender {
              * if not.
              */
             if (mTransport.canTryTlsSecurity()) {
-                if (result.contains("-STARTTLS")) {
+                if (result.matches("[ -]STARTTLS")) {
                     executeSimpleCommand("STARTTLS");
                     mTransport.reopenTls();
                     /*
