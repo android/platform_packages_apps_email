@@ -1542,7 +1542,7 @@ public class MessageView extends Activity implements OnClickListener {
         } else {
             try {
                 Intent intent = new Intent(Intent.ACTION_VIEW);
-                intent.setData(contentUri);
+                intent.setDataAndType(contentUri, attachment.mMimeType);
                 intent.addFlags(Intent.FLAG_GRANT_READ_URI_PERMISSION);
                 startActivity(intent);
             } catch (ActivityNotFoundException e) {
