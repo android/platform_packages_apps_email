@@ -1,0 +1,140 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "AAAAr3///3Q\u003d",
+        "filename": "tests/src/com/android/email/mail/internet/MimeMessageTest.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 426,
+      "author": {
+        "id": 1001252
+      },
+      "writtenOn": "2010-01-13T22:49:59Z",
+      "side": 1,
+      "message": "please move the overall commentary to javadoc above the method declaration",
+      "revId": "06eda28c6259777aa1601c0b24ca746978cb36aa",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "AAAAr3///1g\u003d",
+        "filename": "tests/src/com/android/email/mail/internet/MimeMessageTest.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 460,
+      "author": {
+        "id": 1001252
+      },
+      "writtenOn": "2010-01-13T22:49:59Z",
+      "side": 1,
+      "message": "I would call these \"Note\".  Spelling: \"parenthesis\".",
+      "revId": "06eda28c6259777aa1601c0b24ca746978cb36aa",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "AAAAr3///3E\u003d",
+        "filename": "tests/src/com/android/email/mail/internet/MimeUtilityTest.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 354,
+      "author": {
+        "id": 1001252
+      },
+      "writtenOn": "2010-01-13T22:49:59Z",
+      "side": 1,
+      "message": "Please format this as a single block of Javadoc (see testGetHeaderParameter() for a good example)",
+      "revId": "06eda28c6259777aa1601c0b24ca746978cb36aa",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "AAAAr3///3A\u003d",
+        "filename": "tests/src/com/android/email/mail/internet/MimeUtilityTest.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 363,
+      "author": {
+        "id": 1001252
+      },
+      "writtenOn": "2010-01-13T22:49:59Z",
+      "side": 1,
+      "message": "style:  the final strings should be ALL_CAPS names.\n\nThe name \"theText\" is ambiguous.  In this case, it would be better to use a name including the word \"expect\", since that\u0027s how you\u0027re using this string.",
+      "revId": "06eda28c6259777aa1601c0b24ca746978cb36aa",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "AAAAr3///28\u003d",
+        "filename": "tests/src/com/android/email/mail/internet/MimeUtilityTest.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 374,
+      "author": {
+        "id": 1001252
+      },
+      "writtenOn": "2010-01-13T22:49:59Z",
+      "side": 1,
+      "message": "this can probably fit in a single line - we use 100 col in java files (comment applies to some lines below)",
+      "revId": "06eda28c6259777aa1601c0b24ca746978cb36aa",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "AAAAr3///1o\u003d",
+        "filename": "tests/src/com/android/email/mail/internet/MimeUtilityTest.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 394,
+      "author": {
+        "id": 1001252
+      },
+      "writtenOn": "2010-01-13T22:49:59Z",
+      "side": 1,
+      "message": "It\u0027s not really clear how you are dividing up the pairs of tests below.  The only difference in setup is the charset, but in one case you are checking the gotText, and in the other case you\u0027re ignoring gotText and checking the flags.\n\nI\u0027d prefer to see things more symmetric here, and in 2a/2b and 3a/3b.",
+      "revId": "06eda28c6259777aa1601c0b24ca746978cb36aa",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "AAAAr3///1k\u003d",
+        "filename": "tests/src/com/android/email/mail/internet/MimeUtilityTest.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 401,
+      "author": {
+        "id": 1001252
+      },
+      "writtenOn": "2010-01-13T22:49:59Z",
+      "side": 1,
+      "message": "also, please make sure that the comments are different in each pair, so a reader can quickly understand why semi-equivalent code is being repeated.",
+      "revId": "06eda28c6259777aa1601c0b24ca746978cb36aa",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "AAAAr3///1s\u003d",
+        "filename": "tests/src/com/android/email/mail/internet/MimeUtilityTest.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 448,
+      "author": {
+        "id": 1001252
+      },
+      "writtenOn": "2010-01-13T22:49:59Z",
+      "side": 1,
+      "message": "Indent these three comment lines.\n\nI would use the word \"Note\" here instead of \"Error\".",
+      "revId": "06eda28c6259777aa1601c0b24ca746978cb36aa",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    }
+  ]
+}
