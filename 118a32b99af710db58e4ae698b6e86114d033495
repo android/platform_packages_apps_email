@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "AAAAwX///1w\u003d",
+        "filename": "src/com/android/email/mail/transport/SmtpSender.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 154,
+      "author": {
+        "id": 1001252
+      },
+      "writtenOn": "2010-04-02T06:21:44Z",
+      "side": 1,
+      "message": "One other thing is that when you changed from contains() to matches(), you also changed from a lightweight string scanner to a full pattern match.  This isn\u0027t a good idea as-is because building the pattern is a non-lightweight operation.  I would request refactoring this in one of two ways.\n\n1.  Just use two simple string scans, e.g.\n\n  if (result.contains(\"-STARTTLS\") || result.contains(\" STARTTLS\")) \n\nThis is slightly less efficient (since it scans twice) but the scans themselves are lightweight.\n\n2.  Build and keep a static copy of the Pattern, e.g.\n\n  private final static Pattern PATTERN_STARTTLS \u003d Pattern.compile(\"[ -]STARTTLS\");",
+      "revId": "118a32b99af710db58e4ae698b6e86114d033495",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    }
+  ]
+}
