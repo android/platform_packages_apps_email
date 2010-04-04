@@ -87,6 +87,24 @@
     },
     {
       "key": {
+        "uuid": "AAAAwX///vc\u003d",
+        "filename": "tests/src/com/android/email/mail/transport/SmtpSenderUnitTests.java",
+        "patchSetId": 3
+      },
+      "lineNbr": 114,
+      "author": {
+        "id": 1003575
+      },
+      "writtenOn": "2010-04-04T14:07:52Z",
+      "side": 1,
+      "message": "I have changed these as per your recommendation.  However, note that setupOpen() toward the end of the file uses this 250+OK in all of its test (which is where I got it from).",
+      "parentUuid": "AAAAwX///wA\u003d",
+      "revId": "ae09536935320f2d3001448a5065c5388a3d772e",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "AAAAwX///v8\u003d",
         "filename": "tests/src/com/android/email/mail/transport/SmtpSenderUnitTests.java",
         "patchSetId": 3
