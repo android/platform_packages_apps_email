@@ -19,6 +19,108 @@
     },
     {
       "key": {
+        "uuid": "AAAAwX///vs\u003d",
+        "filename": "tests/src/com/android/email/mail/transport/SmtpSenderUnitTests.java",
+        "patchSetId": 3
+      },
+      "lineNbr": 94,
+      "author": {
+        "id": 1001252
+      },
+      "writtenOn": "2010-04-04T07:38:09Z",
+      "side": 1,
+      "message": "I think you can remove this and the next TODO - thanks!",
+      "revId": "ae09536935320f2d3001448a5065c5388a3d772e",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "AAAAwX///wE\u003d",
+        "filename": "tests/src/com/android/email/mail/transport/SmtpSenderUnitTests.java",
+        "patchSetId": 3
+      },
+      "lineNbr": 104,
+      "author": {
+        "id": 1001252
+      },
+      "writtenOn": "2010-04-04T07:38:09Z",
+      "side": 1,
+      "message": "Watch for leftover spaces, which gerrit code review will helpfully point out (and can be removed).",
+      "revId": "ae09536935320f2d3001448a5065c5388a3d772e",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "AAAAwX///vw\u003d",
+        "filename": "tests/src/com/android/email/mail/transport/SmtpSenderUnitTests.java",
+        "patchSetId": 3
+      },
+      "lineNbr": 106,
+      "author": {
+        "id": 1001252
+      },
+      "writtenOn": "2010-04-04T07:38:09Z",
+      "side": 1,
+      "message": "code style guide discourages use of abbreviations (except for well-known protocols, etc.).  Suggest mockDash and mockSpace.",
+      "revId": "ae09536935320f2d3001448a5065c5388a3d772e",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "AAAAwX///wA\u003d",
+        "filename": "tests/src/com/android/email/mail/transport/SmtpSenderUnitTests.java",
+        "patchSetId": 3
+      },
+      "lineNbr": 114,
+      "author": {
+        "id": 1001252
+      },
+      "writtenOn": "2010-04-04T07:38:09Z",
+      "side": 1,
+      "message": "These sequences don\u0027t look legitimate - what\u0027s the 250+OK ?   The output from EHLO will be a series of 250-abcd followed by 250\u003cspace\u003eabcd.\n\nIt\u0027s a good idea, whenever possible, to use values found in the relevant RFC (e.g. in this case, there are some samples in RFC 5321 appendix D), or, in this case, the specific traces found in the original bug report.",
+      "revId": "ae09536935320f2d3001448a5065c5388a3d772e",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "AAAAwX///v8\u003d",
+        "filename": "tests/src/com/android/email/mail/transport/SmtpSenderUnitTests.java",
+        "patchSetId": 3
+      },
+      "lineNbr": 124,
+      "author": {
+        "id": 1001252
+      },
+      "writtenOn": "2010-04-04T07:38:09Z",
+      "side": 1,
+      "message": "For code style consistency, please use a space after if and { and } around the block.  However, in this case the entire thing should simply be replaced by:\n\n  assertTrue(\"dash\", mtDash.getTlsReopened());",
+      "revId": "ae09536935320f2d3001448a5065c5388a3d772e",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "AAAAwX///v0\u003d",
+        "filename": "tests/src/com/android/email/mail/transport/SmtpSenderUnitTests.java",
+        "patchSetId": 3
+      },
+      "lineNbr": 144,
+      "author": {
+        "id": 1001252
+      },
+      "writtenOn": "2010-04-04T07:38:09Z",
+      "side": 1,
+      "message": "assertTrue(\"dash\", mtSpace.getTlsReopened());",
+      "revId": "ae09536935320f2d3001448a5065c5388a3d772e",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "AAAAwX///wQ\u003d",
         "filename": "tests/src/com/android/email/mail/transport/SmtpSenderUnitTests.java",
         "patchSetId": 3
@@ -30,6 +132,23 @@
       "writtenOn": "2010-04-04T05:55:26Z",
       "side": 1,
       "message": "This comment should be removed.",
+      "revId": "ae09536935320f2d3001448a5065c5388a3d772e",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "AAAAwX///v4\u003d",
+        "filename": "tests/src/com/android/email/mail/transport/SmtpSenderUnitTests.java",
+        "patchSetId": 3
+      },
+      "lineNbr": 167,
+      "author": {
+        "id": 1001252
+      },
+      "writtenOn": "2010-04-04T07:38:09Z",
+      "side": 1,
+      "message": "extra blanks here as well",
       "revId": "ae09536935320f2d3001448a5065c5388a3d772e",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
       "unresolved": false
