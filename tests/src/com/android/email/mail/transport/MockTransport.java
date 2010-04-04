@@ -262,7 +262,6 @@ public class MockTransport implements Transport {
         SmtpSenderUnitTests.assertTrue(mOpen);
         SmtpSenderUnitTests.assertTrue(mTlsAllowed);
         mTlsReopened = true;
-        //SmtpSenderUnitTests.fail("reopenTls() not implemented");
     }
 
     public boolean getTlsReopened() {
