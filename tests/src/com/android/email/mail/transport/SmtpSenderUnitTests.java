@@ -96,7 +96,76 @@ public class SmtpSenderUnitTests extends ProviderTestCase2<EmailProvider> {
      * TODO: Test other capabilities.
      * TODO: Test AUTH LOGIN
      */
-    
+
+    /**
+     * Confirms TLS login
+     */
+    public void testTlsLogin() throws MessagingException {
+        
+        // test with "250-STARTTLS"
+        MockTransport mtDash = new MockTransport();
+        mtDash.setSecurity(Transport.CONNECTION_SECURITY_TLS, false);
+        mtDash.setTlsAllowed(true);
+        mSender.setTransport(mtDash);
+
+        // try to open it
+        mtDash.expect(null, "220 MockTransport 2000 Ready To Assist You Peewee");
+        mtDash.expect("EHLO .*", "250-10.20.30.40 hello");
+        mtDash.expect(null, "250-AUTH LOGIN PLAIN CRAM-MD5");
+        mtDash.expect(null, "250-STARTTLS");
+        mtDash.expect(null, "250+OK");
+        mtDash.expect("STARTTLS", "220 Ready to start TLS");
+        mtDash.expect("EHLO .*", "250-10.20.30.40 hello");
+        mtDash.expect(null, "250-AUTH LOGIN PLAIN CRAM-MD5");
+        mtDash.expect(null, "250-STARTTLS");
+        mtDash.expect(null, "250+OK");
+        mtDash.expect("AUTH PLAIN .*", "235 2.7.0 ... authentication succeeded");
+        mSender.open();
+        if(mtDash.getTlsReopened() == false)
+            fail("TLS not reopened.");
+
+        // test with "250 STARTTLS"
+        MockTransport mtSpace = new MockTransport();
+        mtSpace.setSecurity(Transport.CONNECTION_SECURITY_TLS, false);
+        mtSpace.setTlsAllowed(true);
+        mSender.setTransport(mtSpace);
+
+        // try to open it
+        mtSpace.expect(null, "220 MockTransport 2000 Ready To Assist You Peewee");
+        mtSpace.expect("EHLO .*", "250-10.20.30.40 hello");
+        mtSpace.expect(null, "250-AUTH LOGIN PLAIN CRAM-MD5");
+        mtSpace.expect(null, "250 STARTTLS");
+        mtSpace.expect("STARTTLS", "220 Ready to start TLS");
+        mtSpace.expect("EHLO .*", "250-10.20.30.40 hello");
+        mtSpace.expect(null, "250-AUTH LOGIN PLAIN CRAM-MD5");
+        mtSpace.expect(null, "250 STARTTLS");
+        mtSpace.expect("AUTH PLAIN .*", "235 2.7.0 ... authentication succeeded");
+        mSender.open();
+        if(mtSpace.getTlsReopened() == false)
+            fail("TLS not reopened.");
+    }
+
+    /**
+     * Confirms TLS required but not supported
+     */
+    public void testTlsRequiredNotSupported() throws MessagingException {
+        MockTransport mockTransport = new MockTransport();
+        mockTransport.setSecurity(Transport.CONNECTION_SECURITY_TLS, false);
+        mSender.setTransport(mockTransport);
+
+        // try to open it
+        mockTransport.expect(null, "220 MockTransport 2000 Ready To Assist You Peewee");
+        mockTransport.expect("EHLO .*", "");
+        setupOpen(mockTransport, "");
+        try {
+            mSender.open();
+            fail("Should not be able to open() without TLS.");
+        } catch (MessagingException me) {
+            // good - expected
+            // TODO maybe expect a particular exception?
+        }
+    }    
+
     /**
      * Test:  Open and send a single message (sunny day)
      */
