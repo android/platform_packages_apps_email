@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "AAAAzH///0w\u003d",
+        "filename": "src/com/android/exchange/adapter/EmailSyncAdapter.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 253,
+      "author": {
+        "id": 1002975
+      },
+      "writtenOn": "2010-05-14T18:02:59Z",
+      "side": 1,
+      "message": "Should be a blank line before this.",
+      "revId": "79ce1d5c348b7cbdb95a5da2b46e75f3c5b2cc29",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    }
+  ]
+}
