@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "AAAAzH///Pw\u003d",
+        "filename": "src/com/android/email/activity/MessageView.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 1545,
+      "author": {
+        "id": 1001252
+      },
+      "writtenOn": "2010-05-19T21:12:28Z",
+      "side": 1,
+      "message": "This shouldn\u0027t be needed - see the bug report for commentary.",
+      "revId": "22f9e91cd6f901f1a60ee1205d42f8897ce6f302",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    }
+  ]
+}
