@@ -22,6 +22,7 @@ import com.android.email.Email;
 import com.android.email.R;
 import com.android.email.activity.MessageList;
 import com.android.email.mail.MessagingException;
+import com.android.email.provider.EmailContent;
 import com.android.email.provider.EmailContent.Account;
 import com.android.email.provider.EmailContent.AccountColumns;
 import com.android.email.provider.EmailContent.Mailbox;
@@ -31,6 +32,7 @@ import android.app.Notification;
 import android.app.NotificationManager;
 import android.app.PendingIntent;
 import android.app.Service;
+import android.content.ContentResolver;
 import android.content.ContentUris;
 import android.content.ContentValues;
 import android.content.Context;
@@ -134,6 +136,20 @@ public class MailService extends Service {
     }
 
     /**
+     * Entry point to start of a thread to find the email addresses account ID
+     * and start a mail sync for that account
+     *
+     * @param context a context
+     * @param emailAddress the email address to refresh
+     */
+    public static void actionCheckMail(Context context, String emailAddress) {        
+        Intent i = new Intent(ACTION_CHECK_MAIL);
+        i.setClass(context, MailService.class);
+        i.putExtra(EXTRA_CHECK_ACCOUNT, emailAddress);
+        context.startService(i);
+    }
+
+    /**
      * Entry point for asynchronous message services (e.g. push mode) to post notifications of new
      * messages.  This assumes that the push provider has already synced the messages into the
      * appropriate database - this simply triggers the notification mechanism.
@@ -170,7 +186,15 @@ public class MailService extends Service {
 
             // Sync a specific account if given
             AlarmManager alarmManager = (AlarmManager)getSystemService(Context.ALARM_SERVICE);
+            // try get the account ID
             long checkAccountId = intent.getLongExtra(EXTRA_CHECK_ACCOUNT, -1);
+            // if not present then try get the emailAddress
+            if (checkAccountId == -1) {
+                String emailAddress = intent.getStringExtra(EXTRA_CHECK_ACCOUNT);
+                if (emailAddress.length()>0) {
+                    checkAccountId = getAccountID(emailAddress);
+                }
+            }
             if (Config.LOGD && Email.DEBUG) {
                 Log.d(LOG_TAG, "action: check mail for id=" + checkAccountId);
             }
@@ -715,4 +739,33 @@ public class MailService extends Service {
             (NotificationManager) getSystemService(Context.NOTIFICATION_SERVICE);
         notificationManager.notify(NOTIFICATION_ID_NEW_MESSAGES, notification);
     }
+
+    private long getAccountID(String emailAddress) {
+
+        long accountID = -1;
+
+        if (emailAddress.length() > 0) {
+
+            // find the account associated with this email address
+            ContentResolver cr = getContentResolver();
+            Cursor accountCursor = cr.query(
+                    EmailContent.Account.CONTENT_URI,
+                    EmailContent.ID_PROJECTION,
+                    AccountColumns.EMAIL_ADDRESS + "=?", new String[] {
+                        emailAddress
+                    }, null);
+
+            // if found kick off a sync
+            try {
+                if (accountCursor.moveToFirst()) {
+                    accountID = accountCursor.getLong(EmailContent.ID_PROJECTION_COLUMN);
+                }
+            } finally {
+                accountCursor.close();
+            }
+        }
+
+        return accountID;
+    }
+
 }
