@@ -1,0 +1,72 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "AAAA1X///8I\u003d",
+        "filename": "src/com/android/email/service/EMNReceiver.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 2,
+      "author": {
+        "id": 1000660
+      },
+      "writtenOn": "2010-07-15T22:37:11Z",
+      "side": 1,
+      "message": "Should be 2010",
+      "revId": "0d21408ed226d1b36ac590b274e197c50618e7f0",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "AAAA1X///8E\u003d",
+        "filename": "src/com/android/email/service/EMNReceiver.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 40,
+      "author": {
+        "id": 1000660
+      },
+      "writtenOn": "2010-07-15T22:37:11Z",
+      "side": 1,
+      "message": "please wrap to 100 characters, using 8 spaces for continuation lines.",
+      "revId": "0d21408ed226d1b36ac590b274e197c50618e7f0",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "AAAA1X///8A\u003d",
+        "filename": "src/com/android/email/service/EMNReceiver.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 96,
+      "author": {
+        "id": 1000660
+      },
+      "writtenOn": "2010-07-15T22:37:11Z",
+      "side": 1,
+      "message": "trailing space",
+      "revId": "0d21408ed226d1b36ac590b274e197c50618e7f0",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "AAAA1X///78\u003d",
+        "filename": "src/com/android/email/service/EMNReceiver.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 143,
+      "author": {
+        "id": 1000660
+      },
+      "writtenOn": "2010-07-15T22:37:11Z",
+      "side": 1,
+      "message": "1-- columns",
+      "revId": "0d21408ed226d1b36ac590b274e197c50618e7f0",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    }
+  ]
+}
