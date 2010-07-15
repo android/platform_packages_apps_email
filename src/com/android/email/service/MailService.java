@@ -22,6 +22,7 @@ import com.android.email.Email;
 import com.android.email.R;
 import com.android.email.activity.MessageList;
 import com.android.email.mail.MessagingException;
+import com.android.email.provider.EmailContent;
 import com.android.email.provider.EmailContent.Account;
 import com.android.email.provider.EmailContent.AccountColumns;
 import com.android.email.provider.EmailContent.Mailbox;
@@ -31,6 +32,7 @@ import android.app.Notification;
 import android.app.NotificationManager;
 import android.app.PendingIntent;
 import android.app.Service;
+import android.content.ContentResolver;
 import android.content.ContentUris;
 import android.content.ContentValues;
 import android.content.Context;
@@ -134,6 +136,20 @@ public class MailService extends Service {
     }
 
     /**
+     * Entry point to start of a thread to find the email addresses account ID
+     * and start a mail sync for that account
+     *
+     * @param context a context
+     * @param emailAddress the email address to refresh
+     */
+    public static void actionCheckMail(Context context, String emailAddress) {
+        Intent i = new Intent(ACTION_CHECK_MAIL);
+        i.setClass(context, MailService.class);
+        i.putExtra(EXTRA_CHECK_ACCOUNT, emailAddress);
+        context.startService(i);
+    }
+
+    /**
      * Entry point for asynchronous message services (e.g. push mode) to post notifications of new
      * messages.  This assumes that the push provider has already synced the messages into the
      * appropriate database - this simply triggers the notification mechanism.
@@ -164,28 +180,20 @@ public class MailService extends Service {
         controller.addResultCallback(mControllerCallback);
 
         if (ACTION_CHECK_MAIL.equals(action)) {
-            // If we have the data, restore the last-sync-times for each account
-            // These are cached in the wakeup intent in case the process was killed.
-            restoreSyncReports(intent);
 
-            // Sync a specific account if given
-            AlarmManager alarmManager = (AlarmManager)getSystemService(Context.ALARM_SERVICE);
+            // try get the account ID
             long checkAccountId = intent.getLongExtra(EXTRA_CHECK_ACCOUNT, -1);
-            if (Config.LOGD && Email.DEBUG) {
-                Log.d(LOG_TAG, "action: check mail for id=" + checkAccountId);
-            }
-            if (checkAccountId >= 0) {
-                setWatchdog(checkAccountId, alarmManager);
-            }
-            // if no account given, or the given account cannot be synced - reschedule
-            if (checkAccountId == -1 || !syncOneAccount(controller, checkAccountId, startId)) {
-                // Prevent runaway on the current account by pretending it updated
-                if (checkAccountId != -1) {
-                    updateAccountReport(checkAccountId, 0);
+            // if not present then try get the emailAddress
+            if (checkAccountId == -1) {
+                String emailAddress = intent.getStringExtra(EXTRA_CHECK_ACCOUNT);
+                // if found start a thread to do the lookup
+                if (emailAddress.length() > 0) {
+                    Thread thread = new LookupAccount(controller, intent, startId, emailAddress);
+                    thread.start();
                 }
-                // Find next account to sync, and reschedule
-                reschedule(alarmManager);
-                stopSelf(startId);
+            }
+            else {
+                processCheckAccount(controller, intent, startId, checkAccountId);
             }
         }
         else if (ACTION_CANCEL.equals(action)) {
@@ -715,4 +723,80 @@ public class MailService extends Service {
             (NotificationManager) getSystemService(Context.NOTIFICATION_SERVICE);
         notificationManager.notify(NOTIFICATION_ID_NEW_MESSAGES, notification);
     }
+
+    private void processCheckAccount(Controller controller, Intent intent,
+            int startId, long checkAccountId) {
+        // If we have the data, restore the last-sync-times for each account
+        // These are cached in the wakeup intent in case the process was killed.
+        restoreSyncReports(intent);
+
+        // Sync a specific account if given
+        AlarmManager alarmManager = (AlarmManager)getSystemService(Context.ALARM_SERVICE);
+
+        if (Config.LOGD && Email.DEBUG) {
+            Log.d(LOG_TAG, "action: check mail for id=" + checkAccountId);
+        }
+        if (checkAccountId >= 0) {
+            setWatchdog(checkAccountId, alarmManager);
+        }
+        // if no account given, or the given account cannot be synced - reschedule
+        if (checkAccountId == -1 || !syncOneAccount(controller, checkAccountId, startId)) {
+            // Prevent runaway on the current account by pretending it updated
+            if (checkAccountId != -1) {
+                updateAccountReport(checkAccountId, 0);
+            }
+            // Find next account to sync, and reschedule
+            reschedule(alarmManager);
+            stopSelf(startId);
+        }
+    }
+
+    class LookupAccount extends Thread {
+
+        private final Controller mController;
+        private final Intent mIntent;
+        private final int mStartId;
+        private final String mEmailAddress;
+
+        LookupAccount(Controller controller, Intent intent, int startId,
+                String emailAddress) {
+            mController = controller;
+            mIntent = intent;
+            mStartId = startId;
+            mEmailAddress = emailAddress;
+        }
+
+        public void run() {
+            long checkAccountId = getAccountId(mEmailAddress,getContentResolver());
+            if (checkAccountId != -1) {
+                processCheckAccount(mController, mIntent, mStartId, checkAccountId);
+            }
+        }
+
+        private long getAccountId(String emailAddress, ContentResolver cr) {
+
+            long accountID = -1;
+
+            // find the account associated with this email address
+            if (cr != null) {
+                Cursor accountCursor = cr.query(
+                        EmailContent.Account.CONTENT_URI,
+                        EmailContent.ID_PROJECTION,
+                        AccountColumns.EMAIL_ADDRESS + "=?",
+                        new String[] {emailAddress}, null);
+
+                // if found get the account ID
+                try {
+                    if (accountCursor.moveToFirst()) {
+                        accountID = accountCursor.getLong(EmailContent.ID_PROJECTION_COLUMN);
+                    }
+                } finally {
+                    accountCursor.close();
+                }
+            }
+
+            return accountID;
+        }
+    }
+
 }
