@@ -22,6 +22,7 @@ import com.android.email.Email;
 import com.android.email.R;
 import com.android.email.activity.MessageList;
 import com.android.email.mail.MessagingException;
+import com.android.email.provider.EmailContent;
 import com.android.email.provider.EmailContent.Account;
 import com.android.email.provider.EmailContent.AccountColumns;
 import com.android.email.provider.EmailContent.Mailbox;
@@ -31,6 +32,7 @@ import android.app.Notification;
 import android.app.NotificationManager;
 import android.app.PendingIntent;
 import android.app.Service;
+import android.content.ContentResolver;
 import android.content.ContentUris;
 import android.content.ContentValues;
 import android.content.Context;
@@ -131,6 +133,18 @@ public class MailService extends Service {
             uri = ContentUris.withAppendedId(Account.CONTENT_URI, accountId);
         }
         context.getContentResolver().update(uri, mClearNewMessages, null, null);
+    }
+
+    /**
+     * Entry point to start of a thread to find the email addresses account ID
+     * and start a mail sync for that account
+     *
+     * @param context a context
+     * @param emailAddress the email address to refresh
+     */
+    public static void actionRefreshAccount(Context context, String emailAddress) {
+        Thread thread = new Thread(new RefreshAccountByEmailAddress(context, emailAddress));
+        thread.start();
     }
 
     /**
@@ -715,4 +729,49 @@ public class MailService extends Service {
             (NotificationManager) getSystemService(Context.NOTIFICATION_SERVICE);
         notificationManager.notify(NOTIFICATION_ID_NEW_MESSAGES, notification);
     }
+
+    static class RefreshAccountByEmailAddress implements Runnable {
+
+        static final String[] ID_PROJECTION = new String[] {
+            EmailContent.RECORD_ID
+        };
+
+        private String mEmailAddress;
+
+        private Context mContext;
+
+        public RefreshAccountByEmailAddress(Context context, String emailAddress) {
+            mContext = context;
+            mEmailAddress = emailAddress;
+        }
+
+        public void run() {
+
+            if (mEmailAddress.length() > 0) {
+
+                // find the account associated with this email address
+                ContentResolver cr = mContext.getContentResolver();
+                Cursor accountCursor = cr.query(
+                        com.android.email.provider.EmailContent.Account.CONTENT_URI, ID_PROJECTION,
+                        AccountColumns.EMAIL_ADDRESS + "=?", new String[] {
+                            mEmailAddress
+                        }, null);
+
+                // if found kick off a sync
+                try {
+                    if (accountCursor.moveToFirst()) {
+                        long accountId = accountCursor.getLong(0);
+                        Intent in = new Intent();
+                        in.setClass(mContext, MailService.class);
+                        in.setAction(ACTION_CHECK_MAIL);
+                        in.putExtra(EXTRA_CHECK_ACCOUNT, accountId);
+                        mContext.startService(in);
+                    }
+                } finally {
+                    accountCursor.close();
+                }
+            }
+        }
+    }
+
 }
