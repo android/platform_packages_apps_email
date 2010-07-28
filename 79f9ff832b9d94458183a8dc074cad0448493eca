@@ -1,0 +1,225 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "AAAA3X///kk\u003d",
+        "filename": "src/com/android/email/service/EMNReceiver.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 31,
+      "author": {
+        "id": 1001252
+      },
+      "writtenOn": "2010-07-28T18:46:27Z",
+      "side": 1,
+      "message": "Style guide is to use caps (even for acronyms like EMN) so this should be EmnReceiver",
+      "revId": "79f9ff832b9d94458183a8dc074cad0448493eca",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "AAAA3X///kQ\u003d",
+        "filename": "src/com/android/email/service/EMNReceiver.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 55,
+      "author": {
+        "id": 1001252
+      },
+      "writtenOn": "2010-07-28T18:46:27Z",
+      "side": 1,
+      "message": "please remove all of the \u003d\u003dtrue and \u003d\u003dfalse expressions.  This can just be \n \n if (emn !\u003d null \u0026\u0026 emn.decode(wbxml)) {...",
+      "revId": "79f9ff832b9d94458183a8dc074cad0448493eca",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "AAAA3X///kY\u003d",
+        "filename": "src/com/android/email/service/EMNReceiver.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 65,
+      "author": {
+        "id": 1001252
+      },
+      "writtenOn": "2010-07-28T18:46:27Z",
+      "side": 1,
+      "message": "I think you could simplify this by removing this class and letting the decoder be a top-level method that simply returns the string or null.",
+      "revId": "79f9ff832b9d94458183a8dc074cad0448493eca",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "AAAA3X///kU\u003d",
+        "filename": "src/com/android/email/service/EMNReceiver.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 70,
+      "author": {
+        "id": 1001252
+      },
+      "writtenOn": "2010-07-28T18:46:27Z",
+      "side": 1,
+      "message": "remove all these blank lines and make these into a \"block\" for better readability\n\n  // comment\n  private static final int ...\n  private static final int ...",
+      "revId": "79f9ff832b9d94458183a8dc074cad0448493eca",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "AAAA3X///kI\u003d",
+        "filename": "src/com/android/email/service/EMNReceiver.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 132,
+      "author": {
+        "id": 1001252
+      },
+      "writtenOn": "2010-07-28T18:46:27Z",
+      "side": 1,
+      "message": "a faster way to do this is to simply count forward with j, and then subtract i after the loop to obtain the length",
+      "revId": "79f9ff832b9d94458183a8dc074cad0448493eca",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "AAAA3X///kE\u003d",
+        "filename": "src/com/android/email/service/EMNReceiver.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 142,
+      "author": {
+        "id": 1001252
+      },
+      "writtenOn": "2010-07-28T18:46:27Z",
+      "side": 1,
+      "message": "I imagine the most common exceptions will be ArrayIndexOutOfBoundsException.  Can we do anything better here?  For example, I\u0027m thinking of a 2nd exception handler that actually says something like \"EMN message too short, len\u003d\" + wbxmlBody.length\n\nIn this case you would not need the stack trace (see next comment).",
+      "revId": "79f9ff832b9d94458183a8dc074cad0448493eca",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "AAAA3X///kA\u003d",
+        "filename": "src/com/android/email/service/EMNReceiver.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 144,
+      "author": {
+        "id": 1001252
+      },
+      "writtenOn": "2010-07-28T18:46:27Z",
+      "side": 1,
+      "message": "1.  C++ style naming \n\n2.  The problem here is that you capture and discard the entire exception, which won\u0027t be helpful when debugging.  Suggest something more like this:\n\n  Log.d(Email.LOG_TAG, \"Exception while handling CONTENT_MIME_TYPE_B_EMN \" + e);\n\nThis will write the stack trace to the log (and sidesteps the no-longer-required method naming).",
+      "revId": "79f9ff832b9d94458183a8dc074cad0448493eca",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "AAAA3X///jo\u003d",
+        "filename": "src/com/android/email/service/MailService.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 145,
+      "author": {
+        "id": 1001252
+      },
+      "writtenOn": "2010-07-28T18:46:27Z",
+      "side": 1,
+      "message": "There\u0027s no need to fire up a new thread here.  Just put the account string in an ACTION_CHECK_MAIL intent, with a different extra, and call startService as usual.  Then in onStartComment(), where we call \n\n  long checkAccountId \u003d intent.getLongExtra(EXTRA_CHECK_ACCOUNT, -1);\n\nYou can simply check for both extras and do the name-\u003eid conversion at that point.",
+      "revId": "79f9ff832b9d94458183a8dc074cad0448493eca",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "AAAA3X///jk\u003d",
+        "filename": "src/com/android/email/service/MailService.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 735,
+      "author": {
+        "id": 1001252
+      },
+      "writtenOn": "2010-07-28T18:46:27Z",
+      "side": 1,
+      "message": "Use EmailContent.ID_PROJECTION for this",
+      "revId": "79f9ff832b9d94458183a8dc074cad0448493eca",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "AAAA3X///jg\u003d",
+        "filename": "src/com/android/email/service/MailService.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 748,
+      "author": {
+        "id": 1001252
+      },
+      "writtenOn": "2010-07-28T18:46:27Z",
+      "side": 1,
+      "message": "As noted earlier, please unwrap the worker into a simple method call.  We can just call it from within the service, which makes it much easier to test, and avoids the overhead of creating yet another thread.\n\nIt will also be a much simpler call at that point, since it merely has to return the account ID",
+      "revId": "79f9ff832b9d94458183a8dc074cad0448493eca",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "AAAA3X///jY\u003d",
+        "filename": "src/com/android/email/service/MailService.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 753,
+      "author": {
+        "id": 1001252
+      },
+      "writtenOn": "2010-07-28T18:46:27Z",
+      "side": 1,
+      "message": "When you make this a simple method, you\u0027ll be able to simply call\n\n  getContentResolver().query( ...",
+      "revId": "79f9ff832b9d94458183a8dc074cad0448493eca",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "AAAA3X///jc\u003d",
+        "filename": "src/com/android/email/service/MailService.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 755,
+      "author": {
+        "id": 1001252
+      },
+      "writtenOn": "2010-07-28T18:46:27Z",
+      "side": 1,
+      "message": "remove \"com.android.email.provider.EmailContent.\"",
+      "revId": "79f9ff832b9d94458183a8dc074cad0448493eca",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "AAAA3X///jU\u003d",
+        "filename": "src/com/android/email/service/MailService.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 763,
+      "author": {
+        "id": 1001252
+      },
+      "writtenOn": "2010-07-28T18:46:27Z",
+      "side": 1,
+      "message": "Use ID_PROJECTION_COLUMN instead of 0",
+      "revId": "79f9ff832b9d94458183a8dc074cad0448493eca",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    }
+  ]
+}
