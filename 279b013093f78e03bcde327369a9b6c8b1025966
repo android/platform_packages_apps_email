@@ -1,0 +1,106 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "AAAA3n///2o\u003d",
+        "filename": "src/com/android/email/service/EmnReceiver.java",
+        "patchSetId": 5
+      },
+      "lineNbr": 56,
+      "author": {
+        "id": 1001252
+      },
+      "writtenOn": "2010-07-29T18:49:05Z",
+      "side": 1,
+      "message": "suggest using TextUtils.isEmpty() here",
+      "revId": "279b013093f78e03bcde327369a9b6c8b1025966",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "AAAA3n///24\u003d",
+        "filename": "src/com/android/email/service/EmnReceiver.java",
+        "patchSetId": 5
+      },
+      "lineNbr": 73,
+      "author": {
+        "id": 1001252
+      },
+      "writtenOn": "2010-07-29T18:49:05Z",
+      "side": 1,
+      "message": "Much better.  The only thing I would change here is to return null (not empty string) and simplify your test above.",
+      "revId": "279b013093f78e03bcde327369a9b6c8b1025966",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "AAAA3n///2k\u003d",
+        "filename": "src/com/android/email/service/MailService.java",
+        "patchSetId": 5
+      },
+      "lineNbr": 194,
+      "author": {
+        "id": 1001252
+      },
+      "writtenOn": "2010-07-29T18:49:05Z",
+      "side": 1,
+      "message": "remember spaces around operators;\n\n  if (emailAddress.length() \u003e 0)",
+      "revId": "279b013093f78e03bcde327369a9b6c8b1025966",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "AAAA3n///2w\u003d",
+        "filename": "src/com/android/email/service/MailService.java",
+        "patchSetId": 5
+      },
+      "lineNbr": 743,
+      "author": {
+        "id": 1001252
+      },
+      "writtenOn": "2010-07-29T18:49:05Z",
+      "side": 1,
+      "message": "again, I apologize.  This method should be left as-is (to make it easily testable) but it needs to be called from a thread to avoid ApplicationNotResponding errors.",
+      "revId": "279b013093f78e03bcde327369a9b6c8b1025966",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "AAAA3n///2g\u003d",
+        "filename": "src/com/android/email/service/MailService.java",
+        "patchSetId": 5
+      },
+      "lineNbr": 747,
+      "author": {
+        "id": 1001252
+      },
+      "writtenOn": "2010-07-29T18:49:05Z",
+      "side": 1,
+      "message": "This is the 3rd time checking this;  Might be overkill (esp. since this is a private method)",
+      "revId": "279b013093f78e03bcde327369a9b6c8b1025966",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "AAAA3n///2c\u003d",
+        "filename": "src/com/android/email/service/MailService.java",
+        "patchSetId": 5
+      },
+      "lineNbr": 754,
+      "author": {
+        "id": 1001252
+      },
+      "writtenOn": "2010-07-29T18:49:05Z",
+      "side": 1,
+      "message": "the string array shouldn\u0027t be broken up over three lines",
+      "revId": "279b013093f78e03bcde327369a9b6c8b1025966",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    }
+  ]
+}
