@@ -70,6 +70,23 @@
     },
     {
       "key": {
+        "uuid": "AAAA3n///1w\u003d",
+        "filename": "src/com/android/email/service/MailService.java",
+        "patchSetId": 5
+      },
+      "lineNbr": 743,
+      "author": {
+        "id": 1001252
+      },
+      "writtenOn": "2010-07-29T19:06:55Z",
+      "side": 1,
+      "message": "Two other quick notes\n\n1.  Should be getAccountId()\n\n2.  Suggest injecting (passing in) either Context or ContentResolver as a parameter.  This will make it easier to test this with mock accounts.",
+      "revId": "279b013093f78e03bcde327369a9b6c8b1025966",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "AAAA3n///2g\u003d",
         "filename": "src/com/android/email/service/MailService.java",
         "patchSetId": 5
