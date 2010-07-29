@@ -138,6 +138,24 @@
     },
     {
       "key": {
+        "uuid": "AAAA3n///3k\u003d",
+        "filename": "src/com/android/email/service/MailService.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 145,
+      "author": {
+        "id": 1001252
+      },
+      "writtenOn": "2010-07-29T18:26:54Z",
+      "side": 1,
+      "message": "Billy, I have to apologize, as this was poor advice.  I forgot that onStartCommand(), despite being in a Service, runs in the UI thread, and thus (like the broadcast receiver) can cause ApplicationNotResponding errors if you do something that can be slow (like the DB lookup).\n\nSo, your original code was doing the right thing - the thread handoff is required here.\n\nAgain, my apologies for the extra work this may have caused.",
+      "parentUuid": "AAAA3X///jo\u003d",
+      "revId": "79f9ff832b9d94458183a8dc074cad0448493eca",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "AAAA3X///jk\u003d",
         "filename": "src/com/android/email/service/MailService.java",
         "patchSetId": 2
