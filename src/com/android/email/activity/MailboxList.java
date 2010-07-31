@@ -31,17 +31,21 @@ import com.android.email.provider.EmailContent.Mailbox;
 import com.android.email.provider.EmailContent.MailboxColumns;
 import com.android.email.provider.EmailContent.Message;
 import com.android.email.provider.EmailContent.MessageColumns;
+import com.android.email.service.IEmailService;
 
+import android.accounts.AccountManager;
 import android.app.ListActivity;
 import android.content.ContentUris;
 import android.content.Context;
 import android.content.Intent;
+import android.content.res.Resources;
 import android.database.Cursor;
 import android.graphics.Typeface;
 import android.net.Uri;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.os.Handler;
+import android.util.Log;
 import android.view.ContextMenu;
 import android.view.LayoutInflater;
 import android.view.Menu;
@@ -58,6 +62,7 @@ import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.ProgressBar;
 import android.widget.TextView;
+import android.widget.Toast;
 import android.widget.AdapterView.OnItemClickListener;
 
 public class MailboxList extends ListActivity implements OnItemClickListener, OnClickListener {
@@ -68,6 +73,8 @@ public class MailboxList extends ListActivity implements OnItemClickListener, On
     private static final String MAILBOX_SELECTION = MailboxColumns.ACCOUNT_KEY + "=?"
         + " AND " + MailboxColumns.TYPE + "<" + Mailbox.TYPE_NOT_EMAIL
         + " AND " + MailboxColumns.FLAG_VISIBLE + "=1";
+    private static final String MAILBOX_SELECTION_ALL = MailboxColumns.ACCOUNT_KEY + "=?"
+    + " AND " + MailboxColumns.TYPE + "<" + Mailbox.TYPE_NOT_EMAIL;
     private static final String MESSAGE_MAILBOX_ID_SELECTION =
         MessageColumns.MAILBOX_KEY + "=?";
 
@@ -90,6 +97,7 @@ public class MailboxList extends ListActivity implements OnItemClickListener, On
     private long mTrashMailboxKey = -1;
     private int mUnreadCountDraft = 0;
     private int mUnreadCountTrash = 0;
+    public boolean showHidden;
 
     /**
      * Open a specific account.
@@ -125,13 +133,19 @@ public class MailboxList extends ListActivity implements OnItemClickListener, On
         ((Button) findViewById(R.id.account_title_button)).setOnClickListener(this);
 
         mAccountId = getIntent().getLongExtra(EXTRA_ACCOUNT_ID, -1);
+
+        lmbTask();
+        }
+
+    // broke this out of onCreate so I could re-run the task when show all mailboxes was set
+
+    public void lmbTask() {
         if (mAccountId != -1) {
             mLoadMailboxesTask = new LoadMailboxesTask(mAccountId);
             mLoadMailboxesTask.execute();
         } else {
             finish();
         }
-
         ((TextView)findViewById(R.id.title_left_text)).setText(R.string.mailbox_list_title);
 
         // Go to the database for the account name
@@ -243,6 +257,18 @@ public class MailboxList extends ListActivity implements OnItemClickListener, On
             case R.id.account_settings:
                 onEditAccount();
                 return true;
+            case R.id.show_hidden:
+                if (showHidden == false) {
+                    showHidden=true;
+                    item.setTitle(R.string.hide_hidden_action);
+                    lmbTask();
+                } else {
+                    showHidden=false;
+                    item.setTitle(R.string.show_hidden_action);
+                    lmbTask();
+                }
+                onRefresh(-1);
+                return true;
             default:
                 return super.onOptionsItemSelected(item);
         }
@@ -261,6 +287,13 @@ public class MailboxList extends ListActivity implements OnItemClickListener, On
 
         menu.setHeaderTitle(folderName);
         getMenuInflater().inflate(R.menu.mailbox_list_context, menu);
+
+        Controller controller = Controller.getInstance(getApplication());
+
+        IEmailService sv = controller.getService(mAccountId);
+        if (sv == null){
+            menu.removeItem(R.id.sync);
+        }
     }
 
     @Override
@@ -274,6 +307,12 @@ public class MailboxList extends ListActivity implements OnItemClickListener, On
                 break;
             case R.id.open:
                 onOpenMailbox(info.id);
+                break;
+            case R.id.sync:
+                onToggleSync(info.id);
+                break;
+            case R.id.hide:
+                onToggleHide(info.id);
                 break;
         }
         return super.onContextItemSelected(item);
@@ -304,6 +343,21 @@ public class MailboxList extends ListActivity implements OnItemClickListener, On
 
     private void onOpenMailbox(long mailboxId) {
         MessageList.actionHandleMailbox(this, mailboxId);
+    }
+
+    private void onToggleSync(long mailboxId) {
+        Controller controller = Controller.getInstance(getApplication());
+        if (mailboxId >= 0) {
+            controller.toggleSyncFolder(mAccountId, mailboxId, mControllerCallback);
+        }
+        onRefresh(mailboxId);
+    }
+
+    private void onToggleHide(long mailboxId) {
+        Controller controller = Controller.getInstance(getApplication());
+        if (mailboxId >= 0) {
+            controller.toggleHideFolder(mAccountId, mailboxId, mControllerCallback);
+        }
     }
 
     private void onCompose() {
@@ -340,12 +394,22 @@ public class MailboxList extends ListActivity implements OnItemClickListener, On
 
         @Override
         protected Cursor doInBackground(Void... params) {
-            Cursor c = MailboxList.this.managedQuery(
-                    EmailContent.Mailbox.CONTENT_URI,
-                    MailboxList.this.mListAdapter.PROJECTION,
-                    MAILBOX_SELECTION,
-                    new String[] { String.valueOf(mAccountKey) },
-                    MailboxColumns.TYPE + "," + MailboxColumns.DISPLAY_NAME);
+            Cursor c;
+            if (showHidden) {
+                c = MailboxList.this.managedQuery(
+                        EmailContent.Mailbox.CONTENT_URI,
+                        MailboxList.this.mListAdapter.PROJECTION,
+                        MAILBOX_SELECTION_ALL,
+                        new String[] { String.valueOf(mAccountKey) },
+                        MailboxColumns.TYPE + "," + MailboxColumns.DISPLAY_NAME);
+            } else {
+                c = MailboxList.this.managedQuery(
+                        EmailContent.Mailbox.CONTENT_URI,
+                        MailboxList.this.mListAdapter.PROJECTION,
+                        MAILBOX_SELECTION,
+                        new String[] { String.valueOf(mAccountKey) },
+                        MailboxColumns.TYPE + "," + MailboxColumns.DISPLAY_NAME);
+            }
             mDraftMailboxKey = -1;
             mTrashMailboxKey = -1;
             c.moveToPosition(-1);
@@ -603,11 +667,14 @@ public class MailboxList extends ListActivity implements OnItemClickListener, On
     /* package */ class MailboxListAdapter extends CursorAdapter {
 
         public final String[] PROJECTION = new String[] { MailboxColumns.ID,
-                MailboxColumns.DISPLAY_NAME, MailboxColumns.UNREAD_COUNT, MailboxColumns.TYPE };
+                MailboxColumns.DISPLAY_NAME, MailboxColumns.UNREAD_COUNT,
+                    MailboxColumns.TYPE, MailboxColumns.SYNC_INTERVAL, MailboxColumns.FLAG_VISIBLE };
         public final int COLUMN_ID = 0;
         public final int COLUMN_DISPLAY_NAME = 1;
         public final int COLUMN_UNREAD_COUNT = 2;
         public final int COLUMN_TYPE = 3;
+        public final int COLUMN_INTERVAL = 4;
+        public final int COLUMN_VISIBILITY = 5;
 
         Context mContext;
         private LayoutInflater mInflater;
@@ -685,10 +752,25 @@ public class MailboxList extends ListActivity implements OnItemClickListener, On
                 allCountView.setVisibility(View.GONE);
                 unreadCountView.setVisibility(View.GONE);
             }
-
+            Resources res = mContext.getResources();
             ImageView folderIcon = (ImageView) view.findViewById(R.id.folder_icon);
+            int synctype = cursor.getInt(COLUMN_INTERVAL);
+            int hidden = cursor.getInt(COLUMN_VISIBILITY);
             folderIcon.setImageDrawable(Utility.FolderProperties.getInstance(context)
                     .getIconIds(type));
+
+            // find out if exchange or not - we want to always show the 'normal' folder icon
+            // for imap
+            Controller controller = Controller.getInstance(getApplication());
+            IEmailService sv = controller.getService(mAccountId);
+            if (sv != null) {
+                if (synctype != Mailbox.CHECK_INTERVAL_NEVER && type != Mailbox.TYPE_INBOX ) {
+                    folderIcon.setImageDrawable(res.getDrawable(R.drawable.ic_list_folder_synced));
+                }
+            }
+            if (hidden != 1) {
+                folderIcon.setImageDrawable(res.getDrawable(R.drawable.btn_no_off));
+            }
         }
 
         @Override
