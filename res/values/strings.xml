@@ -115,6 +115,8 @@
     <!-- Menu item -->
     <string name="deselect_all_action">Deselect all</string>
     <!-- Menu item -->
+    <string name="select_all_action">Select all</string>
+    <!-- Menu item -->
     <string name="compose_action">Compose</string>
     <!-- Menu item/button name -->
     <string name="search_action">Search</string>
@@ -707,4 +709,15 @@ save attachment.</string>
          always a larger value because it represents the limit of displayed results.  -->
     <string name="gal_completed_limited_fmt">First <xliff:g id="results" example="20">%1$d</xliff:g>
         results from <xliff:g id="domain">%2$s</xliff:g></string>
+
+    <string name="sync_action">Toggle sync</string>
+    <string name="hide_action">Toggle visibility</string>
+    <string name="show_hidden_action">Show hidden folders</string>
+    <string name="hide_hidden_action">Hide hidden folders</string>
+    <string name="toast_folder_sync_on">Now syncing folder:</string>
+    <string name="toast_folder_sync_off">No longer syncing folder:</string>
+    <string name="toast_folder_sync_invalid">Invalid folder for syncing</string>
+    <string name="toast_folder_hide_on">Hiding folder:</string>
+    <string name="toast_folder_hide_off">Unhiding folder:</string>
+    <string name="toast_folder_hide_invalid">Cannot hide this folder!</string>
 </resources>
