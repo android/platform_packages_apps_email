@@ -69,6 +69,7 @@
         <item>@string/account_setup_options_mail_window_1week</item>
         <item>@string/account_setup_options_mail_window_2weeks</item>
         <item>@string/account_setup_options_mail_window_1month</item>
+        <item>@string/account_setup_options_mail_window_all</item>
     </string-array>
 
     <!-- Mail sync window size codes for EAS accounts -->
@@ -79,6 +80,7 @@
         <item>3</item>
         <item>4</item>
         <item>5</item>
+        <item>6</item>
     </string-array>
 
     <!-- The vibrate notification modes -->
