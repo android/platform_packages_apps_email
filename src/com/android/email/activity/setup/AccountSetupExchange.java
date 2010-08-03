@@ -289,6 +289,9 @@ public class AccountSetupExchange extends Activity implements OnClickListener,
 
         if (hostAuth.mAddress != null) {
             mServerView.setText(hostAuth.mAddress);
+            
+            if (hostAuth.mPort > -1)
+            	mServerView.setText(hostAuth.mAddress + ":" + hostAuth.mPort);
         }
 
         boolean ssl = 0 != (hostAuth.mFlags & HostAuth.FLAG_SSL);
@@ -436,15 +439,19 @@ public class AccountSetupExchange extends Activity implements OnClickListener,
             userName = userName.substring(1);
         }
         mCacheLoginCredential = userName;
+        
         String userInfo = userName + ":" + mPasswordView.getText().toString().trim();
-        String host = mServerView.getText().toString().trim();
+        
+        String[] server_parts = mServerView.getText().toString().trim().split(":");
+        String host = server_parts[0];
+        int port = server_parts.length > 1?Integer.parseInt(server_parts[1]):0;
         String path = null;
 
         URI uri = new URI(
                 scheme,
                 userInfo,
                 host,
-                0,
+                port,
                 path,
                 null,
                 null);

@@ -165,6 +165,7 @@ public class ExchangeStore extends Store {
         private final Context mContext;
 
         private String mHost;
+        private int mPort;
         private String mDomain;
         private String mUsername;
         private String mPassword;
@@ -209,6 +210,8 @@ public class ExchangeStore extends Store {
             if (mHost == null) {
                 throw new MessagingException("host not specified");
             }
+            
+            mPort = uri.getPort();
 
             mDomain = uri.getPath();
             if (!TextUtils.isEmpty(mDomain)) {
@@ -237,9 +240,12 @@ public class ExchangeStore extends Store {
             boolean ssl = uri.getScheme().contains("+ssl");
             boolean tssl = uri.getScheme().contains("+trustallcerts");
             try {
-                int port = ssl ? 443 : 80;
+                
+                if (mPort == -1)
+                	mPort = ssl ? 443 : 80;
+                
                 int result = ExchangeUtils.getExchangeEmailService(mContext, null)
-                    .validate("eas", mHost, mUsername, mPassword, port, ssl, tssl);
+                    .validate("eas", mHost, mUsername, mPassword, mPort, ssl, tssl);
                 if (result != MessagingException.NO_ERROR) {
                     if (result == MessagingException.AUTHENTICATION_FAILED) {
                         throw new AuthenticationFailedException("Authentication failed.");

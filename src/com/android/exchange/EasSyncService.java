@@ -185,6 +185,7 @@ public class EasSyncService extends AbstractSyncService {
     /*package*/ String mAuthString = null;
     private String mCmdString = null;
     public String mHostAddress;
+    public int mHostPort;
     public String mUserName;
     public String mPassword;
     private boolean mSsl = true;
@@ -388,6 +389,7 @@ public class EasSyncService extends AbstractSyncService {
             svc.mHostAddress = hostAddress;
             svc.mUserName = userName;
             svc.mPassword = password;
+            svc.mHostPort = port;
             svc.mSsl = ssl;
             svc.mTrustSsl = trustCertificates;
             // We mustn't use the "real" device id or we'll screw up current accounts
@@ -788,6 +790,7 @@ public class EasSyncService extends AbstractSyncService {
             try {
                 svc.mContext = context;
                 svc.mHostAddress = ha.mAddress;
+                svc.mHostPort = ha.mPort;
                 svc.mUserName = ha.mLogin;
                 svc.mPassword = ha.mPassword;
                 svc.mSsl = (ha.mFlags & HostAuth.FLAG_SSL) != 0;
@@ -1090,7 +1093,7 @@ public class EasSyncService extends AbstractSyncService {
         if (mAuthString == null || mCmdString == null) {
             cacheAuthAndCmdString();
         }
-        String us = (mSsl ? (mTrustSsl ? "httpts" : "https") : "http") + "://" + mHostAddress +
+        String us = (mSsl ? (mTrustSsl ? "httpts" : "https") : "http") + "://" + mHostAddress + ":" + mHostPort +
             "/Microsoft-Server-ActiveSync";
         if (cmd != null) {
             us += "?Cmd=" + cmd + mCmdString;
@@ -1098,6 +1101,8 @@ public class EasSyncService extends AbstractSyncService {
         if (extra != null) {
             us += extra;
         }
+        
+        Log.d("EasSyncService.makeUriString",us);
         return us;
     }
 
@@ -2134,6 +2139,7 @@ public class EasSyncService extends AbstractSyncService {
         HostAuth ha = HostAuth.restoreHostAuthWithId(mContext, mAccount.mHostAuthKeyRecv);
         if (ha == null) return false;
         mHostAddress = ha.mAddress;
+        mHostPort = ha.mPort;
         mUserName = ha.mLogin;
         mPassword = ha.mPassword;
 
