@@ -1,0 +1,123 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "AAAA33///c8\u003d",
+        "filename": "src/com/android/email/service/EmnReceiver.java",
+        "patchSetId": 7
+      },
+      "lineNbr": 57,
+      "author": {
+        "id": 1001252
+      },
+      "writtenOn": "2010-08-03T22:08:52Z",
+      "side": 1,
+      "message": "TextUtils.isEmpty is nice because it does the null check for you.  All you need here is\n\n  if (!TextUtils.isEmpty(...)) {",
+      "revId": "3df35c3a7d1782484cb47ab4b2ac7541c6d50a25",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "AAAA33///c4\u003d",
+        "filename": "src/com/android/email/service/EmnReceiver.java",
+        "patchSetId": 7
+      },
+      "lineNbr": 74,
+      "author": {
+        "id": 1001252
+      },
+      "writtenOn": "2010-08-03T22:08:52Z",
+      "side": 1,
+      "message": "I\u0027d still like to see this unit tested, please, with the following:\n\n1.  normal message with typical ordering\n2.  normal message with reversed ordering\n3.  bad message (well formed but missing expected data)\n4.  bad message (malformed somehow, e.g. maybe a string with a missing \\0)",
+      "revId": "3df35c3a7d1782484cb47ab4b2ac7541c6d50a25",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "AAAA33///c0\u003d",
+        "filename": "src/com/android/email/service/EmnReceiver.java",
+        "patchSetId": 7
+      },
+      "lineNbr": 87,
+      "author": {
+        "id": 1001252
+      },
+      "writtenOn": "2010-08-03T22:08:52Z",
+      "side": 1,
+      "message": "still need to remove these extraneous false\u003d\u003d expressions.  For example, this one should just be\n\n  if ((wbxmlBody[i] \u0026 WBXML_TOKEN_MASK) !\u003d 0x05) {",
+      "revId": "3df35c3a7d1782484cb47ab4b2ac7541c6d50a25",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "AAAA33///cw\u003d",
+        "filename": "src/com/android/email/service/EmnReceiver.java",
+        "patchSetId": 7
+      },
+      "lineNbr": 98,
+      "author": {
+        "id": 1001252
+      },
+      "writtenOn": "2010-08-03T22:08:52Z",
+      "side": 1,
+      "message": "Please convert all magic #\u0027s to constants (you\u0027re about halfway there)",
+      "revId": "3df35c3a7d1782484cb47ab4b2ac7541c6d50a25",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "AAAA33///ck\u003d",
+        "filename": "src/com/android/email/service/EmnReceiver.java",
+        "patchSetId": 7
+      },
+      "lineNbr": 122,
+      "author": {
+        "id": 1001252
+      },
+      "writtenOn": "2010-08-03T22:08:52Z",
+      "side": 1,
+      "message": "Might be a good idea to handle empty string here.\n\n if (i \u003d\u003d j) return null;",
+      "revId": "3df35c3a7d1782484cb47ab4b2ac7541c6d50a25",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "AAAA33///co\u003d",
+        "filename": "src/com/android/email/service/EmnReceiver.java",
+        "patchSetId": 7
+      },
+      "lineNbr": 126,
+      "author": {
+        "id": 1001252
+      },
+      "writtenOn": "2010-08-03T22:08:52Z",
+      "side": 1,
+      "message": "You can just \n\n  return new String(....)\n\nand no blank line needed between that and the following } catch { line",
+      "revId": "3df35c3a7d1782484cb47ab4b2ac7541c6d50a25",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "AAAA33///cg\u003d",
+        "filename": "src/com/android/email/service/MailService.java",
+        "patchSetId": 7
+      },
+      "lineNbr": 756,
+      "author": {
+        "id": 1001252
+      },
+      "writtenOn": "2010-08-03T22:08:52Z",
+      "side": 1,
+      "message": "suggest making these member variables final",
+      "revId": "3df35c3a7d1782484cb47ab4b2ac7541c6d50a25",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    }
+  ]
+}
