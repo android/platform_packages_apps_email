@@ -1,0 +1,157 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "AAAA33///XY\u003d",
+        "filename": "src/com/android/email/service/EmnReceiver.java",
+        "patchSetId": 9
+      },
+      "lineNbr": 37,
+      "author": {
+        "id": 1001252
+      },
+      "writtenOn": "2010-08-04T18:40:46Z",
+      "side": 1,
+      "message": "With this much of an internal spec being coded, it would be very helpful to include a link to the spec that you are working from.",
+      "revId": "942b02ca84e28eb0d5b2726e7c796da32fc5ea7c",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "AAAA33///Xo\u003d",
+        "filename": "src/com/android/email/service/EmnReceiver.java",
+        "patchSetId": 9
+      },
+      "lineNbr": 112,
+      "author": {
+        "id": 1001252
+      },
+      "writtenOn": "2010-08-04T18:40:46Z",
+      "side": 1,
+      "message": "space between i and +\u003d",
+      "revId": "942b02ca84e28eb0d5b2726e7c796da32fc5ea7c",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "AAAA33///XQ\u003d",
+        "filename": "src/com/android/email/service/EmnReceiver.java",
+        "patchSetId": 9
+      },
+      "lineNbr": 143,
+      "author": {
+        "id": 1001252
+      },
+      "writtenOn": "2010-08-04T18:40:46Z",
+      "side": 1,
+      "message": "It\u0027s not quite clear from your code how the extension encoding works.  Specifically, what happens if there is not a common extension.  \n\n1.  Does the array simply terminate (in which case we would have an exception here and fail)?\n\n2.  Is the existence of a common extension predicted by the earlier token  - e.g. is this what WBXML_ATTR_MAILBOX_AT is for (in which case, we need to check that token before trying to read past the string?\n\n3.  Or, is there a specific token that says \"no common extension\", in which case I think you should check for that explicitly in the decoder, instead of just returning null for any unexpected token.",
+      "revId": "942b02ca84e28eb0d5b2726e7c796da32fc5ea7c",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "AAAA33///Xk\u003d",
+        "filename": "src/com/android/email/service/EmnReceiver.java",
+        "patchSetId": 9
+      },
+      "lineNbr": 165,
+      "author": {
+        "id": 1001252
+      },
+      "writtenOn": "2010-08-04T18:40:46Z",
+      "side": 1,
+      "message": "Style guide says methods start with lower case and should be in the form of a verb where possible;  Suggest naming this decodeExtension()",
+      "revId": "942b02ca84e28eb0d5b2726e7c796da32fc5ea7c",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "AAAA33///Xc\u003d",
+        "filename": "src/com/android/email/service/EmnReceiver.java",
+        "patchSetId": 9
+      },
+      "lineNbr": 169,
+      "author": {
+        "id": 1001252
+      },
+      "writtenOn": "2010-08-04T18:40:46Z",
+      "side": 1,
+      "message": "although it would in fact compile to about the same thing, this should be changed to a series of } else if { or into a single case statement.",
+      "revId": "942b02ca84e28eb0d5b2726e7c796da32fc5ea7c",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "AAAA33///X8\u003d",
+        "filename": "tests/src/com/android/email/service/EmnReceiverTests.java",
+        "patchSetId": 9
+      },
+      "lineNbr": 23,
+      "author": {
+        "id": 1001252
+      },
+      "writtenOn": "2010-08-04T18:40:46Z",
+      "side": 1,
+      "message": "Great!",
+      "revId": "942b02ca84e28eb0d5b2726e7c796da32fc5ea7c",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "AAAA33///X4\u003d",
+        "filename": "tests/src/com/android/email/service/EmnReceiverTests.java",
+        "patchSetId": 9
+      },
+      "lineNbr": 26,
+      "author": {
+        "id": 1001252
+      },
+      "writtenOn": "2010-08-04T18:40:46Z",
+      "side": 1,
+      "message": "these can be private",
+      "revId": "942b02ca84e28eb0d5b2726e7c796da32fc5ea7c",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "AAAA33///Xs\u003d",
+        "filename": "tests/src/com/android/email/service/EmnReceiverTests.java",
+        "patchSetId": 9
+      },
+      "lineNbr": 55,
+      "author": {
+        "id": 1001252
+      },
+      "writtenOn": "2010-08-04T18:40:46Z",
+      "side": 1,
+      "message": "watch for double blank lines",
+      "revId": "942b02ca84e28eb0d5b2726e7c796da32fc5ea7c",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "AAAA33///Xw\u003d",
+        "filename": "tests/src/com/android/email/service/EmnReceiverTests.java",
+        "patchSetId": 9
+      },
+      "lineNbr": 56,
+      "author": {
+        "id": 1001252
+      },
+      "writtenOn": "2010-08-04T18:40:46Z",
+      "side": 1,
+      "message": "This algorithm is pretty inefficient, with all the array copying and stringbuilding and such.\n\nSuggest do away with the enc array and the StringBuilder and simply use \n\n  String hexPair \u003d encoded.subString(i, i+2);\n\nThis is sufficiently simplified for test code.  For production code we\u0027d want to do the conversions directly and avoid all of the memory allocation this is going to spin off.",
+      "revId": "942b02ca84e28eb0d5b2726e7c796da32fc5ea7c",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    }
+  ]
+}
