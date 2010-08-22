@@ -259,7 +259,7 @@ public class SecurityPolicy {
         DevicePolicyManager dpm = getDPM();
         if (dpm.isAdminActive(mAdminName)) {
             // check each policy explicitly
-            if (policies.mMinPasswordLength > 0) {
+            if (policies.mMinPasswordLength > 0 && policies.mPasswordMode > 0) {
                 if (dpm.getPasswordMinimumLength(mAdminName) < policies.mMinPasswordLength) {
                     return false;
                 }
