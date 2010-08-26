@@ -197,6 +197,9 @@
     <string name="account_setup_options_mail_window_1week" msgid="5639718031108023741">"Eine Woche"</string>
     <string name="account_setup_options_mail_window_2weeks" msgid="4567049268124213035">"Zwei Wochen"</string>
     <string name="account_setup_options_mail_window_1month" msgid="5846359669750047081">"Ein Monat"</string>
+    <!-- In account setup options & account settings screens (exchange), sync window length  -->
+    <string name="account_setup_options_mail_window_all">Alle Emails</string>
+
     <string name="account_setup_failed_dlg_auth_message" msgid="42827150104879570">"Nutzername oder Passwort falsch"</string>
     <string name="account_setup_failed_dlg_auth_message_fmt" msgid="8598560266430207606">"Nutzername/Password falsch"\n"(<xliff:g id="ERROR">%s</xliff:g>)"</string>
     <string name="account_setup_failed_dlg_certificate_message" msgid="961843413600482906">"Keine sichere Verbindung zu Server möglich"</string>
@@ -241,6 +244,12 @@
     <string name="account_settings_vibrate_when_dlg_title" msgid="308167729046312952">"Vibration"</string>
     <string name="account_settings_ringtone" msgid="7922187231467500404">"Klingelton auswählen"</string>
     <string name="account_settings_servers" msgid="4925493817981624242">"Servereinstellungen"</string>
+
+    <!-- On Settings screen, miscellaneous settings-->
+    <string name="misc_settings_label">Verschiedene Einstellungen</string>
+    <string name="account_settings_msg_list_on_delete">Zur Liste zurück</string>
+    <string name="account_settings_msg_list_on_delete_summary">Zur Nachrichtenliste zurückkehren nachdem die aktuelle Nachricht gelöscht wurde.</string>
+
     <string name="account_delete_dlg_title" msgid="6806087520856396608">"Konto entfernen"</string>
     <string name="account_delete_dlg_instructions_fmt" msgid="8236846322040271280">"Das Konto \"<xliff:g id="ACCOUNT">%s</xliff:g>\" wird aus Email entfernt."</string>
     <string name="upgrade_accounts_title" msgid="5444140226380754014">"Upgrade für Konten"</string>
@@ -271,4 +280,10 @@
     <item quantity="other" msgid="7816121892960632123">"<xliff:g id="RESULTS">%1$d</xliff:g> Ergebnisse von <xliff:g id="DOMAIN">%2$s</xliff:g>"</item>
   </plurals>
     <string name="gal_completed_limited_fmt" msgid="2343791690766047585">"Erste <xliff:g id="RESULTS">%1$d</xliff:g> Ergebnisse von <xliff:g id="DOMAIN">%2$s</xliff:g>"</string>
+
+    <string name="sync_action">Synchronisation umschalten</string>
+    <string name="toast_folder_sync_on">Synchronisiere Ordner:</string>
+    <string name="toast_folder_sync_off">Wird nicht mehr synchronisiert:</string>
+    <string name="toast_folder_sync_invalid">Ungültiger Ordner für Synchronisation</string>
+    <string name="toast_folder_sync_reboot">\nNeustart des Gerätes oder der App erforderlich</string>
 </resources>

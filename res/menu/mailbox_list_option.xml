@@ -33,4 +33,9 @@
         android:title="@string/account_settings_action"
         android:icon="@android:drawable/ic_menu_preferences"
     />
+    <item android:id="@+id/show_hidden"
+        android:title="@string/show_hidden_action"
+        android:icon="@android:drawable/ic_menu_view"
+        android:checkable="true"
+    />
 </menu>

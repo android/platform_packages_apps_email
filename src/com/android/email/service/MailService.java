@@ -70,7 +70,7 @@ public class MailService extends Service {
     private static final String EXTRA_CHECK_ACCOUNT = "com.android.email.intent.extra.ACCOUNT";
     private static final String EXTRA_ACCOUNT_INFO = "com.android.email.intent.extra.ACCOUNT_INFO";
     private static final String EXTRA_DEBUG_WATCHDOG = "com.android.email.intent.extra.WATCHDOG";
-
+    private static final String EXTRA_MAILBOX_ID = "com.android.email.intent.extra.MAILBOX_ID";
     private static final int WATCHDOG_DELAY = 10 * 60 * 1000;   // 10 minutes
 
     private static final String[] NEW_MESSAGE_COUNT_PROJECTION =
@@ -142,10 +142,11 @@ public class MailService extends Service {
      * @param accountId the id of the account that is reporting new messages
      * @param newCount the number of new messages
      */
-    public static void actionNotifyNewMessages(Context context, long accountId) {
+    public static void actionNotifyNewMessages(Context context, long accountId, long mailboxId) {
         Intent i = new Intent(ACTION_NOTIFY_MAIL);
         i.setClass(context, MailService.class);
         i.putExtra(EXTRA_CHECK_ACCOUNT, accountId);
+        i.putExtra(EXTRA_MAILBOX_ID, mailboxId);
         context.startService(i);
     }
 
@@ -215,6 +216,7 @@ public class MailService extends Service {
             stopSelf(startId);
         } else if (ACTION_NOTIFY_MAIL.equals(action)) {
             long accountId = intent.getLongExtra(EXTRA_CHECK_ACCOUNT, -1);
+            long mailboxId = intent.getLongExtra(EXTRA_MAILBOX_ID, -1);
             // Get the current new message count
             Cursor c = getContentResolver().query(
                     ContentUris.withAppendedId(Account.CONTENT_URI, accountId),
@@ -236,7 +238,7 @@ public class MailService extends Service {
             }
             if (accountId != -1) {
                 updateAccountReport(accountId, newMessageCount);
-                notifyNewMessages(accountId);
+                notifyNewMessages(accountId, mailboxId);
             }
             stopSelf(startId);
         }
@@ -586,20 +588,15 @@ public class MailService extends Service {
         public void updateMailboxCallback(MessagingException result, long accountId,
                 long mailboxId, int progress, int numNewMessages) {
             if (result != null || progress == 100) {
-                // We only track the inbox here in the service - ignore other mailboxes
-                long inboxId = Mailbox.findMailboxOfType(MailService.this,
-                        accountId, Mailbox.TYPE_INBOX);
-                if (mailboxId == inboxId) {
                     if (progress == 100) {
                         updateAccountReport(accountId, numNewMessages);
                         if (numNewMessages > 0) {
-                            notifyNewMessages(accountId);
+                            notifyNewMessages(accountId, mailboxId);
                         }
                     } else {
                         updateAccountReport(accountId, -1);
                     }
-                }
-                // Call the global refresh tracker for all mailboxes
+            // Call the global refresh tracker for all mailboxes
                 Email.updateMailboxRefreshTime(mailboxId);
             }
         }
@@ -637,7 +634,7 @@ public class MailService extends Service {
      * the alert preferences) but the notification will include a summary if other
      * accounts also have new mail.
      */
-    private void notifyNewMessages(long accountId) {
+    private void notifyNewMessages(long accountId, long mailboxId) {
         boolean notify = false;
         boolean vibrate = false;
         boolean vibrateWhenSilent = false;
@@ -675,14 +672,14 @@ public class MailService extends Service {
             reportString = getResources().getQuantityString(
                     R.plurals.notification_new_one_account_fmt, numNewMessages,
                     numNewMessages, reportName);
-            intent = MessageList.createIntent(this, accountId, -1, Mailbox.TYPE_INBOX);
+            intent = MessageList.createIntent(this, accountId, mailboxId, -1);
         } else {
             // Prepare a report for multiple accounts
             // "4 accounts"
             reportString = getResources().getQuantityString(
                     R.plurals.notification_new_multi_account_fmt, accountsWithNewMessages,
                     accountsWithNewMessages);
-            intent = MessageList.createIntent(this, -1, Mailbox.QUERY_ALL_INBOXES, -1);
+             intent = MessageList.createIntent(this, mailboxId, Mailbox.QUERY_ALL_INBOXES, -1);
         }
 
         // prepare appropriate pending intent, set up notification, and send
@@ -715,4 +712,5 @@ public class MailService extends Service {
             (NotificationManager) getSystemService(Context.NOTIFICATION_SERVICE);
         notificationManager.notify(NOTIFICATION_ID_NEW_MESSAGES, notification);
     }
+    
 }
