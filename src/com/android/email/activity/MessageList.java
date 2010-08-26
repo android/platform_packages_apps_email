@@ -471,6 +471,9 @@ public class MessageList extends ListActivity implements OnItemClickListener, On
             case R.id.deselect_all:
                 onDeselectAll();
                 return true;
+            case R.id.select_all:
+            	onSelectAll();
+            	return true;
             default:
                 return super.onOptionsItemSelected(item);
         }
@@ -611,7 +614,21 @@ public class MessageList extends ListActivity implements OnItemClickListener, On
         mListView.invalidateViews();
         showMultiPanel(false);
     }
-
+    
+    private void onSelectAll() {
+    	int nummsgs = mListAdapter.getCount();
+    	if (nummsgs == 0) { return; }
+    	Cursor c = mListAdapter.getCursor();
+        c.moveToPosition(-1);
+        while (c.moveToNext()) {
+            long id = c.getInt(MessageListAdapter.COLUMN_ID);
+            mListAdapter.addToSelectedSet(id);
+        }
+        onRefresh();
+        showMultiPanel(true);
+   	}	
+      	
+    	
     private void onOpenMessage(long messageId, long mailboxId) {
         // TODO: Should not be reading from DB in UI thread
         EmailContent.Mailbox mailbox = EmailContent.Mailbox.restoreMailboxWithId(this, mailboxId);
@@ -1216,12 +1233,7 @@ public class MessageList extends ListActivity implements OnItemClickListener, On
             // the position;
             restoreListPosition();
             autoRefreshStaleMailbox();
-            // Reset the "new messages" count in the service, since we're seeing them now
-            if (mMailboxKey == Mailbox.QUERY_ALL_INBOXES) {
-                MailService.resetNewMessageCount(MessageList.this, -1);
-            } else if (mMailboxKey >= 0 && mAccountKey != -1) {
-                MailService.resetNewMessageCount(MessageList.this, mAccountKey);
-            }
+            MailService.resetNewMessageCount(MessageList.this, -1);
         }
     }
 
@@ -1793,7 +1805,17 @@ public class MessageList extends ListActivity implements OnItemClickListener, On
 
             MessageList.this.showMultiPanel(mChecked.size() > 0);
         }
+        
+        /**
+         * For selectAll menu item - a simply add to selected set without the item
+         * having to be current in the listview
+         * @hide
+         */
 
+        public void addToSelectedSet(long id) {
+        	mChecked.add(id);
+        }
+        
         /**
          * This is used as a callback from the list items, to set the favorite state
          *

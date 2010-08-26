@@ -589,7 +589,7 @@ public class EmailSyncAdapter extends AbstractSyncAdapter {
                 cv.put(EmailContent.ADD_COLUMN_NAME, notifyCount);
                 Uri uri = ContentUris.withAppendedId(Account.ADD_TO_FIELD_URI, mAccount.mId);
                 mContentResolver.update(uri, cv, null, null);
-                MailService.actionNotifyNewMessages(mContext, mAccount.mId);
+                MailService.actionNotifyNewMessages(mContext, mAccount.mId, mMailbox.mId);
             }
         }
     }
