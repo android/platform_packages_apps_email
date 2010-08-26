@@ -68,6 +68,7 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.View.OnClickListener;
+import android.view.KeyEvent;
 import android.webkit.WebView;
 import android.webkit.WebViewClient;
 import android.widget.Button;
@@ -1696,5 +1697,33 @@ public class MessageView extends Activity implements OnClickListener {
                 mHandler = null;
             }
         }
+    }
+
+    @Override
+    public boolean onKeyDown(int keycode, KeyEvent event) {
+    	switch (keycode) {
+    	    case KeyEvent.KEYCODE_VOLUME_DOWN:
+    	    	moveToOlder();
+    	    	break;
+    	    case KeyEvent.KEYCODE_VOLUME_UP:
+    	    	moveToNewer();
+    	    	break;
+    	    default:
+    	    	return super.onKeyDown(keycode, event);
+    	}
+    	return true;
+    }
+    
+    // get rid of volume rocker default sound effect
+    @Override
+    public boolean onKeyUp(int keycode, KeyEvent event) {
+    	switch (keycode) {
+	    case KeyEvent.KEYCODE_VOLUME_DOWN:
+	    case KeyEvent.KEYCODE_VOLUME_UP:
+	    	break;
+	    default:
+	    	return super.onKeyUp(keycode, event);
+	}
+    	return true;
     }
 }
