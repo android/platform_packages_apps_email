@@ -78,6 +78,7 @@ import android.content.ContentValues;
 import android.content.Context;
 import android.content.Entity;
 import android.database.Cursor;
+import android.net.Proxy;
 import android.os.Bundle;
 import android.os.RemoteException;
 import android.os.SystemClock;
@@ -1125,7 +1126,8 @@ public class EasSyncService extends AbstractSyncService {
         HttpConnectionParams.setConnectionTimeout(params, CONNECTION_TIMEOUT);
         HttpConnectionParams.setSoTimeout(params, timeout);
         HttpConnectionParams.setSocketBufferSize(params, 8192);
-        HttpClient client = new DefaultHttpClient(getClientConnectionManager(), params);
+        DefaultHttpClient client = new DefaultHttpClient(getClientConnectionManager(), params);
+        Proxy.setHttpClientProxy(client);
         return client;
     }
 
