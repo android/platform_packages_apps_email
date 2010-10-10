@@ -16,7 +16,6 @@
 
 package com.android.email;
 
-import com.android.email.mail.BodyPart;
 import com.android.email.mail.FetchProfile;
 import com.android.email.mail.Flag;
 import com.android.email.mail.Folder;
@@ -573,9 +572,13 @@ public class MessagingController implements Runnable {
                 if (localMessage == null) {
                     newMessageCount++;
                 }
-                if (localMessage == null
-                        || (localMessage.mFlagLoaded == EmailContent.Message.FLAG_LOADED_UNLOADED)
-                        || (localMessage.mFlagLoaded == EmailContent.Message.FLAG_LOADED_PARTIAL)) {
+                if ( localMessage == null
+                              || 
+				( 
+			          ( (localMessage.mFlagLoaded == EmailContent.Message.FLAG_LOADED_UNLOADED) || (localMessage.mFlagLoaded == EmailContent.Message.FLAG_LOADED_PARTIAL) ) 
+				  && (!localMessage.mFlagRead)
+				) 
+                    ){
                     unsyncedMessages.add(message);
                 }
             }
