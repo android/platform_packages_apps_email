@@ -74,6 +74,10 @@ import android.widget.TextView;
 import android.widget.Toast;
 import android.widget.AdapterView.OnItemClickListener;
 
+import android.app.ProgressDialog;
+import java.lang.Long;
+import java.util.HashSet;
+
 import java.util.Date;
 import java.util.HashSet;
 import java.util.Set;
@@ -82,6 +86,10 @@ import java.util.TimerTask;
 
 public class MessageList extends ListActivity implements OnItemClickListener, OnClickListener,
         AnimationListener {
+
+    // need to store these so we can cancel them on pause to prevent anr in some cases
+    private ProgressDialog progressDialog;
+
     // Intent extras (internal to this activity)
     private static final String EXTRA_ACCOUNT_ID = "com.android.email.activity._ACCOUNT_ID";
     private static final String EXTRA_MAILBOX_TYPE = "com.android.email.activity.MAILBOX_TYPE";
@@ -236,6 +244,8 @@ public class MessageList extends ListActivity implements OnItemClickListener, On
         super.onCreate(icicle);
         setContentView(R.layout.message_list);
 
+        progressDialog = new ProgressDialog( MessageList.this );
+
         mHandler = new MessageListHandler();
         mControllerCallback = new ControllerResults();
         mCanAutoRefresh = true;
@@ -305,6 +315,7 @@ public class MessageList extends ListActivity implements OnItemClickListener, On
     @Override
     public void onPause() {
         super.onPause();
+        this.progressDialog.cancel();
         mController.removeResultCallback(mControllerCallback);
     }
 
@@ -408,10 +419,14 @@ public class MessageList extends ListActivity implements OnItemClickListener, On
     public void onClick(View v) {
         switch (v.getId()) {
             case R.id.btn_read_unread:
-                onMultiToggleRead(mListAdapter.getSelectedSet());
+                boolean setRead = mReadUnreadButton.getText().equals( 
+                        this.getString( R.string.read_action ) ); 
+                onMultiToggleRead(mListAdapter.getSelectedSet(), setRead);
                 break;
             case R.id.btn_multi_favorite:
-                onMultiToggleFavorite(mListAdapter.getSelectedSet());
+                boolean doStar = mFavoriteButton.getText().equals( 
+                        this.getString( R.string.set_star_action ) );
+                onMultiToggleFavorite(mListAdapter.getSelectedSet(), doStar);
                 break;
             case R.id.btn_multi_delete:
                 onMultiDelete(mListAdapter.getSelectedSet());
@@ -470,6 +485,15 @@ public class MessageList extends ListActivity implements OnItemClickListener, On
                 return true;
             case R.id.deselect_all:
                 onDeselectAll();
+                return true;
+            case R.id.mark_all_read:
+                onMarkAllRead();
+                return true;
+            case R.id.unstar_all:
+                onUnstarAll();
+                return true;
+            case R.id.select_all:
+                onSelectAll();
                 return true;
             default:
                 return super.onOptionsItemSelected(item);
@@ -612,6 +636,139 @@ public class MessageList extends ListActivity implements OnItemClickListener, On
         showMultiPanel(false);
     }
 
+    private void onSelectAll(){        
+        final Cursor c = mListAdapter.getCursor();
+        // put cursor at starting pos
+        c.moveToPosition(-1);
+        // create set of ids
+        HashSet<Long> mSet = new HashSet<Long>();
+        // create a set
+        while ( c.moveToNext() ) {
+            mSet.add( (long) c.getInt( MessageListAdapter.COLUMN_ID ) );
+        }
+        mListAdapter.setSelectedSet( mSet );
+        mListView.invalidateViews();
+        showMultiPanel(true);
+    }
+
+    /**
+     * Toggles a set of messages to read/unread based on input value
+     *
+     * @param selectedSet The current list of selected items
+     * @param markRead should the items be marked read or unread
+     */
+    private void onMultiToggleRead(Set<Long> selectedSet, final boolean markRead) {
+        String progressTitle = markRead ? getString( R.string.progress_action_mark_read ) 
+                                        : getString( R.string.progress_action_mark_unread );
+        applyActionToSet( progressTitle, selectedSet, new MultiActionHelper(){
+                public void applyAction( long id ){
+                        onSetMessageRead( id, markRead );
+                }
+        } );
+    }
+
+    /**
+     * Toggles a set of favorites (stars)
+     *
+     * @param selectedSet The current list of selected items
+     * @param doStar Whether the items should be starred or 'unstarred'
+     */
+    private void onMultiToggleFavorite(Set<Long> selectedSet, final boolean doStar) {
+        String progressTitle = doStar ? getString( R.string.progress_action_star )
+                                      : getString( R.string.progress_action_unstar );
+        applyActionToSet( progressTitle, selectedSet, new MultiActionHelper(){
+                public void applyAction( long id ){
+                        onSetMessageFavorite( id, doStar );
+                }
+        } );
+    }
+
+    // TODO: find static refs for true/false 'isread' values
+    private void onMarkAllRead() {
+        HashSet<Long> toMark = getApplicableMessages( MessageListAdapter.COLUMN_READ, 0 );
+        String progressTitle = getString( R.string.progress_action_mark_read );
+        applyActionToSet( progressTitle, toMark, new MultiActionHelper(){
+                public void applyAction( long id ){
+                        onSetMessageRead( id, true );
+                }
+        } );
+    }
+
+    private void onUnstarAll() {
+        HashSet<Long> toMark = getApplicableMessages( MessageListAdapter.COLUMN_FAVORITE, 1 );
+        String progressTitle = getString( R.string.progress_action_unstar );
+        applyActionToSet( progressTitle, toMark, new MultiActionHelper(){
+                public void applyAction( long id ){
+                        onSetMessageFavorite( id, false );
+                }
+        } );
+    }
+
+    // returns a set of messages to apply an action to based return values from helper
+    private HashSet<Long> getApplicableMessages( int toCompare, int expectedValue ){
+        HashSet<Long> returnSet = new HashSet<Long>();
+        Cursor c = mListAdapter.getCursor();
+        c.moveToPosition(-1);
+        while( c.moveToNext() ){
+                if( c.getInt( toCompare ) == expectedValue ){
+                        returnSet.add( (long) c.getInt( MessageListAdapter.COLUMN_ID ) );
+                }
+        }
+        return returnSet;
+    }
+
+    // applies an action to a set of messages as defined by helper, spawns a new 
+    // thread, shows progress dialog
+    private void applyActionToSet( String progressTitle, final Set<Long> mSet, 
+                                                final MultiActionHelper helper ){
+        final int MSG_UPDATE = 0;
+        final int MSG_CLOSE = 1;
+        // set up main progress dialog
+        final ProgressDialog mDialog = this.progressDialog;
+        mDialog.setProgressStyle( ProgressDialog.STYLE_HORIZONTAL );
+        mDialog.setTitle( progressTitle );
+         mDialog.setProgress( 0 );
+        mDialog.setMax( mSet.size() );
+        mDialog.show();
+        // handler to receive callbacks from our thread and adjust ui dialogs
+        final Handler mHandler = new Handler() {
+		// cannot import message due to classname collision
+                public void handleMessage( android.os.Message msg ) {
+                  switch( msg.getData().getInt( "what" ) ){
+                        case MSG_UPDATE:
+                                mDialog.setProgress( msg.getData().getInt( "count" ) );
+                                break;
+                        case MSG_CLOSE:
+                                mDialog.cancel();
+                                break;
+                  }
+                }
+        };
+        new Thread(new Runnable() {
+                private void sendMessage( int what, int count ){
+                        android.os.Message msg = mHandler.obtainMessage();
+                        Bundle b = new Bundle();
+                        b.putInt("count", count);
+                        b.putInt("what", what);
+                        msg.setData(b);
+                        mHandler.sendMessage(msg);
+                }
+                    public void run(){
+                        int i = 0;
+                        // now itterate and mark these read
+                        for( Long id : mSet ){
+                                // update data in UI thread
+                                sendMessage( MSG_UPDATE, i+1 );
+                                // apply the action
+                                helper.applyAction( id );
+                                i++;
+                        }
+                        // we're done... close the indicator
+                        sendMessage( MSG_CLOSE, 0 );
+                    }
+                  }).start();
+    }
+
     private void onOpenMessage(long messageId, long mailboxId) {
         // TODO: Should not be reading from DB in UI thread
         EmailContent.Mailbox mailbox = EmailContent.Mailbox.restoreMailboxWithId(this, mailboxId);
@@ -684,53 +841,6 @@ public class MessageList extends ListActivity implements OnItemClickListener, On
         mController.setMessageFavorite(messageId, newFavorite);
     }
 
-    /**
-     * Toggles a set read/unread states.  Note, the default behavior is "mark unread", so the
-     * sense of the helper methods is "true=unread".
-     *
-     * @param selectedSet The current list of selected items
-     */
-    private void onMultiToggleRead(Set<Long> selectedSet) {
-        toggleMultiple(selectedSet, new MultiToggleHelper() {
-
-            public boolean getField(long messageId, Cursor c) {
-                return c.getInt(MessageListAdapter.COLUMN_READ) == 0;
-            }
-
-            public boolean setField(long messageId, Cursor c, boolean newValue) {
-                boolean oldValue = getField(messageId, c);
-                if (oldValue != newValue) {
-                    onSetMessageRead(messageId, !newValue);
-                    return true;
-                }
-                return false;
-            }
-        });
-    }
-
-    /**
-     * Toggles a set of favorites (stars)
-     *
-     * @param selectedSet The current list of selected items
-     */
-    private void onMultiToggleFavorite(Set<Long> selectedSet) {
-        toggleMultiple(selectedSet, new MultiToggleHelper() {
-
-            public boolean getField(long messageId, Cursor c) {
-                return c.getInt(MessageListAdapter.COLUMN_FAVORITE) != 0;
-            }
-
-            public boolean setField(long messageId, Cursor c, boolean newValue) {
-                boolean oldValue = getField(messageId, c);
-                if (oldValue != newValue) {
-                    onSetMessageFavorite(messageId, newValue);
-                    return true;
-                }
-                return false;
-            }
-        });
-    }
-
     private void onMultiDelete(Set<Long> selectedSet) {
         // Clone the set, because deleting is going to thrash things
         HashSet<Long> cloneSet = new HashSet<Long>(selectedSet);
@@ -743,67 +853,14 @@ public class MessageList extends ListActivity implements OnItemClickListener, On
         showMultiPanel(false);
     }
 
-    private interface MultiToggleHelper {
-        /**
-         * Return true if the field of interest is "set".  If one or more are false, then our
-         * bulk action will be to "set".  If all are set, our bulk action will be to "clear".
-         * @param messageId the message id of the current message
-         * @param c the cursor, positioned to the item of interest
-         * @return true if the field at this row is "set"
-         */
-        public boolean getField(long messageId, Cursor c);
+
+    private interface MultiActionHelper {
 
         /**
-         * Set or clear the field of interest.  Return true if a change was made.
-         * @param messageId the message id of the current message
-         * @param c the cursor, positioned to the item of interest
-         * @param newValue the new value to be set at this row
-         * @return true if a change was actually made
+         * Apply the proper action to message with <id>
          */
-        public boolean setField(long messageId, Cursor c, boolean newValue);
-    }
+        public void applyAction( long id );
 
-    /**
-     * Toggle multiple fields in a message, using the following logic:  If one or more fields
-     * are "clear", then "set" them.  If all fields are "set", then "clear" them all.
-     *
-     * @param selectedSet the set of messages that are selected
-     * @param helper functions to implement the specific getter & setter
-     * @return the number of messages that were updated
-     */
-    private int toggleMultiple(Set<Long> selectedSet, MultiToggleHelper helper) {
-        Cursor c = mListAdapter.getCursor();
-        boolean anyWereFound = false;
-        boolean allWereSet = true;
-
-        c.moveToPosition(-1);
-        while (c.moveToNext()) {
-            long id = c.getInt(MessageListAdapter.COLUMN_ID);
-            if (selectedSet.contains(Long.valueOf(id))) {
-                anyWereFound = true;
-                if (!helper.getField(id, c)) {
-                    allWereSet = false;
-                    break;
-                }
-            }
-        }
-
-        int numChanged = 0;
-
-        if (anyWereFound) {
-            boolean newValue = !allWereSet;
-            c.moveToPosition(-1);
-            while (c.moveToNext()) {
-                long id = c.getInt(MessageListAdapter.COLUMN_ID);
-                if (selectedSet.contains(Long.valueOf(id))) {
-                    if (helper.setField(id, c, newValue)) {
-                        ++numChanged;
-                    }
-                }
-            }
-        }
-
-        return numChanged;
     }
 
     /**
@@ -1599,7 +1656,7 @@ public class MessageList extends ListActivity implements OnItemClickListener, On
         private long mLastRefreshTime = 0;
         // How long we want to wait for refreshes (a good starting guess)
         // I suspect this could be lowered down to even 1000 or so, but this seems ok for now
-        private static final long REFRESH_INTERVAL_MS = 2500;
+        private static final long REFRESH_INTERVAL_MS = 1000;
 
         private java.text.DateFormat mDateFormat;
         private java.text.DateFormat mTimeFormat;
@@ -1693,6 +1750,10 @@ public class MessageList extends ListActivity implements OnItemClickListener, On
 
         public Set<Long> getSelectedSet() {
             return mChecked;
+        }
+
+        public void setSelectedSet( HashSet s ) {
+            mChecked = s;
         }
 
         @Override

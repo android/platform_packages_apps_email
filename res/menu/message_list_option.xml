@@ -17,6 +17,10 @@
 <!-- This menu is shown when MessageList is viewing a regular mailbox. -->
 
 <menu xmlns:android="http://schemas.android.com/apk/res/android">
+    <item android:id="@+id/mark_all_read"
+        android:title="@string/mark_all_read_action"
+        android:icon="@*android:drawable/ic_menu_view"
+    />
     <item android:id="@+id/refresh"
         android:alphabeticShortcut="r"
         android:title="@string/refresh_action"
@@ -27,12 +31,6 @@
         android:title="@string/compose_action"
         android:icon="@*android:drawable/ic_menu_compose"
     />
-    <group android:id="@+id/deselect_all_group">
-        <item android:id="@+id/deselect_all"
-            android:title="@string/deselect_all_action"
-            android:icon="@drawable/ic_menu_email_deselect_mail"
-        />
-    </group>
     <item android:id="@+id/folders"
         android:title="@string/folders_action"
         android:icon="@drawable/ic_menu_folder"
@@ -43,6 +41,18 @@
     />
     <item android:id="@+id/account_settings"
         android:title="@string/account_settings_action"
-        android:icon="@android:drawable/ic_menu_preferences"
+        android:icon="@*android:drawable/ic_menu_preferences"
+    />
+    <item android:id="@+id/unstar_all"
+            android:title="@string/unstar_all_action"
+            android:icon="@*android:drawable/ic_menu_cc"
+    />
+    <item android:id="@+id/select_all"
+        android:title="@string/select_all_action"
+        android:icon="@*android:drawable/ic_menu_mark"
+    />
+    <item android:id="@+id/deselect_all"
+        android:title="@string/deselect_all_action"
+        android:icon="@drawable/ic_menu_email_deselect_mail"
     />
 </menu>
