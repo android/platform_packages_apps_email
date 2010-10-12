@@ -566,16 +566,23 @@ public class MessagingController implements Runnable {
              * Note, we also skip syncing messages which are flagged as "deleted message" sentinels,
              * because they are locally deleted and we don't need or want the old message from
              * the server.
+             ** DUSTIN 10-7 do not download any messages marked as read on local
              */
             for (Message message : remoteMessages) {
                 LocalMessageInfo localMessage = localMessageMap.get(message.getUid());
                 if (localMessage == null) {
                     newMessageCount++;
                 }
-                if (localMessage == null
-                        || (localMessage.mFlagLoaded == EmailContent.Message.FLAG_LOADED_UNLOADED)
-                        || (localMessage.mFlagLoaded == EmailContent.Message.FLAG_LOADED_PARTIAL)) {
-                    unsyncedMessages.add(message);
+                if ( localMessage == null ||
+                                (
+                                 (  
+                                    (localMessage.mFlagLoaded == EmailContent.Message.FLAG_LOADED_UNLOADED)
+                                 || (localMessage.mFlagLoaded == EmailContent.Message.FLAG_LOADED_PARTIAL)
+                                 )
+                                 && (!localMessage.mFlagRead)
+                                )
+                    ){
+                        unsyncedMessages.add(message);
                 }
             }
         }
