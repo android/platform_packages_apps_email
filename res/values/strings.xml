@@ -111,13 +111,19 @@
     <!-- Menu item -->
     <string name="deselect_all_action">Deselect all</string>
     <!-- Menu item -->
+    <string name="unstar_all_action">Unstar all</string>
+    <!-- Menu item -->
+    <string name="select_all_action">Select all</string>
+    <!-- Menu item -->
     <string name="compose_action">Compose</string>
     <!-- Menu item/button name -->
     <string name="search_action">Search</string>
     <!-- Menu item/button name -->
     <string name="open_action">Open</string>
     <!-- Menu item -->
-    <string name="account_settings_action">Account settings</string>
+    <string name="mark_all_read_action">Mark All Read</string>
+    <!-- Menu item -->
+    <string name="account_settings_action">Account options</string>
     <!-- Menu item -->
     <string name="remove_account_action">Remove account</string>
     <!-- Menu item -->
@@ -148,6 +154,16 @@
     <!-- Dialog text when we are unable to load the message for display -->
     <string name="error_loading_message_body">Unexpected error while loading message text.  Message
         may be too large to view.</string>
+
+
+    <!-- On Message List, Progress dialog title for unstarring -->
+    <string name="progress_action_unstar">Unstarring...</string>
+    <!-- On Message List, Progress dialog title for marking read -->
+    <string name="progress_action_mark_read">Marking Read...</string>
+    <!-- On Message List, Progress dialog title for starring -->
+    <string name="progress_action_star">Starring...</string>
+    <!-- On Message List, Progress dialog title for marking unread -->
+    <string name="progress_action_mark_unread">Marking Unread...</string>
 
     <!-- Notification message in notifications window when one account has
          one or more new messages; e.g, "279 unread (someone@google.com)". -->
