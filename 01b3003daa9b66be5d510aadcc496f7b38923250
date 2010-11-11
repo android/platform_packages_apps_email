@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "AAAA83///vY\u003d",
+        "filename": "res/xml/providers.xml",
+        "patchSetId": 1
+      },
+      "lineNbr": 382,
+      "author": {
+        "id": 1002975
+      },
+      "writtenOn": "2010-11-11T06:30:06Z",
+      "side": 1,
+      "message": "Is this just for testing?",
+      "revId": "01b3003daa9b66be5d510aadcc496f7b38923250",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    }
+  ]
+}

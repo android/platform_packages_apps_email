@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "AAAA83///vg\u003d",
+        "filename": "res/xml/providers.xml",
+        "patchSetId": 1
+      },
+      "lineNbr": 188,
+      "author": {
+        "id": 1002975
+      },
+      "writtenOn": "2010-11-11T06:30:06Z",
+      "side": 0,
+      "message": "If res/values/strings.xml:provider_note_yahoo doesn\u0027t apply anymore, could you remove that string as well? You don\u0027t need to worry about the other languages.",
+      "revId": "290348114ed3132068158e90f41a9b14083434ad",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "AAAA83///vc\u003d",
+        "filename": "res/xml/providers.xml",
+        "patchSetId": 1
+      },
+      "lineNbr": 202,
+      "author": {
+        "id": 1002975
+      },
+      "writtenOn": "2010-11-11T06:30:06Z",
+      "side": 0,
+      "message": "Ditto for provider_note_yahoo_uk",
+      "revId": "290348114ed3132068158e90f41a9b14083434ad",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    }
+  ]
+}
