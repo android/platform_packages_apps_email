@@ -16,6 +16,23 @@
       "revId": "01b3003daa9b66be5d510aadcc496f7b38923250",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "AAAA83///uk\u003d",
+        "filename": "res/xml/providers.xml",
+        "patchSetId": 1
+      },
+      "lineNbr": 386,
+      "author": {
+        "id": 1001252
+      },
+      "writtenOn": "2010-11-11T19:36:35Z",
+      "side": 1,
+      "message": "remove blank spaces pls.",
+      "revId": "01b3003daa9b66be5d510aadcc496f7b38923250",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
     }
   ]
 }
