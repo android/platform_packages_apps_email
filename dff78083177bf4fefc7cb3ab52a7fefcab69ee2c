@@ -1,0 +1,72 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "AAAA83///ic\u003d",
+        "filename": "res/values/strings.xml",
+        "patchSetId": 2
+      },
+      "lineNbr": 19,
+      "author": {
+        "id": 1001252
+      },
+      "writtenOn": "2010-11-13T00:18:42Z",
+      "side": 1,
+      "message": "Please move your deleted strings up to this section.  We\u0027ll delete them in a subsequent revision.  It reduces a lot of build warnings (because your strings will still exist in the xlation files and the tools think there\u0027s a problem.)",
+      "revId": "dff78083177bf4fefc7cb3ab52a7fefcab69ee2c",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "AAAA83///iM\u003d",
+        "filename": "res/xml/providers.xml",
+        "patchSetId": 2
+      },
+      "lineNbr": 121,
+      "author": {
+        "id": 1001252
+      },
+      "writtenOn": "2010-11-13T00:18:42Z",
+      "side": 1,
+      "message": "I\u0027d like you to break this into two sections.  This probably seems somewhat arbitrary but it will help this patch merge more easily into the internal tree, and thus reduce risk (esp. if you decide to make any subsequent changes here.)\n\nThe first section is largely as you have here, and should remain in this location.  This section should consist of yahoo, ymail, rocketmail, and any other US alternates (y7mail?), and all of the large-scale US domains you\u0027re adding (e.g. bellsouth, att, etc.)  Your demo/test domain can be in this section although it looks as if you\u0027ve removed it.\n\nThen, somewhere down in a separate section (after the USA section, at least) I\u0027d like you to add a 2nd section titled something along the lines of \"Yahoo! country-specific variants\" and put the rest of your list in that section.\n\nOptionally, you might also consider pulling the JP entries into their own section, since they are different.  At a minimum, I would encourage you to add commentary to them so it doesn\u0027t look like a \"one of these things is not like the others\" bug.",
+      "revId": "dff78083177bf4fefc7cb3ab52a7fefcab69ee2c",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "AAAA83///iI\u003d",
+        "filename": "res/xml/providers.xml",
+        "patchSetId": 2
+      },
+      "lineNbr": 142,
+      "author": {
+        "id": 1001252
+      },
+      "writtenOn": "2010-11-13T00:18:42Z",
+      "side": 1,
+      "message": "Australia",
+      "revId": "dff78083177bf4fefc7cb3ab52a7fefcab69ee2c",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "AAAA83///iU\u003d",
+        "filename": "res/xml/providers.xml",
+        "patchSetId": 2
+      },
+      "lineNbr": 382,
+      "author": {
+        "id": 1001252
+      },
+      "writtenOn": "2010-11-13T00:18:42Z",
+      "side": 1,
+      "message": "remove extra whitespace here",
+      "revId": "dff78083177bf4fefc7cb3ab52a7fefcab69ee2c",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    }
+  ]
+}
