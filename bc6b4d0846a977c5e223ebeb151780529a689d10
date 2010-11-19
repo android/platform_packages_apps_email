@@ -1,0 +1,55 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "AAAA9n///e8\u003d",
+        "filename": "res/values/strings.xml",
+        "patchSetId": 3
+      },
+      "lineNbr": 53,
+      "author": {
+        "id": 1001252
+      },
+      "writtenOn": "2010-11-19T19:44:43Z",
+      "side": 1,
+      "message": "sorry for the extra step - the string content itself can be removed here (it\u0027s just to preserve the identifier).",
+      "revId": "bc6b4d0846a977c5e223ebeb151780529a689d10",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "AAAA9n///e4\u003d",
+        "filename": "res/xml/providers.xml",
+        "patchSetId": 3
+      },
+      "lineNbr": 173,
+      "author": {
+        "id": 1001252
+      },
+      "writtenOn": "2010-11-19T19:44:43Z",
+      "side": 1,
+      "message": "please add a blank line below here",
+      "revId": "bc6b4d0846a977c5e223ebeb151780529a689d10",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "AAAA9n///e0\u003d",
+        "filename": "res/xml/providers.xml",
+        "patchSetId": 3
+      },
+      "lineNbr": 412,
+      "author": {
+        "id": 1001252
+      },
+      "writtenOn": "2010-11-19T19:44:43Z",
+      "side": 1,
+      "message": "These callouts are really great - thanks",
+      "revId": "bc6b4d0846a977c5e223ebeb151780529a689d10",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    }
+  ]
+}
