@@ -142,6 +142,9 @@
     <string name="choose_attachment_dialog_title">Choose attachment</string>
     <!-- Appears in message list view while messages are being loaded -->
     <string name="status_loading_more">Loading messages\u2026</string>
+    <!-- show dialog before sending message -->
+    <string name="send_message">Send message</string>
+    <string name="would_you_send_this_message">Would you send this message?</string>
     <!-- Appears in message list view of outbox while messages are being sent -->
     <string name="status_sending_messages">Sending messages\u2026</string>
     <!-- Appears in message list view when there's a network error. -->
@@ -304,6 +307,9 @@ save attachment.</string>
         You have replied \"maybe\" to this invitation</string>
     <!-- Toast shown following a meeting invite reply, declined -->
     <string name="message_view_invite_toast_no">You have declined this invitation</string>
+    <!-- show dialog before delete message -->
+    <string name="delete_message">Delete message</string>
+    <string name="do_you_really_want_to_delete_this_message">Do you really want to delete this message?</string>
     <!-- Toast shown briefly while deleting a message -->
     <plurals name="message_deleted_toast">
         <item quantity="one">Message deleted.</item>

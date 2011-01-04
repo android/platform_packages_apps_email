@@ -34,11 +34,13 @@ import com.android.email.provider.EmailContent.Message;
 import com.android.email.provider.EmailContent.MessageColumns;
 import com.android.email.service.MailService;
 
+import android.app.AlertDialog;
 import android.app.ListActivity;
 import android.app.NotificationManager;
 import android.content.ContentResolver;
 import android.content.ContentUris;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.res.ColorStateList;
 import android.content.res.Resources;
@@ -530,7 +532,7 @@ public class MessageList extends ListActivity implements OnItemClickListener, On
                 onOpenMessage(info.id, itemView.mMailboxId);
                 break;
             case R.id.delete:
-                onDelete(info.id, itemView.mAccountId);
+                showDeleteConfirmDialog(info.id, itemView.mAccountId);
                 break;
             case R.id.reply:
                 onReply(itemView.mMessageId);
@@ -668,6 +670,34 @@ public class MessageList extends ListActivity implements OnItemClickListener, On
                 finish();
             }
         }
+    }
+
+    private AlertDialog.Builder mDeleteConfirmDialogBuilder = null;
+    private void showDeleteConfirmDialog(final long messageId, final long accountId) {
+
+        if (mDeleteConfirmDialogBuilder == null) {
+            mDeleteConfirmDialogBuilder = new AlertDialog.Builder(this)
+                    .setTitle(R.string.delete_message)
+                    .setMessage(R.string.do_you_really_want_to_delete_this_message)
+                    .setCancelable(true)
+                    .setNegativeButton(R.string.cancel_action,
+                            new DialogInterface.OnClickListener() {
+                                @Override
+                                public void onClick(DialogInterface dialog, int which) {
+                                    dialog.dismiss();
+                                }
+                            });
+        }
+        // Set messageId and accountId
+        mDeleteConfirmDialogBuilder.setPositiveButton(R.string.okay_action,
+                new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        onDelete(messageId, accountId);
+                    }
+                });
+
+        mDeleteConfirmDialogBuilder.create().show();
     }
 
     private void onDelete(long messageId, long accountId) {

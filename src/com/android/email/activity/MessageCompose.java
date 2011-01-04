@@ -36,11 +36,13 @@ import com.android.email.provider.EmailContent.MessageColumns;
 import com.android.exchange.provider.GalEmailAddressAdapter;
 
 import android.app.Activity;
+import android.app.AlertDialog;
 import android.content.ActivityNotFoundException;
 import android.content.ContentResolver;
 import android.content.ContentUris;
 import android.content.ContentValues;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.pm.ActivityInfo;
 import android.database.Cursor;
@@ -62,6 +64,7 @@ import android.view.MenuItem;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.view.View.OnFocusChangeListener;
+import android.view.View.OnLongClickListener;
 import android.view.Window;
 import android.webkit.WebView;
 import android.widget.Button;
@@ -79,7 +82,8 @@ import java.util.ArrayList;
 import java.util.List;
 
 
-public class MessageCompose extends Activity implements OnClickListener, OnFocusChangeListener {
+public class MessageCompose extends Activity implements OnClickListener, OnLongClickListener,
+        OnFocusChangeListener {
     private static final String ACTION_REPLY = "com.android.email.intent.action.REPLY";
     private static final String ACTION_REPLY_ALL = "com.android.email.intent.action.REPLY_ALL";
     private static final String ACTION_FORWARD = "com.android.email.intent.action.FORWARD";
@@ -577,6 +581,7 @@ public class MessageCompose extends Activity implements OnClickListener, OnFocus
         mBccView.setValidator(addressValidator);
 
         mSendButton.setOnClickListener(this);
+        mSendButton.setOnLongClickListener(this);
         mDiscardButton.setOnClickListener(this);
         mSaveButton.setOnClickListener(this);
 
@@ -967,6 +972,31 @@ public class MessageCompose extends Activity implements OnClickListener, OnFocus
         return true;
     }
 
+    private AlertDialog mSendConfirmDialog = null;
+    private void showSendConfirmDialog() {
+        if (mSendConfirmDialog == null) {
+            // Build confirm dialog
+            mSendConfirmDialog = new AlertDialog.Builder(this)
+                    .setTitle(R.string.send_message)
+                    .setMessage(R.string.would_you_send_this_message)
+                    .setCancelable(true)
+                    .setNegativeButton(R.string.cancel_action,
+                            new DialogInterface.OnClickListener() {
+                                @Override
+                                public void onClick(DialogInterface dialog, int which) {
+                                    dialog.dismiss();
+                                }
+                            })
+                    .setPositiveButton(R.string.okay_action, new DialogInterface.OnClickListener() {
+                        @Override
+                        public void onClick(DialogInterface dialog, int which) {
+                            onSend();
+                        }
+                    }).create();
+        }
+        mSendConfirmDialog.show();
+    }
+
     private void onSend() {
         if (!isAddressAllValid()) {
             Toast.makeText(this, getString(R.string.message_compose_error_invalid_email),
@@ -1114,7 +1144,7 @@ public class MessageCompose extends Activity implements OnClickListener, OnFocus
     public void onClick(View view) {
         switch (view.getId()) {
             case R.id.send:
-                onSend();
+                showSendConfirmDialog();
                 break;
             case R.id.save:
                 onSave();
@@ -1135,6 +1165,15 @@ public class MessageCompose extends Activity implements OnClickListener, OnFocus
                 setDraftNeedsSaving(true);
                 break;
         }
+    }
+
+    public boolean onLongClick(View view) {
+        switch (view.getId()) {
+            case R.id.send:
+                onSend();
+                return true;
+        }
+        return false;
     }
 
     private void onDeleteAttachment(View delButtonView) {
@@ -1165,7 +1204,7 @@ public class MessageCompose extends Activity implements OnClickListener, OnFocus
     public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()) {
             case R.id.send:
-                onSend();
+                showSendConfirmDialog();
                 break;
             case R.id.save:
                 onSave();

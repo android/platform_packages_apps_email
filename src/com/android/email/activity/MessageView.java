@@ -37,10 +37,12 @@ import com.android.email.service.EmailServiceConstants;
 import org.apache.commons.io.IOUtils;
 
 import android.app.Activity;
+import android.app.AlertDialog;
 import android.app.ProgressDialog;
 import android.content.ActivityNotFoundException;
 import android.content.ContentResolver;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.database.ContentObserver;
 import android.database.Cursor;
@@ -68,6 +70,7 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.View.OnClickListener;
+import android.view.View.OnLongClickListener;
 import android.webkit.WebView;
 import android.webkit.WebViewClient;
 import android.widget.Button;
@@ -85,7 +88,7 @@ import java.util.Date;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
-public class MessageView extends Activity implements OnClickListener {
+public class MessageView extends Activity implements OnClickListener, OnLongClickListener {
     private static final String EXTRA_MESSAGE_ID = "com.android.email.MessageView_message_id";
     private static final String EXTRA_MAILBOX_ID = "com.android.email.MessageView_mailbox_id";
     /* package */ static final String EXTRA_DISABLE_REPLY = "com.android.email.MessageView_disable_reply";
@@ -375,6 +378,7 @@ public class MessageView extends Activity implements OnClickListener {
         findViewById(R.id.reply).setOnClickListener(this);
         findViewById(R.id.reply_all).setOnClickListener(this);
         findViewById(R.id.delete).setOnClickListener(this);
+        findViewById(R.id.delete).setOnLongClickListener(this);
         findViewById(R.id.show_pictures).setOnClickListener(this);
 
         mMeetingYes = (TextView) findViewById(R.id.accept);
@@ -514,12 +518,41 @@ public class MessageView extends Activity implements OnClickListener {
         // the cursor was closed in onPause()
     }
 
+    private AlertDialog mDeleteConfirmDialog = null;
+    private void showDeleteConfirmDialog() {
+
+        if (mDeleteConfirmDialog == null) {
+            // Build confirm dialog
+            mDeleteConfirmDialog = new AlertDialog.Builder(this)
+                    .setTitle(R.string.delete_message)
+                    .setMessage(R.string.do_you_really_want_to_delete_this_message)
+                    .setCancelable(true)
+                    .setNegativeButton(R.string.cancel_action,
+                            new DialogInterface.OnClickListener() {
+                                @Override
+                                public void onClick(DialogInterface dialog, int which) {
+                                    dialog.dismiss();
+                                }
+                    })
+                    .setPositiveButton(R.string.okay_action,
+                            new DialogInterface.OnClickListener() {
+                                @Override
+                                public void onClick(DialogInterface dialog, int which) {
+                                    onDelete();
+                                }
+                    })
+                    .create();
+        }
+        mDeleteConfirmDialog.show();
+    }
+
     private void onDelete() {
         if (mMessage != null) {
             // the delete triggers mCursorObserver
             // first move to older/newer before the actual delete
             long messageIdToDelete = mMessageId;
             boolean moved = moveToOlder() || moveToNewer();
+
             mController.deleteMessage(messageIdToDelete, mMessage.mAccountKey);
             Toast.makeText(this, getResources().getQuantityString(R.plurals.message_deleted_toast,
                     1), Toast.LENGTH_SHORT).show();
@@ -784,7 +817,7 @@ public class MessageView extends Activity implements OnClickListener {
                 onReplyAll();
                 break;
             case R.id.delete:
-                onDelete();
+                showDeleteConfirmDialog();
                 break;
             case R.id.moveToOlder:
                 moveToOlder();
@@ -831,6 +864,15 @@ public class MessageView extends Activity implements OnClickListener {
         }
     }
 
+    public boolean onLongClick(View view) {
+        switch (view.getId()) {
+            case R.id.delete:
+                onDelete();
+                return true;
+        }
+        return false;
+    }
+
    @Override
     public boolean onOptionsItemSelected(MenuItem item) {
        boolean handled = handleMenuItem(item.getItemId());
@@ -850,7 +892,7 @@ public class MessageView extends Activity implements OnClickListener {
    /* package */ boolean handleMenuItem(int menuItemId) {
        switch (menuItemId) {
            case R.id.delete:
-               onDelete();
+               showDeleteConfirmDialog();
                break;
            case R.id.reply:
                onReply();

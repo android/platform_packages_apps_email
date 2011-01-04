@@ -57,6 +57,8 @@
     <string name="dump_settings_action" msgid="4478192525236169829">"ダンプ設定"</string>
     <string name="choose_attachment_dialog_title" msgid="81937507117528954">"添付ファイルの選択"</string>
     <string name="status_loading_more" msgid="1580386959044617884">"メールを読み込み中..."</string>
+    <string name="send_message" msgid="8435934520985438409">"メールの送信"</string>
+    <string name="would_you_send_this_message" msgid="2484303453534566574">"メールを送信します"</string>
     <string name="status_sending_messages" msgid="3971880826111264523">"メッセージを送信中..."</string>
     <string name="status_network_error" msgid="6045933332005067021">"接続エラー"</string>
     <string name="notification_new_title" msgid="2200257910380529139">"新着メール"</string>
@@ -118,6 +120,8 @@
     <string name="message_view_invite_toast_yes" msgid="1900593767157209498">"この招待を承諾しました"</string>
     <string name="message_view_invite_toast_maybe" msgid="8324044318669610540">"この案内を仮承諾しました"</string>
     <string name="message_view_invite_toast_no" msgid="7511491076936887064">"この招待を辞退しました"</string>
+    <string name="delete_message" msgid="9874350983498743521">"メールの削除"</string>
+    <string name="do_you_really_want_to_delete_this_message" msgid="8397543876209843252">"選択したメールを削除します"</string>
   <plurals name="message_deleted_toast">
     <item quantity="one" msgid="710742672464447084">"メッセージを削除しました。"</item>
     <item quantity="other" msgid="6574961322865652255">"メッセージを削除しました。"</item>
