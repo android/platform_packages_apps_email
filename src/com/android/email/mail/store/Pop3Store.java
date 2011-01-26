@@ -235,6 +235,7 @@ public class Pop3Store extends Store {
 
             try {
                 mTransport.open();
+                mTransport.setSoTimeout(MailTransport.SOCKET_READ_TIMEOUT);
 
                 // Eat the banner
                 executeSimpleCommand(null);
