@@ -119,6 +119,9 @@ public class MessageList extends ListActivity implements OnItemClickListener, On
 
     private TextView mLeftTitle;
     private ProgressBar mProgressIcon;
+    private long mSelectedItemId;
+    private boolean mSelectedItemState;
+    private long mSelectedItemInfo;
 
     // DB access
     private ContentResolver mResolver;
@@ -486,6 +489,9 @@ public class MessageList extends ListActivity implements OnItemClickListener, On
             return;
         }
         MessageListItem itemView = (MessageListItem) info.targetView;
+        mSelectedItemId = itemView.mMessageId;
+        mSelectedItemState = itemView.mRead;
+        mSelectedItemInfo = info.id;
 
         Cursor c = (Cursor) mListView.getItemAtPosition(info.position);
         String messageName = c.getString(MessageListAdapter.COLUMN_SUBJECT);
@@ -527,22 +533,22 @@ public class MessageList extends ListActivity implements OnItemClickListener, On
 
         switch (item.getItemId()) {
             case R.id.open:
-                onOpenMessage(info.id, itemView.mMailboxId);
+                onOpenMessage(info.id, mSelectedItemId);
                 break;
             case R.id.delete:
-                onDelete(info.id, itemView.mAccountId);
+                onDelete(info.id, mSelectedItemId);
                 break;
             case R.id.reply:
-                onReply(itemView.mMessageId);
+                onReply(mSelectedItemId);
                 break;
             case R.id.reply_all:
-                onReplyAll(itemView.mMessageId);
+                onReplyAll(mSelectedItemId);
                 break;
             case R.id.forward:
-                onForward(itemView.mMessageId);
+                onForward(mSelectedItemId);
                 break;
             case R.id.mark_as_read:
-                onSetMessageRead(info.id, !itemView.mRead);
+                onSetMessageRead(mSelectedItemInfo, !mSelectedItemState);
                 break;
         }
         return super.onContextItemSelected(item);
