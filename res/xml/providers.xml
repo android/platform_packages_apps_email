@@ -270,4 +270,10 @@
         <outgoing uri="smtp+ssl://poczta.o2.pl" username="$user" />
     </provider>
 
+    <!-- Newzealand -->
+    <provider id="vodafone.net.nz" label="vodafone.net.nz" domain="vodafone.net.nz">
+        <incoming uri="imap://imap.vodafone.net.nz:143" username="$email" />
+        <outgoing uri="smtp://smtp2.vodafone.net.nz:25" username="$email" />
+    </provider>
+
 </providers>
