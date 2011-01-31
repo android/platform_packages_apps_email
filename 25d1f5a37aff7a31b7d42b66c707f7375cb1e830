@@ -1,0 +1,55 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "AAAA+3//7AM\u003d",
+        "filename": "res/xml/providers.xml",
+        "patchSetId": 1
+      },
+      "lineNbr": 273,
+      "author": {
+        "id": 1001252
+      },
+      "writtenOn": "2011-01-31T01:05:49Z",
+      "side": 1,
+      "message": "This should be \"New Zealand\"",
+      "revId": "25d1f5a37aff7a31b7d42b66c707f7375cb1e830",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "AAAA+3//7AE\u003d",
+        "filename": "res/xml/providers.xml",
+        "patchSetId": 1
+      },
+      "lineNbr": 275,
+      "author": {
+        "id": 1001252
+      },
+      "writtenOn": "2011-01-31T01:05:49Z",
+      "side": 1,
+      "message": "1.  Please use imap+ssl or imap+tls.  I\u0027m pretty sure that SSL is supported.  We should not be making it easy for users to send their passwords in plaintext.\n\n2.  Please remove the port# unless it is non-standard.  See list of defaults at the top of this file.",
+      "revId": "25d1f5a37aff7a31b7d42b66c707f7375cb1e830",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "AAAA+3//7AA\u003d",
+        "filename": "res/xml/providers.xml",
+        "patchSetId": 1
+      },
+      "lineNbr": 276,
+      "author": {
+        "id": 1001252
+      },
+      "writtenOn": "2011-01-31T01:05:49Z",
+      "side": 1,
+      "message": "1.  Please use smtp+ssl or smtp+tls.  I\u0027m pretty sure that SSL is supported.  We should not be making it easy for users to send their passwords in plaintext.\n\n2.  Please remove the port# unless it is non-standard.  See list of defaults at the top of this file.",
+      "revId": "25d1f5a37aff7a31b7d42b66c707f7375cb1e830",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    }
+  ]
+}
