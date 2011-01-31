@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "AAAA+3//64Q\u003d",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 2
+      },
+      "lineNbr": 9,
+      "author": {
+        "id": 1001252
+      },
+      "writtenOn": "2011-01-31T19:15:14Z",
+      "side": 1,
+      "message": "Git will not properly process comments that are longer than 80 columns.  Please hard-wrap comments at 80 columns, e.g.\n\n  When decoding the Email body, email application used google default base64\n  function.  But it caused problem, so particular email did not sync any more.\n  So we have changed decoding function as a decoder from apache in order\n  not to occur problem",
+      "revId": "0caf24d9ece764e7d1c454a2b15921deaa604f5f",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    }
+  ]
+}
