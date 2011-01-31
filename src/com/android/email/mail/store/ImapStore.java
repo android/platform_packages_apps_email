@@ -1444,8 +1444,22 @@ public class ImapStore extends Store {
                 }
                 // else: mIdPhrase = null, no ID will be emitted
 
+                String capabilities = capabilityResponse.toString();
+                Log.e("Email","capability response : " + capabilities);
+                boolean canTryID = false;
+                if( capabilities != null ) {
+                    //#null# [CAPABILITY, ID, ...]
+                    Pattern p = Pattern.compile("^(#(null|[0-9])+#)|[\\[\\], ]");
+                    String capas[] = p.split(capabilities);
+                    if( capas != null ) {
+                        for( String capa : capas ) {
+                            if(capa != null && capa.equals("ID")) canTryID = true;
+                        }
+                    }
+                }
+
                 // Send user-agent in an RFC2971 ID command
-                if (mIdPhrase != null) {
+                if (mIdPhrase != null && canTryID == true) {
                     try {
                         executeSimpleCommand(mIdPhrase);
                     } catch (ImapException ie) {
