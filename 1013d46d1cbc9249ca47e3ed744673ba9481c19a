@@ -1,0 +1,55 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "AAAA+3//63o\u003d",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 2
+      },
+      "lineNbr": 7,
+      "author": {
+        "id": 1001252
+      },
+      "writtenOn": "2011-01-31T20:16:07Z",
+      "side": 1,
+      "message": "Please clean up commit message as follows.  First line should be summary and 60 chars or less.\n\nThe following lines (description) should hard wrap at 80 cols.",
+      "revId": "1013d46d1cbc9249ca47e3ed744673ba9481c19a",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "AAAA+3//63Y\u003d",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 2
+      },
+      "lineNbr": 9,
+      "author": {
+        "id": 1001252
+      },
+      "writtenOn": "2011-01-31T20:16:07Z",
+      "side": 1,
+      "message": "Also, this is a long, indirect description of the real nature of this change.  I would change it to simply read:\n\n  Only send IMAP ID to servers that do include ID in the CAPABILITY response.\n  Sending IMAP ID was found to cause problems with imap.vodafone.net.nz.",
+      "revId": "1013d46d1cbc9249ca47e3ed744673ba9481c19a",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "AAAA+3//63Q\u003d",
+        "filename": "src/com/android/email/mail/store/ImapStore.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 1462,
+      "author": {
+        "id": 1001252
+      },
+      "writtenOn": "2011-01-31T20:16:07Z",
+      "side": 1,
+      "message": "You can remove the entire block above and simply rewrite this line as:\n\n    if (mIdPhrase !\u003d null \u0026\u0026 capabilityResponse.contains(ImapConstants.ID)) {",
+      "revId": "1013d46d1cbc9249ca47e3ed744673ba9481c19a",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    }
+  ]
+}
