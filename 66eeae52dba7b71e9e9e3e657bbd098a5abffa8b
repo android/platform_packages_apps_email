@@ -123,6 +123,24 @@
     },
     {
       "key": {
+        "uuid": "AAAA+3//6k4\u003d",
+        "filename": "tests/src/com/android/email/mail/internet/MimeUtilityTest.java",
+        "patchSetId": 4
+      },
+      "lineNbr": 516,
+      "author": {
+        "id": 1005536
+      },
+      "writtenOn": "2011-02-01T22:40:35Z",
+      "side": 1,
+      "message": "Then is it ok?\n\ntestDecodeBody_BadBase64() \n{\n    InputStream in \u003d new ByteArrayInputStream(BASE64.getBytes(\"us-ascii\"));\n    assertNotNull(MimeUtility.decodeBody(in, BASE64));\n\n    in \u003d new ByteArrayInputStream(BAD_BASE64.getBytes(\"us-ascii\"));\n    assertNotNull(MimeUtility.decodeBody(in, BASE64));\n}",
+      "parentUuid": "AAAA+3//6lc\u003d",
+      "revId": "66eeae52dba7b71e9e9e3e657bbd098a5abffa8b",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "AAAA+3//6p0\u003d",
         "filename": "tests/src/com/android/email/mail/internet/MimeUtilityTest.java",
         "patchSetId": 4
