@@ -1,0 +1,106 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "AAAA+3//6qc\u003d",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 4
+      },
+      "lineNbr": 7,
+      "author": {
+        "id": 1001252
+      },
+      "writtenOn": "2011-02-01T18:56:23Z",
+      "side": 1,
+      "message": "Please insert a short summary line, then a blank line, and then you can continue with the description as you have written it.\n\nSee http://tbaggery.com/2008/04/19/a-note-about-git-commit-messages.html for further discussion.",
+      "revId": "66eeae52dba7b71e9e9e3e657bbd098a5abffa8b",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "AAAA+3//6qI\u003d",
+        "filename": "src/com/android/email/mail/internet/MimeUtility.java",
+        "patchSetId": 4
+      },
+      "lineNbr": 34,
+      "author": {
+        "id": 1001252
+      },
+      "writtenOn": "2011-02-01T18:56:23Z",
+      "side": 1,
+      "message": "Your import ordering is incorrect - see http://source.android.com/source/code-style.html#import_style or just look at the existing imports and insert where they belong.\n\nIf you are using Eclipse, please see http://source.android.com/source/using-eclipse.html for information on automatic formatting.",
+      "revId": "66eeae52dba7b71e9e9e3e657bbd098a5abffa8b",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "AAAA+3//6qE\u003d",
+        "filename": "tests/src/com/android/email/mail/internet/MimeUtilityTest.java",
+        "patchSetId": 4
+      },
+      "lineNbr": 19,
+      "author": {
+        "id": 1001252
+      },
+      "writtenOn": "2011-02-01T18:56:23Z",
+      "side": 1,
+      "message": "See previous note and clean up import ordering.",
+      "revId": "66eeae52dba7b71e9e9e3e657bbd098a5abffa8b",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "AAAA+3//6qA\u003d",
+        "filename": "tests/src/com/android/email/mail/internet/MimeUtilityTest.java",
+        "patchSetId": 4
+      },
+      "lineNbr": 515,
+      "author": {
+        "id": 1001252
+      },
+      "writtenOn": "2011-02-01T18:56:23Z",
+      "side": 1,
+      "message": "blank line after this comment as it does not describe the method that starts on the next line.",
+      "revId": "66eeae52dba7b71e9e9e3e657bbd098a5abffa8b",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "AAAA+3//6p8\u003d",
+        "filename": "tests/src/com/android/email/mail/internet/MimeUtilityTest.java",
+        "patchSetId": 4
+      },
+      "lineNbr": 516,
+      "author": {
+        "id": 1001252
+      },
+      "writtenOn": "2011-02-01T18:56:23Z",
+      "side": 1,
+      "message": "1.  Please add a block comment describing the test and what it is looking for.  This can be as simple as:\n\n   /**\n    * Confirm that decodeBody() does not crash when\n    * given bad Base64 data.\n    */\n\n2.  This should be given a more explicit name, because it\u0027s testing an explicit feature (handling bad base64).  I would rename this to \"testDecodeBody_BadBase64()\".",
+      "revId": "66eeae52dba7b71e9e9e3e657bbd098a5abffa8b",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "AAAA+3//6p0\u003d",
+        "filename": "tests/src/com/android/email/mail/internet/MimeUtilityTest.java",
+        "patchSetId": 4
+      },
+      "lineNbr": 519,
+      "author": {
+        "id": 1001252
+      },
+      "writtenOn": "2011-02-01T18:56:23Z",
+      "side": 1,
+      "message": "Why are you calling decodeBody twice?  This is either a copy/paste error, or, you need to add a comment explaining what you are doing here.",
+      "revId": "66eeae52dba7b71e9e9e3e657bbd098a5abffa8b",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    }
+  ]
+}
