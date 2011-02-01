@@ -105,6 +105,24 @@
     },
     {
       "key": {
+        "uuid": "AAAA+3//6lc\u003d",
+        "filename": "tests/src/com/android/email/mail/internet/MimeUtilityTest.java",
+        "patchSetId": 4
+      },
+      "lineNbr": 516,
+      "author": {
+        "id": 1001252
+      },
+      "writtenOn": "2011-02-01T22:35:46Z",
+      "side": 1,
+      "message": "Yes, what I wrote was:  \n\n\"I would like you to add a unit test that calls decodeBody() twice, once with good base64 data, and once with bad base64 data.\"\n\nYou don\u0027t need two test methods here, but in the test method, you should make two calls to decodeBody, one with good data and one with bad data.",
+      "parentUuid": "AAAA+3//6mU\u003d",
+      "revId": "66eeae52dba7b71e9e9e3e657bbd098a5abffa8b",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "AAAA+3//6p0\u003d",
         "filename": "tests/src/com/android/email/mail/internet/MimeUtilityTest.java",
         "patchSetId": 4
