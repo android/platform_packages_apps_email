@@ -367,7 +367,8 @@ public class EasSyncService extends AbstractSyncService {
         // Find the most recent version we support
         for (String version: supportedVersionsArray) {
             if (version.equals(Eas.SUPPORTED_PROTOCOL_EX2003) ||
-                    version.equals(Eas.SUPPORTED_PROTOCOL_EX2007)) {
+                    version.equals(Eas.SUPPORTED_PROTOCOL_EX2007) || 
+                    version.equals(Eas.SUPPORTED_PROTOCOL_EX2007A)) {
                 ourVersion = version;
             }
         }
@@ -805,11 +806,20 @@ public class EasSyncService extends AbstractSyncService {
                 svc.mTrustSsl = (ha.mFlags & HostAuth.FLAG_TRUST_ALL_CERTIFICATES) != 0;
                 svc.mDeviceId = SyncManager.getDeviceId();
                 svc.mAccount = acct;
+                // Take protocol, otherwise we are using the default (2.5)
+                svc.mProtocolVersion = acct.mProtocolVersion;
+                svc.mProtocolVersionDouble = Double.parseDouble(svc.mProtocolVersion);
                 Serializer s = new Serializer();
                 s.start(Tags.SEARCH_SEARCH).start(Tags.SEARCH_STORE);
                 s.data(Tags.SEARCH_NAME, "GAL").data(Tags.SEARCH_QUERY, filter);
                 s.start(Tags.SEARCH_OPTIONS);
                 s.data(Tags.SEARCH_RANGE, "0-19");  // Return 0..20 results
+                // The following two statements maximize search-results at the cost of performance...
+                // I'll only include them for ActiveSync 12.1
+                if (svc.mProtocolVersionDouble >= Eas.SUPPORTED_PROTOCOL_EX2007A_DOUBLE) {
+                    s.tag(Tags.SEARCH_REBUILD_RESULTS); // Rebuild search results (handles changes in search filter better)
+                    s.tag(Tags.SEARCH_DEEP_TRAVERSAL); // Also search sub-folders of the GAL
+                }
                 s.end().end().end().done();
                 if (DEBUG_GAL_SERVICE) svc.userLog("GAL lookup starting for " + ha.mAddress);
                 HttpResponse resp = svc.sendHttpClientPost("Search", s.toByteArray());
@@ -2063,9 +2073,11 @@ public class EasSyncService extends AbstractSyncService {
             userLog("sync, sending ", className, " syncKey: ", syncKey);
             s.start(Tags.SYNC_SYNC)
                 .start(Tags.SYNC_COLLECTIONS)
-                .start(Tags.SYNC_COLLECTION)
-                .data(Tags.SYNC_CLASS, className)
-                .data(Tags.SYNC_SYNC_KEY, syncKey)
+                .start(Tags.SYNC_COLLECTION);
+            // ActiveSync 12.1 and higher don't accept a classname here...
+            if (mProtocolVersionDouble < Eas.SUPPORTED_PROTOCOL_EX2007A_DOUBLE)
+                s.data(Tags.SYNC_CLASS, className);
+            s.data(Tags.SYNC_SYNC_KEY, syncKey)
                 .data(Tags.SYNC_COLLECTION_ID, mailbox.mServerId);
 
             // Start with the default timeout

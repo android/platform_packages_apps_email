@@ -45,6 +45,9 @@ public class Eas {
     public static final double SUPPORTED_PROTOCOL_EX2003_DOUBLE = 2.5;
     public static final String SUPPORTED_PROTOCOL_EX2007 = "12.0";
     public static final double SUPPORTED_PROTOCOL_EX2007_DOUBLE = 12.0;
+    // Define Exchange ActiveSync 12.1 protocol
+    public static final String SUPPORTED_PROTOCOL_EX2007A = "12.1";
+    public static final double SUPPORTED_PROTOCOL_EX2007A_DOUBLE = 12.1;
     public static final String DEFAULT_PROTOCOL_VERSION = SUPPORTED_PROTOCOL_EX2003;
 
     // From EAS spec
