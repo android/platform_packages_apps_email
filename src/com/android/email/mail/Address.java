@@ -102,6 +102,13 @@ public class Address {
         if (personal != null) {
             personal = REMOVE_OPTIONAL_DQUOTE.matcher(personal).replaceAll("$1");
             personal = UNQUOTE.matcher(personal).replaceAll("$1");
+            /**
+             * Comment this line out and replace this with other lines
+             * Block Begin
+             *
+             * @author shinwook
+            * @date 2011.02.10.
+             */
             personal = DecoderUtil.decodeEncodedWords(personal);
             if (personal.length() == 0) {
                 personal = null;
@@ -152,6 +159,53 @@ public class Address {
                     if (TextUtils.isEmpty(name)) {
                         name = null;
                     }
+                    /*
+                     * Block End
+                     */
+                    /**
+                     * Using new decode function
+                     * Block Begin
+                     * @author shinwook
+                     * @date 2011.02.10.
+                     */
+                    name = DecoderUtil.decodeGeneric(name);
+                    /*
+                     * Block End
+                     */
+
+                    addresses.add(new Address(address, name));
+                }
+            }
+        }
+        return addresses.toArray(new Address[] {});
+    }
+
+    /**
+     * getPackedAddress() and getAddress() uses Address.parse() and it passes string from "View"
+     * So, in this case, we don't have to decode
+     * This is a copy and paste/modification fucntion
+     *
+     * @author shinwook
+     * @date 2011.02.10.
+     * @param addressList
+     * @return
+     */
+    public static Address[] parse2(String addressList) {
+        if (addressList == null || addressList.length() == 0) {
+            return EMPTY_ADDRESS_ARRAY;
+        }
+        Rfc822Token[] tokens = Rfc822Tokenizer.tokenize(addressList);
+        ArrayList<Address> addresses = new ArrayList<Address>();
+        for (int i = 0, length = tokens.length; i < length; ++i) {
+            Rfc822Token token = tokens[i];
+            String address = token.getAddress();
+            if (!TextUtils.isEmpty(address)) {
+                if (isValidAddress(address)) {
+                    String name = token.getName();
+                    if (TextUtils.isEmpty(name)) {
+                        name = null;
+                    }
+
                     addresses.add(new Address(address, name));
                 }
             }

@@ -47,6 +47,17 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 /**
+ * Uses encoded word for Korean Filename
+ * 
+ * @author shinwook
+ * @date 2011.02.10.
+ */
+import org.apache.james.mime4j.codec.EncoderUtil;
+import org.apache.james.mime4j.codec.EncoderUtil.Usage;
+import org.apache.james.mime4j.decoder.DecoderUtil;
+import org.apache.james.mime4j.codec.*;
+
+/**
  * Utility class to output RFC 822 messages from provider email messages
  */
 public class Rfc822Output {
@@ -217,17 +228,55 @@ public class Rfc822Output {
      */
     private static void writeOneAttachment(Context context, Writer writer, OutputStream out,
             Attachment attachment) throws IOException, MessagingException {
+        /**
+        * Uses encoded word for Korean Filename
+        * This is RFC822 extended method for encoded-word
+        * Block Begin
+        *
+        * @author shinwook
+        * @date 2011.02.10.
+        */
+
+        Boolean ff = EncoderUtil.hasToBeEncoded(attachment.mFileName,0);
+
+        if(ff == true){
+            String fname = (EncoderUtil.hasToBeEncoded(attachment.mFileName, 0)) ? "\n filename*=\"" : "\n filename=\"";
+        String encFileName = EncoderUtil.encodeAddressDisplayName(attachment.mFileName);
+
         writeHeader(writer, "Content-Type",
-                attachment.mMimeType + ";\n name=\"" + attachment.mFileName + "\"");
+                attachment.mMimeType + ";\n name=\"" + encFileName + "\"");
         writeHeader(writer, "Content-Transfer-Encoding", "base64");
-        // Most attachments (real files) will send Content-Disposition.  The suppression option
-        // is used when sending calendar invites.
-        if ((attachment.mFlags & Attachment.FLAG_ICS_ALTERNATIVE_PART) == 0) {
+        writeHeader(writer, "Content-Disposition",
+                "attachment;"
+              + "\n filename*=\"" + encFileName + "\";"
+                    + "\n size=" + Long.toString(attachment.mSize));
+        }
+        else{
+            writeHeader(writer, "Content-Type",
+                attachment.mMimeType + ";\n name=\"" + attachment.mFileName + "\"");
+            writeHeader(writer, "Content-Transfer-Encoding", "base64");
             writeHeader(writer, "Content-Disposition",
                     "attachment;"
                     + "\n filename=\"" + attachment.mFileName + "\";"
                     + "\n size=" + Long.toString(attachment.mSize));
         }
+        // Block End
+
+        /**
+         * block this one one to new one can take effect
+         * Block Begin
+         * @author shinwook
+        * @date 2011.02.10.
+         */
+//        writeHeader(writer, "Content-Type",
+//                attachment.mMimeType + ";\n name=\"" + attachment.mFileName + "\"");
+//        writeHeader(writer, "Content-Transfer-Encoding", "base64");
+//        writeHeader(writer, "Content-Disposition",
+//                "attachment;"
+//                + "\n filename=\"" + attachment.mFileName + "\";"
+//                + "\n size=" + Long.toString(attachment.mSize));
+        // Block End
+
         writeHeader(writer, "Content-ID", attachment.mContentId);
         writer.append("\r\n");
 

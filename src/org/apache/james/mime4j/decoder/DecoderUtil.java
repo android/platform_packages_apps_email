@@ -31,6 +31,19 @@ import java.io.IOException;
 import java.io.UnsupportedEncodingException;
 
 /**
+ * import new packages to detect charset
+ * Block Begin
+ * @author shinwook
+ * @date 2011.02.10.
+ */
+import java.io.*;
+import java.net.*;
+import java.util.*;
+import org.mozilla.intl.chardet.*;
+// Block End
+
+/**
+
  * Static methods for decoding strings, byte arrays and encoded words.
  *
  * 
@@ -40,6 +53,127 @@ public class DecoderUtil {
     private static Log log = LogFactory.getLog(DecoderUtil.class);
     
     /**
+     * Using mozilla chardet
+     *
+     * @author shinwook
+     * @date 2011.02.10.
+     * @param s the string to detect
+     * @return the charset the string might use (estimated result)
+     * 			return null if it is US-ASCII (decoding is not needed)
+     */
+    public static String chardet(String s)  {
+        if (s == null)
+            return s;
+
+        // Initalize the nsDetector() with default locale Kr (5) or all (nsPSMDetector.ALL)
+        int lang = nsPSMDetector.ALL;
+        nsDetector det = new nsDetector(lang) ;
+
+        // Set an observer...
+        // The Notify() will be called when a matching charset is found.
+        det.Init(new nsICharsetDetectionObserver() {
+            public void Notify(String charset) {
+                log.info("Detected CHARSET = " + charset);
+            }
+        });
+
+        String result;
+
+        ByteArrayOutputStream imp = new ByteArrayOutputStream();
+
+        char[] chars = s.toCharArray();
+        for (char c : chars)
+            imp.write(c);
+
+	byte[] buf = imp.toByteArray();
+	boolean isAscii = true;
+
+	// Check if the stream is only ascii.
+	isAscii = det.isAscii(buf, buf.length);
+    // DoIt if non-ascii and not done yet.
+    if (!isAscii) {
+        det.DoIt(buf, buf.length, false);
+    }
+    det.DataEnd();
+
+       result = null;
+        if (isAscii) {
+            // result = new String("US-ASCII");
+            result = null;
+        } else  {
+            String prob[] = det.getProbableCharsets() ;
+
+            // case Korean.
+            for (String charset : prob)  {
+                if (charset.equals("EUC-KR")){
+                    result = String.valueOf("EUC-KR"); //new String("EUC-KR"); //sec.email tom.jung 20100818 For RSAR 3rd.
+                    break;
+                }
+            }
+        }
+        return result;
+    }
+    /**
+     * Check if it is encoded words and unless it is, decode it with euc-kr
+     *
+     * @author shinwook
+     * @date 2011.02.10.
+     * @param s the string to decode
+     * @return the decoded bytes
+     */
+    public static String justDecode(String s, String charset)  {
+        // if it is encoded words, just return as it was.
+        if (s == null || s.indexOf("=?") != -1)  {
+            return s;
+        }
+
+        ByteArrayOutputStream baos = new ByteArrayOutputStream();
+        String result;
+        try {
+            char[] chars = s.toCharArray();
+
+            for (char c : chars)  {
+                baos.write(c);
+            }
+            result = new String(baos.toByteArray(), CharsetUtil.toJavaCharset(charset.toLowerCase()));
+        }
+            catch(UnsupportedEncodingException e)  {
+            result = s;
+        }
+
+        return result;
+    }
+
+    /**
+     * Check if the string is an encoded-words, then decode it
+     * if it is not an encoded-words, check if it is encoded
+     * if it is, justDecode and return the result
+     *
+     * @author shinwook
+     * @date 2011.02.10.
+     * @param s the string to check and decode
+     * @return the decoded string
+     */
+    public static String decodeGeneric(String s)  {
+        if (s == null)
+            return s;
+
+        String result;
+        if (s.indexOf("=?") == -1)  {
+            // detect
+            String charset = chardet(s);
+            if (charset == null)
+                result = s;
+            else
+                result = justDecode(s, charset);
+        }
+        else  {
+            result = decodeEncodedWords(s);
+        }
+
+        return result;
+    }
+    /**
      * Decodes a string containing quoted-printable encoded data. 
      * 
      * @param s the string to decode.
@@ -47,7 +181,7 @@ public class DecoderUtil {
      */
     public static byte[] decodeBaseQuotedPrintable(String s) {
         ByteArrayOutputStream baos = new ByteArrayOutputStream();
-        
+
         try {
             byte[] bytes = s.getBytes("US-ASCII");
             
@@ -67,7 +201,7 @@ public class DecoderUtil {
         
         return baos.toByteArray();
     }
-    
+
     /**
      * Decodes a string containing base64 encoded data. 
      * 

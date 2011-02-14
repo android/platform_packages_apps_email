@@ -956,7 +956,16 @@ public class CharsetUtil {
         new Charset("Cp943", null, new String[] {}),
         new Charset("Cp943C", null, new String[] {}),
         new Charset("Cp948", null, new String[] {}),
-        new Charset("Cp949", null, new String[] {}),
+
+        //        new Charset("Cp949", null, new String[] {}),
+        /**
+         * add new mapping CP949 with EUC_KR
+         *
+         * @author shinwook
+         * @date 2011.02.10.
+         */
+        new Charset("EUC_KR", "Cp949", new String[] {}),
+
         new Charset("Cp949C", null, new String[] {}),
         new Charset("Cp950", null, new String[] {}),
         new Charset("Cp964", null, new String[] {}),

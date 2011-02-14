@@ -742,12 +742,24 @@ public class MessageCompose extends Activity implements OnClickListener, OnFocus
     }
 
     private String getPackedAddresses(TextView view) {
-        Address[] addresses = Address.parse(view.getText().toString().trim());
+    /**
+    * Don't have to decode, using parse2() function instead of parse()
+    * @author shinwook
+    * @date 2011.02.10.
+    */
+        Address[] addresses = Address.parse2(view.getText().toString().trim());
+//        Address[] addresses = Address.parse(view.getText().toString().trim());
         return Address.pack(addresses);
     }
 
     private Address[] getAddresses(TextView view) {
-        Address[] addresses = Address.parse(view.getText().toString().trim());
+    /**
+    * Don't have to decode, using parse2() function instead of parse()
+    * @author shinwook
+    * @date 2011.02.10.
+    */
+        Address[] addresses = Address.parse2(view.getText().toString().trim());
+//        Address[] addresses = Address.parse(view.getText().toString().trim());
         return addresses;
     }
 

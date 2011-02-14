@@ -26,12 +26,15 @@ import com.android.email.mail.Part;
 
 import org.apache.commons.io.IOUtils;
 import org.apache.james.mime4j.codec.EncoderUtil;
-import org.apache.james.mime4j.decoder.Base64InputStream;
 import org.apache.james.mime4j.decoder.DecoderUtil;
 import org.apache.james.mime4j.decoder.QuotedPrintableInputStream;
 import org.apache.james.mime4j.util.CharsetUtil;
 
 import android.util.Log;
+
+import org.apache.james.mime4j.decoder.Base64InputStream;
+//import android.util.Base64;
+//import android.util.Base64InputStream;
 
 import java.io.ByteArrayOutputStream;
 import java.io.IOException;
@@ -66,7 +69,22 @@ public class MimeUtility {
         if (s == null) {
             return null;
         }
-        return DecoderUtil.decodeEncodedWords(s);
+        /**
+         * Block old one for new one
+         * Block Begin
+         *
+         * @author shinwook
+        * @date 2011.02.10.
+         */
+        // return DecoderUtil.decodeEncodedWords(s);
+        // Block end
+        /**
+         * Using new decoder
+         *
+        * @author shinwook
+        * @date 2011.02.10.
+         */
+        return DecoderUtil.decodeGeneric(s);
     }
 
     public static String unfoldAndDecode(String s) {
@@ -284,7 +302,15 @@ public class MimeUtility {
                      * No encoding, so use us-ascii, which is the standard.
                      */
                     if (charset == null) {
-                        charset = "ASCII";
+                        /**
+                         * Block out this line
+                         * for ASCII string, it doesn't matter wheather using charset as "EUC-KR"
+                         *
+                        * @author shinwook
+                        * @date 2011.02.10.
+                         */
+                        // charset = "ASCII";
+                        charset = "EUC-KR";
                     }
                     /*
                      * Convert and return as new String
@@ -360,7 +386,7 @@ public class MimeUtility {
                 in = new QuotedPrintableInputStream(in);
             }
             else if ("base64".equalsIgnoreCase(contentTransferEncoding)) {
-                in = new Base64InputStream(in);
+                in = new Base64InputStream(in);//, Base64.DEFAULT
             }
         }
 
