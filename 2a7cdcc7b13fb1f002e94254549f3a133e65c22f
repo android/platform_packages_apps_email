@@ -1,0 +1,8 @@
+Change-Id: I3424c666b8315a73a07509346a0df73940579d42
+Code-Review+2: Andy Stadler <stadler@android.com>
+Verified+1: Andy Stadler <stadler@android.com>
+Submitted-by: Andy Stadler <stadler@android.com>
+Submitted-at: Mon, 18 Jan 2010 12:23:08 -0700
+Reviewed-on: https://review.source.android.com/12804
+Project: platform/packages/apps/Email
+Branch: refs/heads/eclair

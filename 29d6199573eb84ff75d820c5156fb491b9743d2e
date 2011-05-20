@@ -1,0 +1,8 @@
+Change-Id: I29d6199573eb84ff75d820c5156fb491b9743d2e
+Code-Review+2: Jean-Baptiste Queru <jbq@google.com>
+Verified+1: Jean-Baptiste Queru <jbq@google.com>
+Submitted-by: Jean-Baptiste Queru <jbq@google.com>
+Submitted-at: Wed, 18 Mar 2009 13:56:37 -0700
+Reviewed-on: https://review.source.android.com/9185
+Project: platform/packages/apps/Email
+Branch: refs/heads/master
