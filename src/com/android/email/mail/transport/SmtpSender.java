@@ -31,7 +31,9 @@ import android.util.Log;
 import android.util.Base64;
 
 import java.io.IOException;
+import java.lang.StringBuilder;
 import java.net.InetAddress;
+import java.net.Inet6Address;
 import java.net.URI;
 import java.net.URISyntaxException;
 
@@ -123,7 +125,18 @@ public class SmtpSender extends Sender {
             // Try to get local address in the X.X.X.X format.
             InetAddress localAddress = mTransport.getLocalAddress();
             if (localAddress != null) {
-                localHost = localAddress.getHostAddress();
+                /*
+                 * Address Literal
+                 * formatted in accordance to RFC2821 Sec. 4.1.3
+                 */
+                StringBuilder sb = new StringBuilder();
+                sb.append('[');
+                if (localAddress instanceof Inet6Address) {
+                    sb.append("IPv6:");
+                }
+                sb.append(localAddress.getHostAddress());
+                sb.append(']');
+                localHost = sb.toString();
             }
             String result = executeSimpleCommand("EHLO " + localHost);
 
