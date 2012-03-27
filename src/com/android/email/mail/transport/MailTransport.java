@@ -165,13 +165,12 @@ public class MailTransport implements Transport {
         }
 
         try {
-            SocketAddress socketAddress = new InetSocketAddress(getHost(), getPort());
             if (canTrySslSecurity()) {
-                mSocket = SSLUtils.getSSLSocketFactory(canTrustAllCertificates()).createSocket();
+                mSocket = SSLUtils.getSSLSocketFactory(canTrustAllCertificates()).createSocket(getHost(), getPort());
             } else {
-                mSocket = new Socket();
+                mSocket = new Socket(getHost(), getPort());
             }
-            mSocket.connect(socketAddress, SOCKET_CONNECT_TIMEOUT);
+            mSocket.setSoTimeout(SOCKET_CONNECT_TIMEOUT);
             // After the socket connects to an SSL server, confirm that the hostname is as expected
             if (canTrySslSecurity() && !canTrustAllCertificates()) {
                 verifyHostname(mSocket, getHost());
