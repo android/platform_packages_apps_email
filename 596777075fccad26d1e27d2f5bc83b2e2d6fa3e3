@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "AAAFUX///10\u003d",
+        "filename": "src/com/android/email/mail/transport/MailTransport.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 169,
+      "author": {
+        "id": 1000660
+      },
+      "writtenOn": "2012-05-06T23:46:08Z",
+      "side": 1,
+      "message": "Please wrap to 100 columns",
+      "revId": "596777075fccad26d1e27d2f5bc83b2e2d6fa3e3",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    }
+  ]
+}
