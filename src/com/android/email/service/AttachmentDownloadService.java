@@ -416,12 +416,17 @@ public class AttachmentDownloadService extends Service implements Runnable {
          * have failed silently (the connection dropped, for example)
          */
         private void onWatchdogAlarm() {
-            // If our service instance is gone, just leave (but cancel alarm first!)
+            // If our service instance is gone, just leave (alarm will go away on its own)
             if (mStop) {
-                cancelWatchdogAlarm();
                 return;
             }
             long now = System.currentTimeMillis();
+
+            // schedule the next watchdog alarm
+            mAlarmManager.set(AlarmManager.RTC_WAKEUP,
+                    System.currentTimeMillis() + WATCHDOG_CHECK_INTERVAL,
+                    mWatchdogPendingIntent);
+
             for (DownloadRequest req: mDownloadsInProgress.values()) {
                 // Check how long it's been since receiving a callback
                 long timeSinceCallback = now - req.lastCallbackTime;
@@ -493,9 +498,9 @@ public class AttachmentDownloadService extends Service implements Runnable {
             if (mWatchdogPendingIntent == null) {
                 createWatchdogPendingIntent(mContext);
             }
-            // Set the alarm
-            mAlarmManager.setRepeating(AlarmManager.RTC_WAKEUP,
-                    System.currentTimeMillis() + WATCHDOG_CHECK_INTERVAL, WATCHDOG_CHECK_INTERVAL,
+            // Set the alarm for one shot
+            mAlarmManager.set(AlarmManager.RTC_WAKEUP,
+                    System.currentTimeMillis() + WATCHDOG_CHECK_INTERVAL,
                     mWatchdogPendingIntent);
         }
 
