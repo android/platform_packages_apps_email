@@ -693,6 +693,8 @@ as <xliff:g id="filename">%s</xliff:g>.</string>
     <string name="account_setup_exchange_headline">Server settings</string>
     <!-- On "Exchange" setup screen, the name of the server -->
     <string name="account_setup_exchange_server_label">Server</string>
+    <!-- On "Exchange" setup screen, the server port -->
+    <string name="account_setup_exchange_port_label">Port</string>
     <!-- On "Exchange" setup screen, the domain\\username -->
     <string name="account_setup_exchange_username_label">Domain\\Username</string>
     <!-- On "Exchange" setup screen, the use-SSL checkbox label -->

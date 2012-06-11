@@ -61,6 +61,19 @@
         android:layout_height="wrap_content"
         android:layout_width="match_parent"
         android:contentDescription="@string/account_setup_exchange_server_label" />
+    <TextView
+        android:text="@string/account_setup_exchange_port_label"
+        android:layout_height="wrap_content"
+        android:layout_width="match_parent"
+        android:textAppearance="?android:attr/textAppearanceSmall"
+        android:textColor="?android:attr/textColorPrimary" />
+    <EditText
+        android:id="@+id/account_port"
+        android:layout_height="wrap_content"
+        android:layout_width="match_parent"
+        android:contentDescription="@string/account_setup_exchange_port_label"
+        android:inputType="number"
+        android:imeOptions="actionDone" />
     <CheckBox
         android:id="@+id/account_ssl"
         android:layout_height="wrap_content"

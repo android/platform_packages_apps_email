@@ -24,6 +24,7 @@ import android.os.Bundle;
 import android.os.RemoteException;
 import android.text.Editable;
 import android.text.TextWatcher;
+import android.text.method.DigitsKeyListener;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -66,6 +67,7 @@ public class AccountSetupExchangeFragment extends AccountServerBaseFragment
     private EditText mUsernameView;
     private EditText mPasswordView;
     private EditText mServerView;
+    private EditText mPortView;
     private CheckBox mSslSecurityView;
     private CheckBox mTrustCertificatesView;
     private CertificateSelector mClientCertificateSelector;
@@ -109,6 +111,7 @@ public class AccountSetupExchangeFragment extends AccountServerBaseFragment
         mUsernameView = UiUtilities.getView(view, R.id.account_username);
         mPasswordView = UiUtilities.getView(view, R.id.account_password);
         mServerView = UiUtilities.getView(view, R.id.account_server);
+        mPortView = UiUtilities.getView(view, R.id.account_port);
         mSslSecurityView = UiUtilities.getView(view, R.id.account_ssl);
         mSslSecurityView.setOnCheckedChangeListener(this);
         mTrustCertificatesView = UiUtilities.getView(view, R.id.account_trust_certificates);
@@ -132,8 +135,12 @@ public class AccountSetupExchangeFragment extends AccountServerBaseFragment
         mUsernameView.addTextChangedListener(validationTextWatcher);
         mPasswordView.addTextChangedListener(validationTextWatcher);
         mServerView.addTextChangedListener(validationTextWatcher);
+        mPortView.addTextChangedListener(validationTextWatcher);
 
-        EditText lastView = mServerView;
+        // Only allow digits in the port field.
+        mPortView.setKeyListener(DigitsKeyListener.getInstance("0123456789"));
+
+        EditText lastView = mPortView;
         lastView.setOnEditorActionListener(mDismissImeOnDoneListener);
 
         String deviceId = "";
@@ -295,6 +302,12 @@ public class AccountSetupExchangeFragment extends AccountServerBaseFragment
         }
         onUseSslChanged(ssl);
 
+        int port = hostAuth.mPort;
+        if (port == HostAuth.PORT_UNKNOWN) {
+            port = ssl ? 443 : 80;
+        }
+        mPortView.setText(Integer.toString(port));
+
         mLoadedRecvAuth = hostAuth;
         mLoaded = true;
         return validateFields();
@@ -313,7 +326,8 @@ public class AccountSetupExchangeFragment extends AccountServerBaseFragment
         if (!mLoaded) return false;
         boolean enabled = usernameFieldValid(mUsernameView)
                 && Utility.isTextViewNotEmpty(mPasswordView)
-                && Utility.isServerNameValid(mServerView);
+                && Utility.isServerNameValid(mServerView)
+                && Utility.isPortFieldValid(mPortView);
         enableNextButton(enabled);
 
         // Warn (but don't prevent) if password has leading/trailing spaces
@@ -335,6 +349,20 @@ public class AccountSetupExchangeFragment extends AccountServerBaseFragment
         UiUtilities.setVisibilitySafe(getView(), R.id.account_trust_certificates_divider, mode);
         mClientCertificateSelector.setVisibility(mode);
         UiUtilities.setVisibilitySafe(getView(), R.id.client_certificate_divider, mode);
+
+        int port = 443; // default to HTTPS
+        try {
+            port = Integer.parseInt(mPortView.getText().toString().trim());
+        } catch (NumberFormatException e) {
+            port = useSsl ? 443 : 80;
+        }
+        if (useSsl && port == 80) {
+            port = 443;
+        }
+        if (!useSsl && port == 443) {
+            port = 80;
+        }
+        mPortView.setText(Integer.toString(port));
     }
 
     @Override
@@ -418,7 +446,14 @@ public class AccountSetupExchangeFragment extends AccountServerBaseFragment
         String certAlias = mClientCertificateSelector.getCertificate();
         String serverAddress = mServerView.getText().toString().trim();
 
-        int port = mSslSecurityView.isChecked() ? 443 : 80;
+        int port;
+        try {
+            port = Integer.parseInt(mPortView.getText().toString().trim());
+        } catch (NumberFormatException e) {
+            port = (0 != (flags & HostAuth.FLAG_SSL)) ? 443 : 80;
+            Log.d(Logging.LOG_TAG, "Non-integer server port; using '" + port + "'");
+        }
+
         HostAuth sendAuth = account.getOrCreateHostAuthSend(mContext);
         sendAuth.setLogin(userName, userPassword);
         sendAuth.setConnection(mBaseScheme, serverAddress, port, flags, certAlias);
