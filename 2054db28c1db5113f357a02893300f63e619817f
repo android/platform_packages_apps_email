@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "Nop2JdNc",
+        "filename": "res/values-sv/strings.xml",
+        "patchSetId": 3
+      },
+      "lineNbr": 34,
+      "author": {
+        "id": 1018026
+      },
+      "writtenOn": "2013-01-04T14:50:35Z",
+      "side": 1,
+      "message": "Please make sure the source of translated string is correct, otherwise it will get overwritten at next run.\n\nhttps://tc.corp.google.com/btviewer/edittranslation?project\u003dAndroidEmail\u0026msgId\u003d669174181042344116\u0026language\u003dsv",
+      "revId": "2054db28c1db5113f357a02893300f63e619817f",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    }
+  ]
+}
