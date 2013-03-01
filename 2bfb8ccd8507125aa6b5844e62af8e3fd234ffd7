@@ -1,0 +1,7 @@
+Verified+1: Deckard Autoverifier <deckard@android.com>
+Code-Review+2: Paul Westbrook <pwestbro@android.com>
+Submitted-by: Elliott Hughes <enh@google.com>
+Submitted-at: Fri, 01 Mar 2013 23:51:44 +0000
+Reviewed-on: https://android-review.googlesource.com/47592
+Project: platform/packages/apps/Email
+Branch: refs/heads/master
