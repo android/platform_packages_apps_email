@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "Q5n9Pi2w",
+        "filename": "src/com/android/email/mail/transport/MailTransport.java",
+        "patchSetId": 3
+      },
+      "lineNbr": 168,
+      "author": {
+        "id": 1003723
+      },
+      "writtenOn": "2013-03-05T22:55:53Z",
+      "side": 1,
+      "message": "i wonder if there are similar issues with \"new InetSocketAddress\" in emailcommon/src/com/android/emailcommon/utility/SSLSocketFactory.java",
+      "revId": "a4370531ed2fb5760bc7045e83c759c97e07b0a4",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    }
+  ]
+}
