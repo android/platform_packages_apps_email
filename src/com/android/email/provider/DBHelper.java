@@ -963,6 +963,7 @@ public final class DBHelper {
             args[0] = Long.toString(c.getLong(0 /*RECORD_ID*/));
             db.update(Account.TABLE_NAME, cv, EmailContent.RECORD_ID + "=?", args);
         }
+        c.close();
     }
 
     /** Upgrades the database from v17 to v18 */
