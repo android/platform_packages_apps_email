@@ -16,6 +16,24 @@
       "revId": "a4370531ed2fb5760bc7045e83c759c97e07b0a4",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "TBabajDE",
+        "filename": "src/com/android/email/mail/transport/MailTransport.java",
+        "patchSetId": 3
+      },
+      "lineNbr": 168,
+      "author": {
+        "id": 1018017
+      },
+      "writtenOn": "2013-04-05T23:24:22Z",
+      "side": 1,
+      "message": "There are similar issues in SSLSocketFactory, but our calling pattern doesn\u0027t exercise these paths.  I will cleanup SSLSocketFactory",
+      "parentUuid": "Q5n9Pi2w",
+      "revId": "a4370531ed2fb5760bc7045e83c759c97e07b0a4",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
     }
   ]
 }
