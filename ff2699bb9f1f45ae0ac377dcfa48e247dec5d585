@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "TBaZjrB0",
+        "filename": "src/com/android/email/activity/setup/AccountServerBaseFragment.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 412,
+      "author": {
+        "id": 1018017
+      },
+      "writtenOn": "2013-04-06T09:40:38Z",
+      "side": 1,
+      "message": "Catching an ignoring runtime exceptions is bad practice.  A better fix would be to make sure that setupdata has been initialized.\n\nHow did the app get in this state?  Is this a new instance of the activity, where the state hasn\u0027t been initialized?",
+      "revId": "ff2699bb9f1f45ae0ac377dcfa48e247dec5d585",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    }
+  ]
+}
