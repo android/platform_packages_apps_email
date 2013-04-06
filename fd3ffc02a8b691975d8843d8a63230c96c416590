@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "TBWZH5IU",
+        "filename": "src/com/android/email/activity/setup/AccountSetupExchange.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 156,
+      "author": {
+        "id": 1018017
+      },
+      "writtenOn": "2013-04-06T09:42:44Z",
+      "side": 1,
+      "message": "Catching and ignoring runtime exceptions is bad practice.  What was null?  Why wasn\u0027t it initialized?  Is this a new activity instance, where the state hadn\u0027t been setup?",
+      "revId": "fd3ffc02a8b691975d8843d8a63230c96c416590",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    }
+  ]
+}
