@@ -17,6 +17,7 @@
 package com.android.email.mail.store.imap;
 
 import com.android.email.mail.Store;
+import java.util.Locale;
 
 public final class ImapConstants {
     private ImapConstants() {}
@@ -24,7 +25,7 @@ public final class ImapConstants {
     public static final String FETCH_FIELD_BODY_PEEK_BARE = "BODY.PEEK";
     public static final String FETCH_FIELD_BODY_PEEK = FETCH_FIELD_BODY_PEEK_BARE + "[]";
     public static final String FETCH_FIELD_BODY_PEEK_SANE
-            = String.format("BODY.PEEK[]<0.%d>", Store.FETCH_BODY_SANE_SUGGESTED_SIZE);
+            = String.format(Locale.ENGLISH, "BODY.PEEK[]<0.%d>", Store.FETCH_BODY_SANE_SUGGESTED_SIZE);
     public static final String FETCH_FIELD_HEADERS =
             "BODY.PEEK[HEADER.FIELDS (date subject from content-type to cc message-id)]";
 

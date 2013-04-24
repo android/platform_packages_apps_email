@@ -60,6 +60,7 @@ import java.util.Date;
 import java.util.HashMap;
 import java.util.LinkedHashSet;
 import java.util.List;
+import java.util.Locale;
 
 class ImapFolder extends Folder {
     private final static Flag[] PERMANENT_FLAGS =
@@ -475,10 +476,10 @@ class ImapFolder extends Folder {
     public Message[] getMessages(int start, int end, MessageRetrievalListener listener)
             throws MessagingException {
         if (start < 1 || end < 1 || end < start) {
-            throw new MessagingException(String.format("Invalid range: %d %d", start, end));
+            throw new MessagingException(String.format(Locale.ENGLISH, "Invalid range: %d %d", start, end));
         }
         return getMessagesInternal(
-                searchForUids(String.format("%d:%d NOT DELETED", start, end)), listener);
+                searchForUids(String.format(Locale.ENGLISH, "%d:%d NOT DELETED", start, end)), listener);
     }
 
     @Override
@@ -861,7 +862,7 @@ class ImapFolder extends Folder {
             if ((size > 0)
                     && (MimeUtility.getHeaderParameter(contentDisposition.toString(), "size")
                             == null)) {
-                contentDisposition.append(String.format(";\n size=%d", size));
+                contentDisposition.append(String.format(Locale.ENGLISH, ";\n size=%d", size));
             }
 
             if (contentDisposition.length() > 0) {
@@ -937,7 +938,7 @@ class ImapFolder extends Folder {
                 }
 
                 mConnection.sendCommand(
-                        String.format(ImapConstants.APPEND + " \"%s\" (%s) {%d}",
+                        String.format(Locale.ENGLISH, ImapConstants.APPEND + " \"%s\" (%s) {%d}",
                                 ImapStore.encodeFolderName(mName, mStore.mPathPrefix),
                                 flagList,
                                 out.getCount()), false);
