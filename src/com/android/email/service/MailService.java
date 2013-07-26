@@ -340,7 +340,7 @@ public class MailService extends Service {
 
                 // select next account to sync
                 if ((prevSyncTime == 0) || (nextSyncTime < timeNow)) {  // never checked, or overdue
-                    nextCheckTime = 0;
+                    nextCheckTime = SystemClock.elapsedRealtime() + 1000;
                     nextAccount = report;
                 } else if (nextSyncTime < nextCheckTime) {              // next to be checked
                     nextCheckTime = nextSyncTime;
