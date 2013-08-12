@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "1807b0cc_6693a053",
+        "filename": "src/com/android/email/service/MailService.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 343,
+      "author": {
+        "id": 1018017
+      },
+      "writtenOn": "2013-08-12T20:46:15Z",
+      "side": 1,
+      "message": "The documentation for AlarmManager#set() states:\n\nIf the time occurs in the past, the alarm will be triggered immediately. If there is already an alarm for this Intent scheduled (with the equality of two intents being defined by filterEquals(Intent)), then it will be removed and replaced by this one.\n\nhttp://developer.android.com/reference/android/app/AlarmManager.html#set(int, long, android.app.PendingIntent)\n\n\nThis change shouldn\u0027t be necessary",
+      "revId": "86a355aaf35df80383594ae0cabacde1e0a04a1f",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    }
+  ]
+}
