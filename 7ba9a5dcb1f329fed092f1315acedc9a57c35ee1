@@ -45,6 +45,24 @@
       "revId": "7ba9a5dcb1f329fed092f1315acedc9a57c35ee1",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "19f8a337_43d5fa83",
+        "filename": "emailcommon/src/com/android/emailcommon/utility/SSLSocketFactory.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 379,
+      "author": {
+        "id": 1012083
+      },
+      "writtenOn": "2014-03-27T23:57:56Z",
+      "side": 1,
+      "message": "Calling setHostname just enable SNI for ssl handling, so no calling to this method will have the same effect that the current source: when user try to register through a exchange account under a server that implement SNI, the connection will fail due a hostname mismatch. So use OS build checks looks a good think for me.\n\nI don\u0027t have visibility over other apps other than Email and Exchage, so don\u0027t know how Gmail or other Google projects link to emailcommon, so my primary concern here is about removing the private SSLSocketFactory constructor (isn\u0027t called from aosp code, but don\u0027t know it is called from gapps).\n\nMaybe a better alternative is to use reflect to call setHostname and left the API level untoched. What do think about?",
+      "parentUuid": "39fba735_b26f68cd",
+      "revId": "7ba9a5dcb1f329fed092f1315acedc9a57c35ee1",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
     }
   ]
 }
