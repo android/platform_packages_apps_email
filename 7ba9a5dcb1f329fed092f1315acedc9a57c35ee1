@@ -1,0 +1,50 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "993ad3c3_1193ccd1",
+        "filename": "emailcommon/Android.mk",
+        "patchSetId": 1
+      },
+      "lineNbr": 45,
+      "author": {
+        "id": 1017618
+      },
+      "writtenOn": "2014-03-27T23:27:38Z",
+      "side": 1,
+      "message": "I would be much happier if you just changed this to 19.",
+      "range": {
+        "startLine": 45,
+        "startChar": 21,
+        "endLine": 45,
+        "endChar": 28
+      },
+      "revId": "7ba9a5dcb1f329fed092f1315acedc9a57c35ee1",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "39fba735_b26f68cd",
+        "filename": "emailcommon/src/com/android/emailcommon/utility/SSLSocketFactory.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 379,
+      "author": {
+        "id": 1017618
+      },
+      "writtenOn": "2014-03-27T23:27:38Z",
+      "side": 1,
+      "message": "Will this code still function as before if you wrap this line in a check for Build.VERSION_CODES.JELLYBEAN_MR1 ?\n\nThis package (emailcommon) is built into various projects, including Gmail, which supports API 14 and up.",
+      "range": {
+        "startLine": 379,
+        "startChar": 22,
+        "endLine": 379,
+        "endChar": 33
+      },
+      "revId": "7ba9a5dcb1f329fed092f1315acedc9a57c35ee1",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    }
+  ]
+}
