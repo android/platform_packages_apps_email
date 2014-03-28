@@ -1,0 +1,72 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "b935d7d3_598174a1",
+        "filename": "emailcommon/src/com/android/emailcommon/utility/SSLSocketFactory.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 262,
+      "author": {
+        "id": 1017618
+      },
+      "writtenOn": "2014-03-28T16:43:18Z",
+      "side": 1,
+      "message": "@TargetApi(17) is safer",
+      "revId": "44960aed301dc15f9eb0c2989a812ddaab1aca21",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "7958bf41_0b1f2145",
+        "filename": "emailcommon/src/com/android/emailcommon/utility/SSLSocketFactory.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 307,
+      "author": {
+        "id": 1017618
+      },
+      "writtenOn": "2014-03-28T16:43:18Z",
+      "side": 1,
+      "message": "We have Utils.isRunningJBMR1OrLater() so we might as well use it.",
+      "revId": "44960aed301dc15f9eb0c2989a812ddaab1aca21",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "f91d8f5d_257af146",
+        "filename": "emailcommon/src/com/android/emailcommon/utility/SSLSocketFactory.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 363,
+      "author": {
+        "id": 1017618
+      },
+      "writtenOn": "2014-03-28T16:43:18Z",
+      "side": 1,
+      "message": "See above",
+      "revId": "44960aed301dc15f9eb0c2989a812ddaab1aca21",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "7958bf41_cb20e981",
+        "filename": "emailcommon/src/com/android/emailcommon/utility/SSLSocketFactory.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 384,
+      "author": {
+        "id": 1017618
+      },
+      "writtenOn": "2014-03-28T16:43:18Z",
+      "side": 1,
+      "message": "See above",
+      "revId": "44960aed301dc15f9eb0c2989a812ddaab1aca21",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    }
+  ]
+}
