@@ -63,6 +63,24 @@
       "revId": "7ba9a5dcb1f329fed092f1315acedc9a57c35ee1",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "993ad3c3_1495fa23",
+        "filename": "emailcommon/src/com/android/emailcommon/utility/SSLSocketFactory.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 379,
+      "author": {
+        "id": 1017618
+      },
+      "writtenOn": "2014-03-28T00:17:48Z",
+      "side": 1,
+      "message": "You can change the LOCAL_SDK_VERSION to 19 - that\u0027s safe.\n\nAnd your change builds fine in our internal branches, so I\u0027m not worried about that.  I would just wrap this one line in a Build.VERSION.SDK_INT check, and that should be fine.",
+      "parentUuid": "19f8a337_43d5fa83",
+      "revId": "7ba9a5dcb1f329fed092f1315acedc9a57c35ee1",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
     }
   ]
 }
