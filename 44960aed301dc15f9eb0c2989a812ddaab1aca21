@@ -19,6 +19,24 @@
     },
     {
       "key": {
+        "uuid": "99ec937b_6a5b2b72",
+        "filename": "emailcommon/src/com/android/emailcommon/utility/SSLSocketFactory.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 262,
+      "author": {
+        "id": 1012083
+      },
+      "writtenOn": "2014-03-28T20:00:12Z",
+      "side": 1,
+      "message": "Yes, safer.",
+      "parentUuid": "b935d7d3_598174a1",
+      "revId": "44960aed301dc15f9eb0c2989a812ddaab1aca21",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "7958bf41_0b1f2145",
         "filename": "emailcommon/src/com/android/emailcommon/utility/SSLSocketFactory.java",
         "patchSetId": 2
@@ -30,6 +48,24 @@
       "writtenOn": "2014-03-28T16:43:18Z",
       "side": 1,
       "message": "We have Utils.isRunningJBMR1OrLater() so we might as well use it.",
+      "revId": "44960aed301dc15f9eb0c2989a812ddaab1aca21",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "99ec937b_4a60671a",
+        "filename": "emailcommon/src/com/android/emailcommon/utility/SSLSocketFactory.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 307,
+      "author": {
+        "id": 1012083
+      },
+      "writtenOn": "2014-03-28T20:00:12Z",
+      "side": 1,
+      "message": "Sure? I\u0027m not able to find it in the public master branch, nor in Email neither UnifiedEmail.\nThis last have an Utils class, but it doesn\u0027t have a isRunningJBMR1OrLater utility method. Only isRunningJellybeanOrLater() and isRunningKitkatOrLater(). In fact in https://android.googlesource.com/platform/packages/apps/UnifiedEmail/+/master/src/com/android/mail/browse/ConversationViewHeader.java#119 uses a Build.VERSION_CODES.JELLY_BEAN_MR1 check.\n\nShould i add a new method in UnifiedEmail\u0027s Utils class?",
+      "parentUuid": "7958bf41_0b1f2145",
       "revId": "44960aed301dc15f9eb0c2989a812ddaab1aca21",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
       "unresolved": false
