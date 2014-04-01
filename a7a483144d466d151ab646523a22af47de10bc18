@@ -22,6 +22,30 @@
       "revId": "a7a483144d466d151ab646523a22af47de10bc18",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "39c56724_74b9c0cb",
+        "filename": "emailcommon/src/com/android/emailcommon/utility/SSLSocketFactory.java",
+        "patchSetId": 3
+      },
+      "lineNbr": 380,
+      "author": {
+        "id": 1017618
+      },
+      "writtenOn": "2014-04-01T20:32:26Z",
+      "side": 1,
+      "message": "On second thought, maybe just store the InetAddress in a local variable, but keep the close() at the top.",
+      "parentUuid": "d9a44b89_83699e53",
+      "range": {
+        "startLine": 380,
+        "startChar": 21,
+        "endLine": 380,
+        "endChar": 35
+      },
+      "revId": "a7a483144d466d151ab646523a22af47de10bc18",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
     }
   ]
 }
