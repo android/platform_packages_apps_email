@@ -46,6 +46,24 @@
       "revId": "a7a483144d466d151ab646523a22af47de10bc18",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "f9a74f88_b87721e4",
+        "filename": "emailcommon/src/com/android/emailcommon/utility/SSLSocketFactory.java",
+        "patchSetId": 3
+      },
+      "lineNbr": 380,
+      "author": {
+        "id": 1036883
+      },
+      "writtenOn": "2014-04-01T20:35:26Z",
+      "side": 1,
+      "message": "I\u0027d look at what the other version of socketfactory.createSocket does, and mirror whatever ordering that does, or better, understand what impact the ordering has. No idea if or how the ordering matters.",
+      "parentUuid": "39c56724_74b9c0cb",
+      "revId": "a7a483144d466d151ab646523a22af47de10bc18",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
     }
   ]
 }
