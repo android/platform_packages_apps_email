@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "d9a44b89_83699e53",
+        "filename": "emailcommon/src/com/android/emailcommon/utility/SSLSocketFactory.java",
+        "patchSetId": 3
+      },
+      "lineNbr": 380,
+      "author": {
+        "id": 1017618
+      },
+      "writtenOn": "2014-04-01T20:26:24Z",
+      "side": 1,
+      "message": "We\u0027re getting a crash.  The implementation of Socket is such that calling socket.close() forces socket.getInetAddress() to return null.  Moving the socket.close() call after the last use of socket should work.\n\npublic synchronized void close() throws IOException {\n    ...\n    isConnected \u003d false;\n    ...\n}\n\npublic InetAddress getInetAddress() {\n    if (!isConnected()) {\n        return null;\n    }\n    return impl.getInetAddress();\n}",
+      "range": {
+        "startLine": 380,
+        "startChar": 21,
+        "endLine": 380,
+        "endChar": 35
+      },
+      "revId": "a7a483144d466d151ab646523a22af47de10bc18",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    }
+  ]
+}
