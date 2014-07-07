@@ -699,7 +699,7 @@ public class SecurityPolicy {
                     " secured account(s)");
             while (c.moveToNext()) {
                 long accountId = c.getLong(EmailContent.ID_PROJECTION_COLUMN);
-                Uri uri = EmailProvider.uiUri("uiaccountdata", accountId);
+                Uri uri = EmailProvider.uiUri("uiaccount", accountId);
                 cr.delete(uri, null, null);
             }
         } finally {
