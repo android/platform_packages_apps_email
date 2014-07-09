@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "b9015cf5_64ffe0cd",
+        "filename": "src/com/android/email/SecurityPolicy.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 702,
+      "author": {
+        "id": 1050539
+      },
+      "writtenOn": "2014-07-09T18:48:45Z",
+      "side": 1,
+      "message": "We don\u0027t want to delete the whole account in this situation. What we should be doing is setting the security hold on the account, which should block all sync actions and prompt the user to activate the device policy. You can do this by using setAccountHoldFlag in this class.",
+      "revId": "e57c84cc58c99619bb3f77192dd747e50a65bca4",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    }
+  ]
+}
