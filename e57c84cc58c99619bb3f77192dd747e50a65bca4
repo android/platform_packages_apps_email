@@ -16,6 +16,24 @@
       "revId": "e57c84cc58c99619bb3f77192dd747e50a65bca4",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "598dc0f1_0086e6c5",
+        "filename": "src/com/android/email/SecurityPolicy.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 702,
+      "author": {
+        "id": 1050539
+      },
+      "writtenOn": "2014-07-10T18:19:44Z",
+      "side": 1,
+      "message": "I dug into this a bit more and a similar change has already been made internally. I\u0027m not entirely sure why it hasn\u0027t made it out to AOSP yet.",
+      "parentUuid": "b9015cf5_64ffe0cd",
+      "revId": "e57c84cc58c99619bb3f77192dd747e50a65bca4",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
     }
   ]
 }
