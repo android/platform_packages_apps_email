@@ -34,6 +34,24 @@
       "revId": "e57c84cc58c99619bb3f77192dd747e50a65bca4",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "f92594a9_f3acc824",
+        "filename": "src/com/android/email/SecurityPolicy.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 702,
+      "author": {
+        "id": 1023057
+      },
+      "writtenOn": "2014-07-10T18:35:25Z",
+      "side": 1,
+      "message": "I vaguely remember older versions of aosp removing all the accounts but I could be wrong. In the interim aosp should get the internal patch out as it\u0027s a pretty serious security hole. A user can continue using the account potentially indefinitely with no security policies being enforced. I\u0027ll update my patch in my fork to set the security hold instead of removing the account.",
+      "parentUuid": "598dc0f1_0086e6c5",
+      "revId": "e57c84cc58c99619bb3f77192dd747e50a65bca4",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
     }
   ]
 }
