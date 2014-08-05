@@ -737,6 +737,26 @@ public class ImapService extends Service {
         // 14. Clean up and report results
         remoteFolder.close(false);
     }
+    /**
+     * Find messages in the updated table that need to be written back to server.
+     * This is called from Intent methods to support Bluetooth MAP email sharing functionality.
+     * Handles:
+     *   Read/Unread
+     *   Flagged
+     *   Append (upload)
+     *   Move To Trash
+     *   Empty trash
+     * TODO:
+     *   Move
+     *
+     * @param account the account to scan for pending actions
+     * @throws MessagingException
+     */
+    public static void synchronizePendingActions(Context context, Account account,
+            Store remoteStore, boolean manualSync)
+            throws MessagingException {
+        processPendingActionsSynchronous(context, account, remoteStore, manualSync);
+    }
 
     /**
      * Find messages in the updated table that need to be written back to server.

@@ -472,6 +472,42 @@
                     android:host="36245" />
             </intent-filter>
         </receiver>
+        <receiver
+            android:name=".service.BluetoothEmailBroadcastReceiver"
+            android:enabled="true"
+            android:permission="com.android.email.permission.ACCESS_PROVIDER">
+            <intent-filter>
+                <action android:name="android.intent.action.BOOT_COMPLETED" />
+                <action android:name="android.intent.action.DEVICE_STORAGE_LOW" />
+                <action android:name="android.intent.action.DEVICE_STORAGE_OK" />
+                <action android:name="android.intent.action.LOCALE_CHANGED"/>
+                <action android:name="android.accounts.LOGIN_ACCOUNTS_CHANGED" />
+                <action android:name="com.android.email.intent.action.MAIL_SERVICE_WAKEUP" />
+                <action
+                    android:name="com.android.email.intent.action.MAIL_SERVICE_DELETE_MESSAGE" />
+                <action
+                    android:name="com.android.email.intent.action.MAIL_SERVICE_MOVE_MESSAGE" />
+                <action
+                    android:name="com.android.email.intent.action.MAIL_SERVICE_MESSAGE_READ" />
+                <action
+                    android:name="com.android.email.intent.action.MAIL_SERVICE_SEND_PENDING" />
+            </intent-filter>
+            <!-- To handle new message notifications -->
+            <intent-filter>
+                <action android:name="com.android.mail.action.update_notification"
+                        android:priority="-10" />
+                <data android:mimeType="@string/application_mime_type" />
+            </intent-filter>
+            <!-- To handle secret code to activate the debug screen. -->
+            <intent-filter>
+                <action
+                    android:name="android.provider.Telephony.SECRET_CODE" />
+                <!-- "36245" = "email" -->
+                <data
+                    android:scheme="android_secret_code"
+                    android:host="36245" />
+            </intent-filter>
+        </receiver>
         <service
             android:name=".service.EmailBroadcastProcessorService" />
 
@@ -583,9 +619,37 @@
                     android:name="com.android.email.IMAP_INTENT" />
             </intent-filter>
         </service>
+        <service
+            android:name=".service.BluetoothImapService"
+            android:enabled="true"
+            android:permission="com.android.email.permission.ACCESS_PROVIDER"
+            >
+            <intent-filter>
+                <action
+                    android:name="com.android.email.IMAP_INTENT" />
+                <action
+                    android:name="com.android.email.intent.action.MAIL_SERVICE_DELETE_MESSAGE" />
+                <action
+                    android:name="com.android.email.intent.action.MAIL_SERVICE_MOVE_MESSAGE" />
+                <action
+                    android:name="com.android.email.intent.action.MAIL_SERVICE_MESSAGE_READ" />
+                <action
+                    android:name="com.android.email.intent.action.MAIL_SERVICE_SEND_PENDING" />
+            </intent-filter>
+        </service>
 
         <service
             android:name=".service.Pop3Service"
+            android:enabled="true"
+            android:permission="com.android.email.permission.ACCESS_PROVIDER"
+            >
+            <intent-filter>
+                <action
+                    android:name="com.android.email.POP3_INTENT" />
+            </intent-filter>
+        </service>
+        <service
+            android:name=".service.BluetoothPop3Service"
             android:enabled="true"
             android:permission="com.android.email.permission.ACCESS_PROVIDER"
             >
