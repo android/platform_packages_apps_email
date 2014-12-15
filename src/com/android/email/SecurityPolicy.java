@@ -714,6 +714,9 @@ public class SecurityPolicy {
                 long accountId = c.getLong(EmailContent.ID_PROJECTION_COLUMN);
                 Uri uri = EmailProvider.uiUri("uiaccount", accountId);
                 cr.delete(uri, null, null);
+
+                // Disallow the account to perform sync operations
+                setAccountHoldFlag(context, accountId, true);
             }
         } finally {
             c.close();
