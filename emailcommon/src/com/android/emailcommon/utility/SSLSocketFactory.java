@@ -33,6 +33,11 @@
 
 package com.android.emailcommon.utility;
 
+import android.annotation.TargetApi;
+import android.os.Build;
+
+import com.android.mail.utils.LogUtils;
+
 import org.apache.http.conn.scheme.HostNameResolver;
 import org.apache.http.conn.scheme.LayeredSocketFactory;
 import org.apache.http.conn.ssl.AllowAllHostnameVerifier;
@@ -49,7 +54,10 @@ import javax.net.ssl.SSLContext;
 import javax.net.ssl.SSLSocket;
 import javax.net.ssl.TrustManager;
 import javax.net.ssl.TrustManagerFactory;
+
 import java.io.IOException;
+import java.lang.reflect.InvocationTargetException;
+import java.lang.reflect.Method;
 import java.net.InetAddress;
 import java.net.InetSocketAddress;
 import java.net.Socket;
@@ -143,6 +151,9 @@ import java.security.UnrecoverableKeyException;
  */
 
 public class SSLSocketFactory implements LayeredSocketFactory {
+
+    private static final boolean LOG_ENABLED = false;
+    private static final String TAG = "Email.SslFactory";
 
     public static final String TLS   = "TLS";
     public static final String SSL   = "SSL";
@@ -323,6 +334,10 @@ public class SSLSocketFactory implements LayeredSocketFactory {
         sslsock.connect(remoteAddress, connTimeout);
 
         sslsock.setSoTimeout(soTimeout);
+
+        // Set Server Name Indication if is available for this socket
+        setSocketHostname(sslsock, host);
+
         try {
             hostnameVerifier.verify(host, sslsock);
             // verifyHostName() didn't blowup - good!
@@ -386,6 +401,10 @@ public class SSLSocketFactory implements LayeredSocketFactory {
               port,
               autoClose
         );
+
+        // Set Server Name Indication if is available for this socket
+        setSocketHostname(sslSocket, host);
+
         hostnameVerifier.verify(host, sslSocket);
         // verifyHostName() didn't blowup - good!
         return sslSocket;
@@ -400,6 +419,29 @@ public class SSLSocketFactory implements LayeredSocketFactory {
 
     public X509HostnameVerifier getHostnameVerifier() {
         return hostnameVerifier;
+    }
+
+    @TargetApi(Build.VERSION_CODES.JELLY_BEAN_MR1)
+    private void setSocketHostname(SSLSocket sslSocket, String hostname) {
+        // Socket#setHostname is only available since 4.2
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.JELLY_BEAN_MR1) {
+            boolean ret = false;
+            try {
+                Method method = sslSocket.getClass().getMethod("setHostname", String.class);
+                method.invoke(sslSocket, hostname);
+                ret = true;
+            } catch (NoSuchMethodException ex) {
+                // Ignore
+            } catch (InvocationTargetException ex) {
+                // Ignore
+            } catch (IllegalAccessException ex) {
+                // Ignore
+            }
+            if (!ret && LOG_ENABLED) {
+                LogUtils.i(TAG, "setHostname isn't available for this socket.");
+            }
+
+        }
     }
 
 }
