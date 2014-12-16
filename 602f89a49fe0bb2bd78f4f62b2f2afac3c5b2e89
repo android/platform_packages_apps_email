@@ -1,0 +1,84 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "e1ba449b_cd881db4",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 9,
+      "author": {
+        "id": 1018773
+      },
+      "writtenOn": "2014-12-16T21:05:31Z",
+      "side": 1,
+      "message": "underlying",
+      "range": {
+        "startLine": 9,
+        "startChar": 11,
+        "endLine": 9,
+        "endChar": 22
+      },
+      "revId": "602f89a49fe0bb2bd78f4f62b2f2afac3c5b2e89",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "01ccb852_2e7d27a1",
+        "filename": "emailcommon/src/com/android/emailcommon/utility/SSLSocketFactory.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 311,
+      "author": {
+        "id": 1018773
+      },
+      "writtenOn": "2014-12-16T21:05:31Z",
+      "side": 1,
+      "message": "Please invoke SSLSocket.startHandshake() here to ensure that exceptions thrown during the handshake do not get silenced and rethrown as SSLPeerUnverifiedException by the hostname verification code below. The latter is caused by HostnameVerifier code getting an invalid SSLSession when the handshake occurs and then throwing SSLPeerUnverifiedException.",
+      "revId": "602f89a49fe0bb2bd78f4f62b2f2afac3c5b2e89",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "01ccb852_ce810328",
+        "filename": "emailcommon/src/com/android/emailcommon/utility/SSLSocketFactory.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 370,
+      "author": {
+        "id": 1018773
+      },
+      "writtenOn": "2014-12-16T21:05:31Z",
+      "side": 1,
+      "message": "underlying",
+      "range": {
+        "startLine": 370,
+        "startChar": 52,
+        "endLine": 370,
+        "endChar": 63
+      },
+      "revId": "602f89a49fe0bb2bd78f4f62b2f2afac3c5b2e89",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "e1ba449b_edb08161",
+        "filename": "emailcommon/src/com/android/emailcommon/utility/SSLSocketFactory.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 373,
+      "author": {
+        "id": 1018773
+      },
+      "writtenOn": "2014-12-16T21:05:31Z",
+      "side": 1,
+      "message": "That\u0027s not what autoClose means. autoClose determines whether invoking Socket.close on the socket returned by this createSocket method will close the underlying socket (the one passed in as the \"socket\" argument to this createSocket method). The rest of the code needs to be fixed too, because it assumes that it needs to initiate a new connection. Instead, it must wrap the provided Socket into an SSLSocket.",
+      "revId": "602f89a49fe0bb2bd78f4f62b2f2afac3c5b2e89",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    }
+  ]
+}
