@@ -25,6 +25,23 @@
     },
     {
       "key": {
+        "uuid": "01ccb852_8eb9bbeb",
+        "filename": "emailcommon/src/com/android/emailcommon/utility/SSLSocketFactory.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 191,
+      "author": {
+        "id": 1018773
+      },
+      "writtenOn": "2014-12-16T21:07:26Z",
+      "side": 1,
+      "message": "This will blow up with ClassCastException because SSLContext.getSocketFactory is highly unlikely to return an instance of SSLCertificateSocketFactory. The proper way to obtain SSLCertificateSocketFactory is to use one of its getDefault methods.",
+      "revId": "602f89a49fe0bb2bd78f4f62b2f2afac3c5b2e89",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "01ccb852_2e7d27a1",
         "filename": "emailcommon/src/com/android/emailcommon/utility/SSLSocketFactory.java",
         "patchSetId": 1
