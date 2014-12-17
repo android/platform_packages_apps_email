@@ -338,6 +338,10 @@ public class SSLSocketFactory implements LayeredSocketFactory {
         // Set Server Name Indication if is available for this socket
         setSocketHostname(sslsock, host);
 
+        // Start handshake prior to hostname verification to ensure
+        // exceptions do not get silenced
+        sslsock.startHandshake();
+
         try {
             hostnameVerifier.verify(host, sslsock);
             // verifyHostName() didn't blowup - good!
@@ -404,6 +408,10 @@ public class SSLSocketFactory implements LayeredSocketFactory {
 
         // Set Server Name Indication if is available for this socket
         setSocketHostname(sslSocket, host);
+
+        // Start handshake prior to hostname verification to ensure
+        // exceptions do not get silenced
+        sslSocket.startHandshake();
 
         hostnameVerifier.verify(host, sslSocket);
         // verifyHostName() didn't blowup - good!
