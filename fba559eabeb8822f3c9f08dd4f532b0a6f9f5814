@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "a1dbec04_50312c8f",
+        "filename": "emailcommon/src/com/android/emailcommon/utility/SSLSocketFactory.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 342,
+      "author": {
+        "id": 1018773
+      },
+      "writtenOn": "2014-12-17T00:52:25Z",
+      "side": 1,
+      "message": "Suggestion: \"exceptions...\" -\u003e \"handshake exceptions do not get silenced by hostname verification.\" Just to make it clearer.",
+      "revId": "fba559eabeb8822f3c9f08dd4f532b0a6f9f5814",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    }
+  ]
+}
