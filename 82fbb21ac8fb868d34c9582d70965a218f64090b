@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "41ab1057_05c4d21f",
+        "filename": "emailcommon/src/com/android/emailcommon/utility/SSLSocketFactory.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 427,
+      "author": {
+        "id": 1018773
+      },
+      "writtenOn": "2014-12-17T00:50:38Z",
+      "side": 1,
+      "message": "Suggestion: Drop this check. You actually don\u0027t need the API Level check here (and the @TargetApi annotation above). The code is failing gracefully if the setHostname method is not there. Without this check, SNI can get enabled even on older platforms if the SSLSocket supports it.",
+      "revId": "82fbb21ac8fb868d34c9582d70965a218f64090b",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "a1dbec04_d0fbdc4a",
+        "filename": "emailcommon/src/com/android/emailcommon/utility/SSLSocketFactory.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 432,
+      "author": {
+        "id": 1018773
+      },
+      "writtenOn": "2014-12-17T00:50:38Z",
+      "side": 1,
+      "message": "Suggestion: You can get rid of the \"ret\" local variable by simply returning here.",
+      "revId": "82fbb21ac8fb868d34c9582d70965a218f64090b",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    }
+  ]
+}
