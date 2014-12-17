@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "61df3424_3e366989",
+        "filename": "emailcommon/src/com/android/emailcommon/utility/SSLSocketFactory.java",
+        "patchSetId": 3
+      },
+      "lineNbr": 335,
+      "author": {
+        "id": 1018773
+      },
+      "writtenOn": "2014-12-17T21:02:38Z",
+      "side": 1,
+      "message": "Typo (here and below): \"if is\" -\u003e \"if it is\" or \"if it\u0027s\" or \"if\"",
+      "revId": "59dad31ba1a217098bb971b53f7852ad47eb57e9",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    }
+  ]
+}
