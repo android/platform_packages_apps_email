@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "e197a45c_88a39b83",
+        "filename": "emailcommon/src/com/android/emailcommon/utility/SSLSocketFactory.java",
+        "patchSetId": 4
+      },
+      "lineNbr": 339,
+      "author": {
+        "id": 1018773
+      },
+      "writtenOn": "2014-12-18T20:19:49Z",
+      "side": 1,
+      "message": "How about the same comment change below in createSocket? :)",
+      "revId": "22587642bbad2a18e87a579f38856bf0d8cc4d7f",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    }
+  ]
+}
