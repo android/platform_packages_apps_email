@@ -70,7 +70,7 @@
     <emailservice
         email:protocol="imap"
         email:name="@string/imap_name"
-        email:accountType="@string/account_manager_type_imap"
+        email:accountType="@string/account_manager_type_legacy_imap"
         email:serviceClass="com.android.email.service.ImapService"
         email:port="143"
         email:portSsl="993"
