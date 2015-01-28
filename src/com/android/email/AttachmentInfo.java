@@ -221,7 +221,7 @@ public class AttachmentInfo {
      * @return whether the attachment is eligible for download
      */
     public boolean isEligibleForDownload() {
-        return mAllowView || mAllowSave;
+        return mAllowView || mAllowSave || mAllowInstall;
     }
 
     @Override
