@@ -90,7 +90,7 @@ public class Credential extends EmailContent implements Parcelable, BaseColumns 
        mProviderId = cursor.getString(CredentialQuery.PROVIDER_COLUMN_INDEX);
        mAccessToken = cursor.getString(CredentialQuery.ACCESS_TOKEN_COLUMN_INDEX);
        mRefreshToken = cursor.getString(CredentialQuery.REFRESH_TOKEN_COLUMN_INDEX);
-       mExpiration = cursor.getInt(CredentialQuery.EXPIRATION_COLUMN_INDEX);
+       mExpiration = cursor.getLong(CredentialQuery.EXPIRATION_COLUMN_INDEX);
    }
 
    /**
