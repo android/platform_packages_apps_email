@@ -361,7 +361,7 @@
         <activity
                 android:name="com.android.mail.browse.EmlViewerActivity"
                 android:label="@string/app_name"
-                android:theme="@style/UnifiedEmailTheme" >
+                android:theme="@style/UnifiedEmailTheme.Appcompat" >
             <intent-filter>
                 <action android:name="android.intent.action.VIEW" />
                 <category android:name="android.intent.category.DEFAULT" />
