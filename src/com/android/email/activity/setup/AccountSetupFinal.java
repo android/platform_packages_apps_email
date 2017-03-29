@@ -43,6 +43,7 @@ import android.view.inputmethod.InputMethodManager;
 import android.widget.Toast;
 
 import com.android.email.R;
+import com.android.email.activity.RequestPermissionsActivity;
 import com.android.email.setup.AuthenticatorSetupIntentHelper;
 import com.android.email.service.EmailServiceUtils;
 import com.android.emailcommon.VendorPolicyLoader;
@@ -182,6 +183,9 @@ public class AccountSetupFinal extends AccountSetupActivity
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
+        if (RequestPermissionsActivity.startPermissionActivity(this)) {
+            finish();
+        }
         super.onCreate(savedInstanceState);
 
         final Intent intent = getIntent();

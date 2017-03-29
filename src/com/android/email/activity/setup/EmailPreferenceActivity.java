@@ -27,6 +27,7 @@ import android.view.Menu;
 import android.view.MenuItem;
 
 import com.android.email.R;
+import com.android.email.activity.RequestPermissionsActivity;
 import com.android.email.setup.AuthenticatorSetupIntentHelper;
 import com.android.emailcommon.utility.IntentUtilities;
 import com.android.mail.providers.UIProvider.EditSettingsExtras;
@@ -93,6 +94,9 @@ public class EmailPreferenceActivity extends MailPreferenceActivity {
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
+        if (RequestPermissionsActivity.startPermissionActivity(this)) {
+            finish();
+        }
         super.onCreate(savedInstanceState);
 
         final Intent i = getIntent();

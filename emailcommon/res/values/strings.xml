@@ -41,4 +41,6 @@
 
     <!-- Do Not Translate.  This is the authority for the email package name -->
     <string name="email_package_name" translatable="false">com.android.email</string>
+
+    <string name="missed_exchange_required_permission">Click Permissions,add Required Permissions</string>
 </resources>
