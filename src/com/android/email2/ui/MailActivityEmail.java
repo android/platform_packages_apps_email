@@ -27,6 +27,7 @@ import android.net.Uri;
 import android.os.Bundle;
 
 import com.android.email.Preferences;
+import com.android.email.activity.RequestPermissionsActivity;
 import com.android.email.provider.EmailProvider;
 import com.android.email.service.AttachmentService;
 import com.android.email.service.EmailServiceUtils;
@@ -57,6 +58,9 @@ public class MailActivityEmail extends com.android.mail.ui.MailActivity {
 
     @Override
     public void onCreate(Bundle bundle) {
+        if (RequestPermissionsActivity.startPermissionActivity(this)) {
+            finish();
+        }
         final Intent intent = getIntent();
         final Uri data = intent != null ? intent.getData() : null;
         if (data != null) {

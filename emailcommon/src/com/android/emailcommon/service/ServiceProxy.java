@@ -17,20 +17,28 @@
 
 package com.android.emailcommon.service;
 
+import android.app.AlertDialog;
 import android.content.ComponentName;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.ServiceConnection;
 import android.content.pm.ProviderInfo;
+import android.net.Uri;
+import android.os.Build;
+import android.os.Bundle;
 import android.os.AsyncTask;
 import android.os.Debug;
+import android.os.Handler;
 import android.os.IBinder;
 import android.os.Looper;
+import android.os.Message;
 import android.os.RemoteException;
+import android.widget.Toast;
 
+import com.android.emailcommon.R;
 import com.android.emailcommon.provider.EmailContent;
 import com.android.mail.utils.LogUtils;
-
 /**
  * ServiceProxy is a superclass for proxy objects which make a single call to a service. It handles
  * connecting to the service, running a task supplied by the subclass when the connection is ready,
@@ -87,6 +95,8 @@ public abstract class ServiceProxy {
      */
     public abstract void onConnected(IBinder binder);
 
+    private Handler mHandler;
+    private static final int TIPS = 1;
     public ServiceProxy(Context _context, Intent _intent) {
         mContext = _context;
         mIntent = _intent;
@@ -94,6 +104,42 @@ public abstract class ServiceProxy {
         if (Debug.isDebuggerConnected()) {
             mTimeout <<= 2;
         }
+        mHandler = new Handler(Looper.getMainLooper()) {
+            @Override
+            public void handleMessage(Message msg) {
+                switch (msg.what) {
+                    case TIPS:
+                        Toast.makeText(mContext, mContext.getResources()
+                                .getString(R.string.missed_exchange_required_permission),
+                                Toast.LENGTH_LONG).show();
+                        mContext.startActivity(getAppDetailSettingIntent(mContext));
+                        break;
+                    default:
+                        break;
+                }
+            }
+        };
+    }
+
+    private final static String SETTING_ACTION = "android.settings.APPLICATION_DETAILS_SETTINGS";
+    private final static String PACKAGE = "package";
+    private final static String EXCHANGE_PACKAGE_NAME = "com.android.exchange";
+    private final static String SETTING_PACKAGE_NAME = "com.android.settings";
+    private final static String CLASS_INSTALLEDAPPDETAILS = "com.android.settings.InstalledAppDetails";
+    private final static String CLASS_APPLICATIONPKGNAME = "com.android.settings.ApplicationPkgName";
+
+    private Intent getAppDetailSettingIntent(Context context) {
+        Intent localIntent = new Intent();
+        localIntent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+        if (Build.VERSION.SDK_INT >= 9) {
+            localIntent.setAction(SETTING_ACTION);
+            localIntent.setData(Uri.fromParts(PACKAGE, EXCHANGE_PACKAGE_NAME, null));
+        } else if (Build.VERSION.SDK_INT <= 8) {
+            localIntent.setAction(Intent.ACTION_VIEW);
+            localIntent.setClassName(SETTING_PACKAGE_NAME, CLASS_INSTALLEDAPPDETAILS);
+            localIntent.putExtra(CLASS_APPLICATIONPKGNAME, EXCHANGE_PACKAGE_NAME);
+        }
+        return localIntent;
     }
 
     private class ProxyConnection implements ServiceConnection {
@@ -115,6 +161,8 @@ public abstract class ServiceProxy {
                         mTask.run();
                     } catch (RemoteException e) {
                         LogUtils.e(mTag, e, "RemoteException thrown running mTask!");
+                    } catch (java.lang.SecurityException e) {
+                        mHandler.sendEmptyMessage(TIPS);
                     } finally {
                         // Make sure that we unbind the mConnection even on exceptions in the
                         // task provided by the subclass.

@@ -682,4 +682,27 @@
 
     <!-- Name for preference entry which leads to the per-folder sync settings activity -->
     <string name="folder_sync_settings_pref_title">Folder sync settings</string>
+
+    <!-- In Account setup options & Account Settings screens, Email sync size option. -->
+    <string name="account_settings_sync_size_enable">Configure sync size per mail</string>
+    <string name="account_settings_sync_size_enable_summary">To save the data, you could configure the sync size per mail of the account</string>
+    <string name="account_settings_sync_size_label">Choose sync size</string>
+    <string name="account_settings_sync_size_category_label">Sync size settings</string>
+
+    <string name="account_setup_options_mail_sync_size_all">Entire</string>
+    <string name="account_setup_options_mail_sync_size_20k">20KB</string>
+    <string name="account_setup_options_mail_sync_size_100k">100KB</string>
+    <string name="account_setup_options_mail_sync_size_200k">200KB</string>
+    <string name="account_setup_options_mail_sync_size_500k">500KB</string>
+    <string name="account_setup_options_mail_sync_size_1M">1MB</string>
+
+    <!--Delete email account -->
+    <string name="remove_email_account">Remove account</string>
+    <string name="remove_email_account_continue">CONTINUE</string>
+    <string name="remove_email_account_message">You are about to go to the Settings app, where you can remove Accounts</string>
+    <string name="default_domain"></string>
+    <!-- Customize Email account's signature -->
+    <string name="default_email_signature"></string>
+    <string name="default_email_signature_with_brand"></string>
+    <string name="missing_required_permission">You have disabled a required permission.</string>
 </resources>
