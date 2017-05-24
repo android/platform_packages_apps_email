@@ -22,6 +22,30 @@
       "revId": "22cdd3bc7abf385fbf934c842443a3007907401a",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "2247e1f1_fe84cf1e",
+        "filename": "tests/Android.mk",
+        "patchSetId": 2
+      },
+      "lineNbr": 29,
+      "author": {
+        "id": 1103203
+      },
+      "writtenOn": "2017-05-24T10:04:17Z",
+      "side": 1,
+      "message": "Done. Rephrased a little to say what is required if LOCAL_SDK_VERSION is \u003c 19, rather than saying that setting it to \u003e\u003d 19 will definitely work (language 1.8 and API 19 worked when I tried, but I think there were some other additional issues when using an even more recent SDK).",
+      "parentUuid": "05090744_5fe87dbe",
+      "range": {
+        "startLine": 29,
+        "startChar": 0,
+        "endLine": 29,
+        "endChar": 27
+      },
+      "revId": "22cdd3bc7abf385fbf934c842443a3007907401a",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
     }
   ]
 }
