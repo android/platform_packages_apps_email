@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "05090744_5fe87dbe",
+        "filename": "tests/Android.mk",
+        "patchSetId": 2
+      },
+      "lineNbr": 29,
+      "author": {
+        "id": 1038039
+      },
+      "writtenOn": "2017-05-24T08:43:32Z",
+      "side": 1,
+      "message": "I think there should be a comment explaining why and/or referencing a bug. The commit comment is good, nay excellent, but this is unusual enough for people to want to understand more at a glance.\n\nSuggestion:\n\n# javac from JDKs \u003e\u003d 9 generate code that requires the Objects.requireNotNull() method when targeting Java language versions \u003e\u003d 1.7.\n# requireNotNull() is not present in Android SDK version 14. \n# The use of LOCAL_JAVA_LANGUAGE_VERSION :\u003d 1.6 can be removed if LOCAL_SDK_VERSION is changed to \u003e\u003d 19. http://b/38495704",
+      "range": {
+        "startLine": 29,
+        "startChar": 0,
+        "endLine": 29,
+        "endChar": 27
+      },
+      "revId": "22cdd3bc7abf385fbf934c842443a3007907401a",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    }
+  ]
+}
