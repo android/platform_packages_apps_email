@@ -213,16 +213,17 @@ public class Rfc822Output {
      */
     private static void writeOneAttachment(Context context, Writer writer, OutputStream out,
             Attachment attachment) throws IOException, MessagingException {
-        writeHeader(writer, "Content-Type",
-                attachment.mMimeType + ";\n name=\"" + attachment.mFileName + "\"");
+        writeHeader(writer, "Content-Type", attachment.mMimeType + ";\n name=\""
+                + MimeUtility.foldAndEncode2(attachment.mFileName, "Content-Type".length() + 2)
+                + "\"");
         writeHeader(writer, "Content-Transfer-Encoding", "base64");
         // Most attachments (real files) will send Content-Disposition.  The suppression option
         // is used when sending calendar invites.
         if ((attachment.mFlags & Attachment.FLAG_ICS_ALTERNATIVE_PART) == 0) {
-            writeHeader(writer, "Content-Disposition",
-                    "attachment;"
-                    + "\n filename=\"" + attachment.mFileName + "\";"
-                    + "\n size=" + Long.toString(attachment.mSize));
+            writeHeader(writer, "Content-Disposition", "attachment;" + "\n filename=\""
+                    + MimeUtility.foldAndEncode2(attachment.mFileName,
+                            "Content-Disposition".length() + 2)
+                    + "\";" + "\n size=" + Long.toString(attachment.mSize));
         }
         if (attachment.mContentId != null) {
             writeHeader(writer, "Content-ID", attachment.mContentId);
