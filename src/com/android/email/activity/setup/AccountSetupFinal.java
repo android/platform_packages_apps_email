@@ -447,6 +447,16 @@ public class AccountSetupFinal extends AccountSetupActivity
     }
 
     @Override
+    protected void onPostResume() {
+        super.onPostResume();
+        AccountCheckSettingsFragment fragment = (AccountCheckSettingsFragment)
+                getFragmentManager().findFragmentByTag(AccountCheckSettingsFragment.TAG);
+        if (fragment != null) {
+            fragment.checkResult();
+        }
+    }
+
+    @Override
     public void onSaveInstanceState(@NonNull Bundle outState) {
         super.onSaveInstanceState(outState);
         outState.putBoolean(SAVESTATE_KEY_IS_PROCESSING, mIsProcessing);
