@@ -174,7 +174,9 @@ public class AccountCheckSettingsFragment extends Fragment {
     public void onResume() {
         super.onResume();
         mPaused = false;
+    }
 
+    public void checkResult() {
         if (mState != STATE_START) {
             reportProgress(mState, mProgressException);
         }
