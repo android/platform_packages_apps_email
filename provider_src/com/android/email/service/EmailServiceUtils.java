@@ -157,7 +157,7 @@ public class EmailServiceUtils {
         if (info == null) return false;
         if (info.klass != null) return true;
         final Intent serviceIntent = getServiceIntent(info);
-        return new EmailServiceProxy(context, serviceIntent).test();
+        return new EmailServiceProxy(context, serviceIntent).testAndWaitForCompletion();
     }
 
     private static Intent getServiceIntent(EmailServiceInfo info) {

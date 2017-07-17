@@ -369,4 +369,10 @@ public class EmailServiceProxy extends ServiceProxy implements IEmailService {
             return (Integer) mReturn;
         }
     }
+
+    public boolean testAndWaitForCompletion() {
+        boolean ret = test();
+        waitForCompletion();
+        return ret;
+    }
 }
