@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "5706e069_6f2f20f7",
+        "filename": "provider_src/com/android/email/provider/EmailProvider.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 5685,
+      "author": {
+        "id": 1046451
+      },
+      "writtenOn": "2017-10-04T23:30:24Z",
+      "side": 1,
+      "message": "refactor w/ identical above code",
+      "range": {
+        "startLine": 5685,
+        "startChar": 13,
+        "endLine": 5685,
+        "endChar": 73
+      },
+      "revId": "a26f1dd1fc2639a0499107bfaf8658382932096d",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    }
+  ]
+}
