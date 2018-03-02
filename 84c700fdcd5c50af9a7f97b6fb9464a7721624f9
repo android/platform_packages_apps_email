@@ -22,6 +22,30 @@
       "revId": "84c700fdcd5c50af9a7f97b6fb9464a7721624f9",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "b7a9e351_ff6a0739",
+        "filename": "tests/src/com/android/email/mail/StoreTests.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 73,
+      "author": {
+        "id": 1041833
+      },
+      "writtenOn": "2018-03-02T18:00:10Z",
+      "side": 1,
+      "message": "Yes, it could, but it looked into testAccount before, so I decided to keep it that way...",
+      "parentUuid": "9d0153f8_fb109394",
+      "range": {
+        "startLine": 73,
+        "startChar": 48,
+        "endLine": 73,
+        "endChar": 73
+      },
+      "revId": "84c700fdcd5c50af9a7f97b6fb9464a7721624f9",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
     }
   ]
 }
