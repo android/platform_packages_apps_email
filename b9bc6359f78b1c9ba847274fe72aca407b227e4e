@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "e104223f_2e29cfdb",
+        "filename": "AndroidManifest.xml",
+        "patchSetId": 1
+      },
+      "lineNbr": 154,
+      "author": {
+        "id": 1022933
+      },
+      "writtenOn": "2018-11-21T00:56:16Z",
+      "side": 1,
+      "message": "I believe this needs android:exported\u003d\"false\" so external apps can\u0027t intent in here directly.",
+      "revId": "b9bc6359f78b1c9ba847274fe72aca407b227e4e",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    }
+  ]
+}
