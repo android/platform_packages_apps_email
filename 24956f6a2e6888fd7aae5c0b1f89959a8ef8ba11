@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "a577c457_308d7310",
+        "filename": "src/com/android/email/activity/ComposeActivityEmailExternal.java",
+        "patchSetId": 4
+      },
+      "lineNbr": 2,
+      "author": {
+        "id": 1086523
+      },
+      "writtenOn": "2018-11-26T22:07:45Z",
+      "side": 1,
+      "message": "Should this be LLC?",
+      "range": {
+        "startLine": 2,
+        "startChar": 30,
+        "endLine": 2,
+        "endChar": 33
+      },
+      "revId": "24956f6a2e6888fd7aae5c0b1f89959a8ef8ba11",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    }
+  ]
+}
