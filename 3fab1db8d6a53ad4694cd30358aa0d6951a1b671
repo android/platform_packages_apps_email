@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "0a6e7ec1_d9d1f8d9",
+        "filename": "OWNERS",
+        "patchSetId": 3
+      },
+      "lineNbr": 2,
+      "author": {
+        "id": 1338311
+      },
+      "writtenOn": "2019-01-10T01:10:07Z",
+      "side": 1,
+      "message": "Can you please add rtenneti@google.com also to this list? Thanks.",
+      "range": {
+        "startLine": 2,
+        "startChar": 0,
+        "endLine": 2,
+        "endChar": 10
+      },
+      "revId": "3fab1db8d6a53ad4694cd30358aa0d6951a1b671",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    }
+  ]
+}
