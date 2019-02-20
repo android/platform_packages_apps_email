@@ -47,7 +47,7 @@
     <uses-permission android:name="android.permission.DOWNLOAD_WITHOUT_NOTIFICATION" />
 
     <!-- This needs to be present when we are doing unbundled releases. -->
-    <uses-sdk android:targetSdkVersion="24" android:minSdkVersion="14" />
+    <uses-sdk android:targetSdkVersion="28" android:minSdkVersion="14" />
 
     <!-- additional uses -->
 
@@ -486,7 +486,9 @@
             </intent-filter>
         </receiver>
         <service
-            android:name=".service.EmailBroadcastProcessorService" />
+            android:name=".service.EmailBroadcastProcessorService"
+            android:permission="android.permission.BIND_JOB_SERVICE"
+            android:exported="true" />
 
         <!-- Support for DeviceAdmin / DevicePolicyManager.  See SecurityPolicy class for impl. -->
         <receiver
@@ -725,6 +727,7 @@
         </service>
 
         <service android:name="com.android.email.EmailIntentService"
+                 android:permission="android.permission.BIND_JOB_SERVICE"
                  android:exported="false">
             <intent-filter>
                 <action android:name="com.android.mail.action.RESEND_NOTIFICATIONS" />
