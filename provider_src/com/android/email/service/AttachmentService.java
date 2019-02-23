@@ -27,10 +27,13 @@ import android.content.Intent;
 import android.database.Cursor;
 import android.net.ConnectivityManager;
 import android.net.Uri;
+import android.os.Build.VERSION_CODES;
 import android.os.IBinder;
 import android.os.RemoteException;
 import android.os.SystemClock;
 import android.text.format.DateUtils;
+
+import androidx.core.os.BuildCompat;
 
 import com.android.email.AttachmentInfo;
 import com.android.email.EmailConnectivityManager;
@@ -60,7 +63,27 @@ import java.util.PriorityQueue;
 import java.util.Queue;
 import java.util.concurrent.ConcurrentHashMap;
 import java.util.concurrent.ConcurrentLinkedQueue;
+import java.util.concurrent.Executors;
+import java.util.concurrent.ScheduledExecutorService;
+import java.util.concurrent.ScheduledFuture;
+import java.util.concurrent.TimeUnit;
 
+/**
+ * A service that handles downloading of attachment. It also handles auto download over wifi.
+ *
+ * <p>This is run as a background service on pre-Oreo environment, but it is run as a foreground
+ * service since Oreo. (see {@link #start(Context, Intent)}.
+ *
+ * <p>When there is no connectivity:
+ *
+ * <ul>
+ *   <li>if it is a background service, it waits for connectivity synchronously;
+ *   <li>if it is a foreground service, it stops itself to avoid having the foreground service
+ *       notification all the time. Before it stops itself, it schedules a {@link
+ *       AttachmentServiceStarterJobService}, which will start this service when connectivity is
+ *       available.
+ * </ul>
+ */
 public class AttachmentService extends Service implements Runnable {
     // For logging.
     public static final String LOG_TAG = "AttachmentService";
@@ -78,7 +101,8 @@ public class AttachmentService extends Service implements Runnable {
     // Our idle time, waiting for notifications; this is something of a failsafe
     private static final int PROCESS_QUEUE_WAIT_TIME = 30 * ((int)DateUtils.MINUTE_IN_MILLIS);
     // How long we'll wait for a callback before canceling a download and retrying
-    private static final int CALLBACK_TIMEOUT = 30 * ((int)DateUtils.SECOND_IN_MILLIS);
+    // Use EDGE network to estimate timeout value (10MB attachment with 120Kbps bandwidth)
+    private static final int CALLBACK_TIMEOUT = 11 * ((int) DateUtils.MINUTE_IN_MILLIS);
     // Try to download an attachment in the background this many times before giving up
     private static final int MAX_DOWNLOAD_RETRIES = 5;
 
@@ -104,6 +128,8 @@ public class AttachmentService extends Service implements Runnable {
     private static final int MAX_SIMULTANEOUS_DOWNLOADS_PER_ACCOUNT = 1;
     // Limit on the number of attachments we'll check for background download
     private static final int MAX_ATTACHMENTS_TO_CHECK = 25;
+    // Delay in milliseconds before stopping the service when download queue is empty.
+    @VisibleForTesting static final int EMPTY_QUEUE_STOP_SELF_DELAY_MS = 5000;
 
     private static final String EXTRA_ATTACHMENT_ID =
             "com.android.email.AttachmentService.attachment_id";
@@ -121,6 +147,10 @@ public class AttachmentService extends Service implements Runnable {
     // Signify that we are being shut down & destroyed.
     private volatile boolean mStop = false;
 
+    // Indicates whether this service is currently running. Currently, only used for Android O+ to
+    // decide whether to call startForegroundService or startService in start method.
+    private static volatile boolean isRunning = false;
+
     EmailConnectivityManager mConnectivityManager;
 
     // Helper class that keeps track of in progress downloads to make sure that they
@@ -128,6 +158,7 @@ public class AttachmentService extends Service implements Runnable {
     final AttachmentWatchdog mWatchdog = new AttachmentWatchdog();
 
     private final Object mLock = new Object();
+    private final Object stopSelfLock = new Object();
 
     // A map of attachment storage used per account as we have account based maximums to follow.
     // NOTE: This map is not kept current in terms of deletions (i.e. it stores the last calculated
@@ -151,6 +182,20 @@ public class AttachmentService extends Service implements Runnable {
     // attachmentChanged(). Entries in the queue are picked off in processQueue().
     private static final Queue<long[]> sAttachmentChangedQueue =
             new ConcurrentLinkedQueue<long[]>();
+
+    // These are used to delay the call to stopSelf for killing this service when download queue
+    // becomes empty. Since Android O, it's required to post notification for running background
+    // service, and by doing so, if we start/stop this service frequently, it'll frequently post
+    // and dismiss the notification causing visual disturbance in some cases (b/68275494). To avoid
+    // this flickering issue, we delay the service termination for some time (defined by
+    // EMPTY_QUEUE_STOP_SELF_DELAY_MS), and if there is no more download request during that time,
+    // we'll kill the service. Otherwise, we'll use the existing one.
+    @GuardedBy("stopSelfLock")
+    @Nullable
+    private ScheduledExecutorService stopSelfService;
+
+    @GuardedBy("stopSelfLock")
+    private ScheduledFuture<?> stopSelfScheduledFuture;
 
     // Extra layer of control over debug logging that should only be enabled when
     // we need to take an extra deep dive at debugging the workflow in this class.
@@ -586,7 +631,34 @@ public class AttachmentService extends Service implements Runnable {
         debugTrace("Calling startService with extras %d & %d", id, flags);
         intent.putExtra(EXTRA_ATTACHMENT_ID, id);
         intent.putExtra(EXTRA_ATTACHMENT_FLAGS, flags);
-        context.startService(intent);
+        start(context, intent);
+    }
+
+    public static void startWithoutSpecificAttachmentChange(Context context) {
+        LogUtils.d(LOG_TAG, "Going to start AttachmentService without specifying an attachment.");
+
+        Intent intent = new Intent(context, AttachmentService.class);
+        start(context, intent);
+    }
+
+    /**
+     * Starts running attachment service.
+     *
+     * @param intent an intent set to run AttachmentService class
+     */
+    public static void start(Context context, Intent intent) {
+        if (getApplicationInfo().targetSdkVersion >= android.os.Build.VERSION_CODES.O && !isRunning) {
+            LogUtils.i(LOG_TAG, "startForegroundService");
+            context.startForegroundService(intent);
+        } else {
+            LogUtils.i(LOG_TAG, "startService");
+            context.startService(intent);
+        }
+    }
+
+    public static void stop(Context context) {
+        Intent intent = new Intent(context, AttachmentService.class);
+        context.stopService(intent);
     }
 
     /**
@@ -604,12 +676,17 @@ public class AttachmentService extends Service implements Runnable {
             final int attachment_flags = intent.getIntExtra(EXTRA_ATTACHMENT_FLAGS, -1);
             if ((attachment_id >= 0) && (attachment_flags >= 0)) {
                 sAttachmentChangedQueue.add(new long[]{attachment_id, attachment_flags});
-                // Process the queue if we're in a wait
-                kick();
+                if (getApplicationInfo().targetSdkVersion >= android.os.Build.VERSION_CODES.O) {
+                    // Cancel the service termination if there is currently one scheduled, and also restart
+                    // the service thread since it was stopped when service termination was scheduled.
+                    cancelStopSelfSchedule(/* restartThread= */ true);
+                }
             } else {
                 debugTrace("Received an invalid intent w/o the required extras %d & %d",
                         attachment_id, attachment_flags);
             }
+            // Process the queue if we're in a wait
+            kick();
         } else {
             debugTrace("Received a null intent in onStartCommand");
         }
@@ -622,6 +699,15 @@ public class AttachmentService extends Service implements Runnable {
      */
     @Override
     public void onCreate() {
+        isRunning = true;
+        if (getApplicationInfo().targetSdkVersion >= android.os.Build.VERSION_CODES.O) {
+            LogUtils.i(LOG_TAG, "startForeground");
+            startForeground(
+                EmailNotificationController.NOTIFICATION_ID_ONGOING_ATTACHMENT,
+                EmailNotificationController.getOngoingDownloadNotification(
+                    getApplicationContext(),
+                    getString(R.string.notification_downloading_attachments_title)));
+        }
         // Start up our service thread.
         new Thread(this, "AttachmentService").start();
     }
@@ -635,6 +721,11 @@ public class AttachmentService extends Service implements Runnable {
     public void onDestroy() {
         debugTrace("Destroying AttachmentService object");
         dumpInProgressDownloads();
+        if (VersionUtils.isRunningOcOrLater()) {
+            // Cancel the service termination if there is one scheduled since the service is already
+            // terminated.
+            cancelStopSelfSchedule(/* restartThread= */ false);
+        }
 
         // Mark this instance of the service as stopped. Our main loop for the AttachmentService
         // checks for this flag along with the AttachmentWatchdog.
@@ -649,6 +740,7 @@ public class AttachmentService extends Service implements Runnable {
             mConnectivityManager.stopWait();
             mConnectivityManager = null;
         }
+        isRunning = false;
     }
 
     /**
@@ -684,13 +776,32 @@ public class AttachmentService extends Service implements Runnable {
             c.close();
         }
 
-        // Loop until stopped, with a 30 minute wait loop
+        // This loop keeps running until: 1. the download queue is empty; or 2. connectivity is lost
+        // (Oreo+ only).
+        // In every loop, it calls processQueue() to start download asynchronously, then it waits
+        // synchronously for a maximum of 30 minutes (PROCESS_QUEUE_WAIT_TIME). This wait is expected to
+        // be stopped by calling kick(), which is called when: 1. a download is finished (successful or
+        // not); 2. a new download is enqueued (onChange()/onStartCommand); or 3. when onDestroy() is
+        // called.
         while (!mStop) {
-            // Here's where we run our attachment loading logic...
-            // Make a local copy of the variable so we don't null-crash on service shutdown
-            final EmailConnectivityManager ecm = mConnectivityManager;
-            if (ecm != null) {
-                ecm.waitForConnectivity();
+            if (!isConnected()) {
+                if (getApplicationInfo().targetSdkVersion >= android.os.Build.VERSION_CODES.O) {
+                  // On Oreo+, this is a foreground service. We don't want a foreground service to keep
+                  // running just to wait for connectivity, so stop the service and schedule a job to run
+                  // when there is a connection.
+                  LogUtils.d(LOG_TAG, "Shutting down service. No connectivity.");
+                  MailJobSchedulerWrapperEmail.scheduleAttachmentServiceWhenConnectivityAvailable(
+                      getApplicationContext());
+                  stopSelf();
+                  break;
+                } else {
+                    // Here's where we run our attachment loading logic...
+                    // Make a local copy of the variable so we don't null-crash on service shutdown
+                    final EmailConnectivityManager ecm = mConnectivityManager;
+                    if (ecm != null) {
+                        ecm.waitForConnectivity();
+                    }
+                }
             }
             if (mStop) {
                 // We might be bailing out here due to the service shutting down
@@ -707,8 +818,15 @@ public class AttachmentService extends Service implements Runnable {
             dumpInProgressDownloads();
 
             if (mDownloadQueue.isEmpty() && (mDownloadsInProgress.size() < 1)) {
-                LogUtils.d(LOG_TAG, "Shutting down service. No in-progress or pending downloads.");
-                stopSelf();
+                // If O and above, we'll delay the call to stopSelf to avoid notification flicker
+                // (b/68275494); otherwise, call stopSelf right away.
+                if (getApplicationInfo().targetSdkVersion >= android.os.Build.VERSION_CODES.O) {
+                    LogUtils.i(LOG_TAG, "Schedule to terminate service");
+                    scheduleStopSelf();
+                } else {
+                    LogUtils.d(LOG_TAG, "Shutting down service. No in-progress or pending downloads.");
+                    stopSelf();
+                }
                 break;
             }
             debugTrace("Run() idle, wait for mLock (something to do)");
@@ -728,6 +846,46 @@ public class AttachmentService extends Service implements Runnable {
         if (ecm != null) {
             ecm.unregister();
         }
+    }
+
+    @VisibleForTesting
+    void scheduleStopSelf() {
+        synchronized (stopSelfLock) {
+            if (stopSelfService != null) {
+                return;
+            }
+
+            stopSelfService = Executors.newSingleThreadScheduledExecutor();
+            Runnable stopSelfTask =
+                () -> {
+                  LogUtils.i(LOG_TAG, "Stop the service from schedule");
+                  stopSelf();
+                };
+
+            stopSelfScheduledFuture =
+                stopSelfService.schedule(
+                    stopSelfTask, EMPTY_QUEUE_STOP_SELF_DELAY_MS, TimeUnit.MILLISECONDS);
+        }
+    }
+
+    @VisibleForTesting
+    void cancelStopSelfSchedule(boolean restartThread) {
+      synchronized (stopSelfLock) {
+        ScheduledExecutorService stopSelfService = this.stopSelfService;
+        if (stopSelfService == null) {
+            return;
+        }
+
+        LogUtils.i(LOG_TAG, "Cancel stopSelf schedule");
+        stopSelfScheduledFuture.cancel(/* mayInterruptIfRunning= */ true);
+        stopSelfService.shutdown();
+        this.stopSelfService = null;
+
+        if (restartThread) {
+            LogUtils.i(LOG_TAG, "Restart the thread");
+            new Thread(this, "AttachmentService").start();
+        }
+      }
     }
 
     /*
