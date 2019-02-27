@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "d562564f_ccbd3742",
+        "filename": "provider_src/com/android/email/service/AttachmentService.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 614,
+      "author": {
+        "id": 1359095
+      },
+      "writtenOn": "2019-02-27T04:09:04Z",
+      "side": 1,
+      "message": "Line length",
+      "revId": "a987dc75701d862826834d321db20ea3957083ad",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "b052f3a1_f0848ce4",
+        "filename": "provider_src/com/android/email/service/AttachmentService.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 668,
+      "author": {
+        "id": 1359095
+      },
+      "writtenOn": "2019-02-27T04:09:04Z",
+      "side": 1,
+      "message": "Line length",
+      "revId": "a987dc75701d862826834d321db20ea3957083ad",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    }
+  ]
+}
