@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "8def3543_2c753033",
+        "filename": "provider_src/com/android/email/service/AttachmentService.java",
+        "patchSetId": 7
+      },
+      "lineNbr": 614,
+      "author": {
+        "id": 1359095
+      },
+      "writtenOn": "2019-02-27T22:01:18Z",
+      "side": 1,
+      "message": "Sorry, I should have checked earlier. According to the style guides, the line break comes before the operator...",
+      "revId": "62359082b83b870195f7899bd33d3d86d1830988",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    }
+  ]
+}
