@@ -24,6 +24,8 @@ res_dir := res $(unified_email_dir)/res
 
 LOCAL_MODULE_TAGS := optional
 
+LOCAL_MODULE_PATH := $(TARGET_OUT_APPS)
+
 LOCAL_SRC_FILES := $(call all-java-files-under, $(unified_email_dir)/src)
 LOCAL_SRC_FILES += $(call all-java-files-under, src/com/android)
 LOCAL_SRC_FILES += $(call all-java-files-under, provider_src/com/android)
@@ -72,6 +74,8 @@ ifeq (eng,$(TARGET_BUILD_VARIANT))
 endif
 
 LOCAL_SDK_VERSION := current
+
+LOCAL_COMPATIBILITY_SUITE := general-tests
 
 include $(BUILD_PACKAGE)
 
