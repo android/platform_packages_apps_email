@@ -73,6 +73,8 @@ endif
 
 LOCAL_SDK_VERSION := current
 
+LOCAL_COMPATIBILITY_SUITE := device-tests
+
 include $(BUILD_PACKAGE)
 
 # only include rules to build other stuff for the original package, not the derived package.
