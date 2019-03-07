@@ -31,8 +31,10 @@ LOCAL_STATIC_JAVA_LIBRARIES := android-support-test
 # stay at 1.6 as long as LOCAL_SDK_VERSION is set to a value < 19. See http://b/38495704
 LOCAL_JAVA_LANGUAGE_VERSION := 1.6
 LOCAL_SDK_VERSION := 14
+LOCAL_COMPATIBILITY_SUITE := device-tests
 LOCAL_PACKAGE_NAME := EmailTests
 LOCAL_INSTRUMENTATION_FOR := Email
+LOCAL_PROGUARD_ENABLED := disabled
 
 LOCAL_SRC_FILES := $(call all-java-files-under, $(src_dirs))
 LOCAL_RESOURCE_DIR := $(addprefix $(LOCAL_PATH)/, $(res_dirs))
