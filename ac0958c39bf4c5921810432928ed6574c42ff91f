@@ -16,6 +16,24 @@
       "revId": "ac0958c39bf4c5921810432928ed6574c42ff91f",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "bcb12cbb_5ae1c0e6",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 3
+      },
+      "lineNbr": 26,
+      "author": {
+        "id": 1338311
+      },
+      "writtenOn": "2019-03-08T23:57:55Z",
+      "side": 1,
+      "message": "Kevin Chang helped me with the acloud set up and was able to verify that it runs. Will file a bug for the  following failure \n\nhttps://sponge.corp.google.com/target?id\u003d5242f03d-ac94-4535-9ba0-d145532f9a6e\u0026target\u003dx86+EmailTests\u0026searchFor\u003d\u0026show\u003dINTERNAL_ERROR\u0026sortBy\u003dSTATUS",
+      "parentUuid": "31c2f6f8_ed9b87b5",
+      "revId": "ac0958c39bf4c5921810432928ed6574c42ff91f",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
     }
   ]
 }
