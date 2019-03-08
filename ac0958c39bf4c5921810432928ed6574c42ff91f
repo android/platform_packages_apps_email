@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "31c2f6f8_ed9b87b5",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 3
+      },
+      "lineNbr": 26,
+      "author": {
+        "id": 1088076
+      },
+      "writtenOn": "2019-03-08T19:07:04Z",
+      "side": 1,
+      "message": "The test mapping suite runs on target cf_x86_phone-userdebug. Were you able to run atest against that target? You can use acloud command to create a cuttlefish instance.",
+      "revId": "ac0958c39bf4c5921810432928ed6574c42ff91f",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    }
+  ]
+}
