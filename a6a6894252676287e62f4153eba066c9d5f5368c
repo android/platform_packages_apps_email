@@ -1,0 +1,8 @@
+Code-Review+2: Greg Kaiser <gkaiser@google.com>
+Code-Review+2: Raman Tenneti <rtenneti@google.com>
+Presubmit-Verified+1: Treehugger Robot <treehugger-gerrit@google.com>
+Submitted-by: Colin Cross <ccross@android.com>
+Submitted-at: Wed, 26 Jun 2019 17:05:31 +0000
+Reviewed-on: https://android-review.googlesource.com/c/platform/packages/apps/Email/+/986879
+Project: platform/packages/apps/Email
+Branch: refs/heads/master
