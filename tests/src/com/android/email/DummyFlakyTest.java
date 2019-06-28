@@ -16,7 +16,7 @@
 
 package com.android.email;
 
-import android.support.test.filters.FlakyTest;
+import androidx.test.filters.FlakyTest;
 import org.junit.Test;
 
 /**
