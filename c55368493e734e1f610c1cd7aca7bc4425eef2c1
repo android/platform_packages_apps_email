@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "8584a9d3_2d2c0aaf",
+        "filename": "tests/AndroidManifest.xml",
+        "patchSetId": 18
+      },
+      "lineNbr": 23,
+      "author": {
+        "id": 1088076
+      },
+      "writtenOn": "2019-07-02T18:31:45Z",
+      "side": 1,
+      "message": "nits, clear the tailing spaces, same in line 7 and 9",
+      "revId": "c55368493e734e1f610c1cd7aca7bc4425eef2c1",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    }
+  ]
+}
