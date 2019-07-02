@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "8decd83e_232ed8d3",
+        "filename": "tests/AndroidTest.xml",
+        "patchSetId": 15
+      },
+      "lineNbr": 25,
+      "author": {
+        "id": 1088076
+      },
+      "writtenOn": "2019-07-02T06:31:37Z",
+      "side": 1,
+      "message": "androidx.test.runner.AndroidJUnitRunner\n\nThe test was migrated to use androidx, that\u0027s why it was failing.\nI was able to reproduce it locally and change this to androidx was able to fix it.",
+      "range": {
+        "startLine": 25,
+        "startChar": 37,
+        "endLine": 25,
+        "endChar": 83
+      },
+      "revId": "fa4bd3f1e65e203a34d7a5945bb6d8094f1789c2",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    }
+  ]
+}
