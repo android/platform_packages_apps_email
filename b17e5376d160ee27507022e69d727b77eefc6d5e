@@ -1,0 +1,7 @@
+Presubmit-Verified+1: Treehugger Robot <treehugger-gerrit@google.com>
+Code-Review+2: Raman Tenneti <rtenneti@google.com>
+Submitted-by: Neil Fuller <nfuller@google.com>
+Submitted-at: Wed, 24 Jul 2019 07:53:30 +0000
+Reviewed-on: https://android-review.googlesource.com/c/platform/packages/apps/Email/+/1089105
+Project: platform/packages/apps/Email
+Branch: refs/heads/master
