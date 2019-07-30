@@ -37,6 +37,24 @@
     },
     {
       "key": {
+        "uuid": "e89cf93e_fdc35e72",
+        "filename": "Android.bp",
+        "patchSetId": 1
+      },
+      "lineNbr": 30,
+      "author": {
+        "id": 1088076
+      },
+      "writtenOn": "2019-07-30T22:30:11Z",
+      "side": 1,
+      "message": "Seems the issue is in build/soong/java/aar.go\nhttps://cs.corp.google.com/android/build/soong/java/aar.go\u0026l\u003d65\nResource_dirs []string\nAsset_dirs []string\n\nWould it be reasonable to change them to following?\nResource_dirs []string `android:\"path\"`\nAsset_dirs []string `android:\"path\"`",
+      "parentUuid": "a05809b0_0b72984a",
+      "revId": "78976433c4663064b017bd2409a8e564a7b37338",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "17805998_bbe5002b",
         "filename": "emailcommon/Android.bp",
         "patchSetId": 1
