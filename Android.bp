@@ -1,0 +1,71 @@
+// Copyright 2008, The Android Open Source Project
+//
+// Licensed under the Apache License, Version 2.0 (the "License");
+// you may not use this file except in compliance with the License.
+// You may obtain a copy of the License at
+//
+//     http://www.apache.org/licenses/LICENSE-2.0
+//
+// Unless required by applicable law or agreed to in writing, software
+// distributed under the License is distributed on an "AS IS" BASIS,
+// WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+// See the License for the specific language governing permissions and
+// limitations under the License.
+
+// Build the Email application itself, along with its tests and tests for the emailcommon
+// static library.  All tests can be run via runtest email
+
+android_app {
+    name: "Email",
+
+    srcs: [
+        ":UnifiedEmail_src_shared",
+        "src/com/android/**/*.java",
+        "provider_src/com/android/**/*.java",
+        "src/com/beetstra/**/*.java",
+    ],
+
+    resource_dirs: ["res"],
+
+    aaptflags: [
+        "--auto-add-overlay",
+        "--extra-packages",
+        "com.android.mail:com.android.email:com.android.emailcommon",
+        "--legacy",
+    ],
+
+    static_libs: [
+        "UnifiedEmail-shared-library",
+        "com.android.emailcommon",
+        "libchips",
+        "libphotoviewer_appcompat",
+        "android-opt-bitmap",
+        "androidx.core_core",
+        "androidx.media_media",
+        "androidx.legacy_legacy-support-core-utils",
+        "androidx.legacy_legacy-support-core-ui",
+        "androidx.fragment_fragment",
+        "androidx.appcompat_appcompat",
+        "androidx.gridlayout_gridlayout",
+        "androidx.legacy_legacy-support-v13",
+        "androidx.annotation_annotation",
+        "android-common",
+        "guava",
+        "owasp-html-sanitizer",
+    ],
+
+    libs: ["org.apache.http.legacy"],
+
+    product_specific: true,
+
+    optimize: {
+        proguard_flags_files: [
+            "proguard.flags",
+            "proguard-test.flags",
+            ":UnifiedEmail_proguard_shared",
+        ],
+    },
+
+    sdk_version: "current",
+
+}
