@@ -55,6 +55,24 @@
     },
     {
       "key": {
+        "uuid": "224fd2af_40d7e21f",
+        "filename": "Android.bp",
+        "patchSetId": 1
+      },
+      "lineNbr": 30,
+      "author": {
+        "id": 1002751
+      },
+      "writtenOn": "2019-07-30T23:10:02Z",
+      "side": 1,
+      "message": "No, those properties take directories, and `android:\"path\"` only handles files.",
+      "parentUuid": "e89cf93e_fdc35e72",
+      "revId": "78976433c4663064b017bd2409a8e564a7b37338",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "17805998_bbe5002b",
         "filename": "emailcommon/Android.bp",
         "patchSetId": 1
