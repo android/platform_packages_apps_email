@@ -19,6 +19,24 @@
     },
     {
       "key": {
+        "uuid": "3cd239b4_81e1cce5",
+        "filename": "emailcommon/Android.bp",
+        "patchSetId": 1
+      },
+      "lineNbr": 42,
+      "author": {
+        "id": 1088076
+      },
+      "writtenOn": "2019-07-30T21:15:56Z",
+      "side": 1,
+      "message": "To make it even more complicated, ../../UnifiedEmail is in a different git project. And the common directory packages/apps is not a git repository. That means we can\u0027t really have emailcommon\u0027s Android.bp in the top most common directory. Anyway we can use relative source path in Android.bp?",
+      "parentUuid": "17805998_bbe5002b",
+      "revId": "78976433c4663064b017bd2409a8e564a7b37338",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "138b0ee1_fae3e833",
         "filename": "tests/Androidbp.manual",
         "patchSetId": 1
