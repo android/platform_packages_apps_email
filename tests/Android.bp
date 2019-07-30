@@ -1,0 +1,36 @@
+// Copyright 2011, The Android Open Source Project
+//
+// Licensed under the Apache License, Version 2.0 (the "License");
+// you may not use this file except in compliance with the License.
+// You may obtain a copy of the License at
+//
+//     http://www.apache.org/licenses/LICENSE-2.0
+//
+// Unless required by applicable law or agreed to in writing, software
+// distributed under the License is distributed on an "AS IS" BASIS,
+// WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+// See the License for the specific language governing permissions and
+// limitations under the License.
+
+android_test {
+    name: "EmailTests",
+
+    // TODO
+    // We only want this apk build for tests.
+    // LOCAL_MODULE_TAGS := tests
+
+    static_libs: ["androidx.test.rules"],
+
+    // For LOCAL_JAVA_LANGUAGE_VERSION >= 1.7, OpenJDK 9 javac generates synthetic calls to
+    // Objects.requireNonNull() which was only added in Android API level 19. Thus, this must
+    // stay at 1.6 as long as LOCAL_SDK_VERSION is set to a value < 19. See http://b/38495704
+    java_version: "1.6",
+    sdk_version: "14",
+    test_suites: ["general-tests"],
+    instrumentation_for: "Email",
+
+    srcs: ["src/**/*.java"],
+    resource_dirs: ["res"],
+
+    aaptflags: ["--auto-add-overlay"],
+}
