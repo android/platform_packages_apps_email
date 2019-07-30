@@ -19,6 +19,24 @@
     },
     {
       "key": {
+        "uuid": "a05809b0_0b72984a",
+        "filename": "Android.bp",
+        "patchSetId": 1
+      },
+      "lineNbr": 30,
+      "author": {
+        "id": 1002751
+      },
+      "writtenOn": "2019-07-30T22:24:21Z",
+      "side": 1,
+      "message": "They take directories, not files.  You can use resources instead of resource_dirs, and use res/**/* in the filegroup, but it is probably better to make an android_library in UnifiedEmail that includes the resources instead of trying to export them.",
+      "parentUuid": "5aa4956e_77edaad8",
+      "revId": "78976433c4663064b017bd2409a8e564a7b37338",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "17805998_bbe5002b",
         "filename": "emailcommon/Android.bp",
         "patchSetId": 1
