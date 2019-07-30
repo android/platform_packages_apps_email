@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "17805998_bbe5002b",
+        "filename": "emailcommon/Android.bp",
+        "patchSetId": 1
+      },
+      "lineNbr": 42,
+      "author": {
+        "id": 1088076
+      },
+      "writtenOn": "2019-07-30T21:09:04Z",
+      "side": 1,
+      "message": "the relative path is causing build failure:\nerror: packages/apps/Email/emailcommon/Android.bp:19:1: module \"com.android.emailcommon\" variant \"android_common\": Path is outside directory: ../../UnifiedEmail/src/org/**/*.java\n\nSeems that Soong is restrictive on how a module accessing its source code. How can we solve this issue? I guess we can move this android_library block all the way to the common parent directory. Is that the recommended way to fix it?",
+      "revId": "78976433c4663064b017bd2409a8e564a7b37338",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    }
+  ]
+}
